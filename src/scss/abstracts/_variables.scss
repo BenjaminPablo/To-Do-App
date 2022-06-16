@@ -1,0 +1,83 @@
+// Type scale
+$font-sizes: (
+  100: 1.4rem,
+  200: 1.6rem,
+  300: 2rem,
+  400: 2.4rem,
+  500: 3rem,
+  600: 3.6rem,
+  700: 4.4rem,
+  800: 5.2rem,
+);
+
+// Whitespace
+$whitespaces: (
+  100: 1.2rem,
+  200: 1.6rem,
+  300: 2.4rem,
+  400: 3.2rem,
+  500: 4.8rem,
+  600: 6.4rem,
+  700: 8rem,
+  800: 9.6rem,
+  900: 12.8rem,
+);
+
+// Font Weight
+$font-weights: (
+  400: 400,
+  500: 500,
+  600: 600,
+  700: 700,
+);
+
+// Line-height
+$line-heights: (
+  100: 0,
+  200: 1.2,
+  300: 1.31,
+  400: 1.7,
+);
+
+// Colors
+$colors: (
+  'primary': (
+    100: hsl(0, 0%, 100%),
+    200: hsl(234, 51%, 55%),
+  ),
+  'neutral': (
+    100: hsl(240, 10%, 6%),
+    200: hsl(240, 8%, 37%),
+    300: hsl(240, 4%, 74%),
+  ),
+);
+
+// Grid system
+$grid-columns: [full-start] minmax(7rem, 1fr) [center-start]
+  repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end]
+  minmax(7rem, 1fr) [full-end];
+
+// Generating the classes
+:root {
+  @each $color, $shades in $colors {
+    @each $shade, $value in $shades {
+      --clr-#{$color}-#{$shade}: #{$value};
+    }
+  }
+
+  @each $font-size, $value in $font-sizes {
+    --fs-#{$font-size}: #{$value};
+  }
+
+  @each $font-weight, $value in $font-weights {
+    --fw-#{$font-weight}: #{$value};
+  }
+
+  @each $line-height, $value in $line-heights {
+    --lh-#{$line-height}: #{$value};
+  }
+
+  @each $gap, $value in $whitespaces {
+    --gap-#{$gap}: #{$value};
+  }
+}
