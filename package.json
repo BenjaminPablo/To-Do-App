@@ -1,0 +1,28 @@
+{
+  "name": "to-do-app",
+  "version": "1.0.0",
+  "description": "A simple to-do-app",
+  "default": "index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --dist-dir ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BenjaminPablo/To-Do-App.git"
+  },
+  "author": "Benjamin Pablo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BenjaminPablo/To-Do-App/issues"
+  },
+  "homepage": "https://github.com/BenjaminPablo/To-Do-App#readme",
+  "devDependencies": {
+    "@parcel/packager-raw-url": "^2.5.0",
+    "@parcel/transformer-sass": "^2.5.0",
+    "@parcel/transformer-webmanifest": "^2.5.0",
+    "lodash": "^4.17.21",
+    "parcel": "^2.5.0",
+    "purgecss": "^4.1.3"
+  }
+}
