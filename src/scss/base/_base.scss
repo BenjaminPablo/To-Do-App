@@ -31,6 +31,8 @@ html {
 .container {
   display: grid;
   grid-template-columns: $grid-columns;
+  padding: 1.6rem;
+  background-color: var(--clr-primary-300);
 
   & > * {
     grid-column: $grid-col-center;

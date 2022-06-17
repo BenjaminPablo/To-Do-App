@@ -10,6 +10,18 @@ $font-sizes: (
   800: 5.2rem,
 );
 
+// Font Weight
+$font-weights: (
+  // Regular
+  400: 400,
+  // Medium
+  500: 500,
+  // SemiBold
+  600: 600,
+  // Bold
+  700: 700
+);
+
 // Whitespace
 $whitespaces: (
   100: 1.2rem,
@@ -21,14 +33,6 @@ $whitespaces: (
   700: 8rem,
   800: 9.6rem,
   900: 12.8rem,
-);
-
-// Font Weight
-$font-weights: (
-  400: 400,
-  500: 500,
-  600: 600,
-  700: 700,
 );
 
 // Line-height
@@ -43,11 +47,16 @@ $line-heights: (
 $colors: (
   'primary': (
     100: hsl(0, 0%, 100%),
-    200: hsl(234, 51%, 55%),
+    200: hsl(0, 0%, 82%),
+    300: hsl(0, 0%, 97%),
+    400: hsl(234, 51%, 55%),
   ),
   'neutral': (
+    // #0e0e11
     100: hsl(240, 10%, 6%),
+    // #575767
     200: hsl(240, 8%, 37%),
+    // #b9b9be
     300: hsl(240, 4%, 74%),
   ),
 );
@@ -57,7 +66,7 @@ $grid-columns: [full-start] minmax(7rem, 1fr) [center-start]
   repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end]
   minmax(7rem, 1fr) [full-end];
 
-$grid-col-center: center-start / center-end;
+$grid-col-center: col-start 2 / col-end 7;
 
 // Generating the classes
 :root {
@@ -79,7 +88,7 @@ $grid-col-center: center-start / center-end;
     --lh-#{$line-height}: #{$value};
   }
 
-  @each $gap, $value in $whitespaces {
-    --gap-#{$gap}: #{$value};
+  @each $whitespace, $value in $whitespaces {
+    --ws-#{$whitespace}: #{$value};
   }
 }
