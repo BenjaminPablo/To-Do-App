@@ -1,4 +1,6 @@
 @use '../abstracts/' as *;
 
-.main {
+.section-tasks {
+  @include flex-column;
+  gap: var(--ws-400);
 }

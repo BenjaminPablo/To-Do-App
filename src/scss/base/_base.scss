@@ -31,7 +31,8 @@ html {
 .container {
   display: grid;
   grid-template-columns: $grid-columns;
-  padding: 1.6rem;
+  row-gap: var(--ws-500);
+  padding: var(--ws-200);
   background-color: var(--clr-primary-300);
 
   & > * {

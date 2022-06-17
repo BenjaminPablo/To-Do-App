@@ -42,3 +42,9 @@ ORDER to add Media Queries: Base + typography > general layout + grid > page lay
     }
   }
 }
+
+// Other mixins
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,9 @@
+@use '../abstracts/' as *;
+
+.btn {
+  position: fixed;
+  inset: auto var(--ws-400) var(--ws-400) auto;
+
+  &--add-task {
+  }
+}
