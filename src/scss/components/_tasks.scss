@@ -3,11 +3,10 @@
 .tasks {
   @include flex-column;
   gap: var(--ws-200);
+  color: var(--clr-neutral-200);
 
   &__heading {
-    font-size: var(--fs-300);
     font-weight: var(--fw-700);
-    color: var(--clr-neutral-200);
   }
 
   &__list {
@@ -19,5 +18,23 @@
     display: flex;
     gap: var(--ws-200);
     align-items: baseline;
+  }
+
+  &__input {
+    &--checkbox:disabled + &--label {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    &--label {
+      font-weight: var(--fw-500);
+      cursor: pointer;
+    }
+  }
+
+  &__category {
+    font-size: var(--fs-100);
+    font-weight: var(--fw-600);
+    color: var(--clr-neutral-300);
   }
 }

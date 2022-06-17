@@ -29,7 +29,7 @@
     <!-- Main -->
     <main class="main">
       <!-- Btn to add a new task -->
-      <button class="btn btn--add-task">Add a new task</button>
+      <button class="btn">Add a new task</button>
       <!-- Tasks -->
       <section class="section-tasks">
         <div class="tasks">
@@ -37,13 +37,13 @@
           <div class="tasks__list">
             <div class="tasks__item">
               <input
-                class="tasks__input-checkbox"
+                class="tasks__input--checkbox"
                 type="checkbox"
                 name="tasks__group"
                 id="tasks__item--1"
               />
               <div class="tasks__description">
-                <label class="tasks__input-label" for="tasks__item--1">
+                <label class="tasks__input--label" for="tasks__item--1">
                   Upload 1099-R to TurboTax
                 </label>
                 <p class="tasks__category">💰 Finance</p>
@@ -51,13 +51,13 @@
             </div>
             <div class="tasks__item">
               <input
-                class="tasks__input-checkbox"
+                class="tasks__input--checkbox"
                 type="checkbox"
                 name="tasks__group"
                 id="tasks__item--2"
               />
               <div class="tasks__description">
-                <label class="tasks__input-label" for="tasks__item--2">
+                <label class="tasks__input--label" for="tasks__item--2">
                   Submit 2019 tax return
                 </label>
                 <p class="tasks__category">💰 Finance</p>
@@ -65,13 +65,13 @@
             </div>
             <div class="tasks__item">
               <input
-                class="tasks__input-checkbox"
+                class="tasks__input--checkbox"
                 type="checkbox"
                 name="tasks__group"
                 id="tasks__item--3"
               />
               <div class="tasks__description">
-                <label class="tasks__input-label" for="tasks__item--3">
+                <label class="tasks__input--label" for="tasks__item--3">
                   Print parking passes
                 </label>
                 <p class="tasks__category">💞 Wedding</p>
@@ -79,13 +79,13 @@
             </div>
             <div class="tasks__item">
               <input
-                class="tasks__input-checkbox"
+                class="tasks__input--checkbox"
                 type="checkbox"
                 name="tasks__group"
                 id="tasks__item--4"
               />
               <div class="tasks__description">
-                <label class="tasks__input-label" for="tasks__item--4">
+                <label class="tasks__input--label" for="tasks__item--4">
                   Sign contract, send back
                 </label>
                 <p class="tasks__category">🖥️ Freelance</p>
@@ -93,13 +93,13 @@
             </div>
             <div class="tasks__item">
               <input
-                class="tasks__input-checkbox"
+                class="tasks__input--checkbox"
                 type="checkbox"
                 name="tasks__group"
                 id="tasks__item--5"
               />
               <div class="tasks__description">
-                <label class="tasks__input-label" for="tasks__item--5">
+                <label class="tasks__input--label" for="tasks__item--5">
                   Hand sanitizer
                 </label>
                 <p class="tasks__category">🛒 Shopping List</p>
@@ -113,56 +113,66 @@
           <div class="tasks__list">
             <div class="tasks__item">
               <input
-                class="tasks__input-checkbox"
+                class="tasks__input--checkbox"
                 type="checkbox"
                 name="tasks__group"
                 id="tasks__item--6"
+                checked
+                disabled
               />
-              <label class="tasks__input-label" for="tasks__item--6">
+              <label class="tasks__input--label" for="tasks__item--6">
                 Check on FedEx Order
               </label>
             </div>
             <div class="tasks__item">
               <input
-                class="tasks__input-checkbox"
+                class="tasks__input--checkbox"
                 type="checkbox"
                 name="tasks__group"
                 id="tasks__item--7"
+                checked
+                disabled
               />
-              <label class="tasks__input-label" for="tasks__item--7">
+              <label class="tasks__input--label" for="tasks__item--7">
                 Look at new plugins
               </label>
             </div>
             <div class="tasks__item">
               <input
-                class="tasks__input-checkbox"
+                class="tasks__input--checkbox"
                 type="checkbox"
                 name="tasks__group"
                 id="tasks__item--8"
+                checked
+                disabled
               />
-              <label class="tasks__input-label" for="tasks__item--8">
+              <label class="tasks__input--label" for="tasks__item--8">
                 Respond to catering company
               </label>
             </div>
             <div class="tasks__item">
               <input
-                class="tasks__input-checkbox"
+                class="tasks__input--checkbox"
                 type="checkbox"
                 name="tasks__group"
                 id="tasks__item--9"
+                checked
+                disabled
               />
-              <label class="tasks__input-label" for="tasks__item--9">
+              <label class="tasks__input--label" for="tasks__item--9">
                 Reschedule morning coffee
               </label>
             </div>
             <div class="tasks__item">
               <input
-                class="tasks__input-checkbox"
+                class="tasks__input--checkbox"
                 type="checkbox"
                 name="tasks__group"
                 id="tasks__item--10"
+                checked
+                disabled
               />
-              <label class="tasks__input-label" for="tasks__item--10">
+              <label class="tasks__input--label" for="tasks__item--10">
                 Check the latest on Community
               </label>
             </div>
@@ -174,7 +184,11 @@
     <!-- Footer -->
     <footer class="footer">
       Made by
-      <a href="https://benjamin-portafolio.netlify.app" target="_blank">
+      <a
+        class="footer__link"
+        href="https://benjamin-portafolio.netlify.app"
+        target="_blank"
+      >
         Benjamin Pablo
       </a>
     </footer>

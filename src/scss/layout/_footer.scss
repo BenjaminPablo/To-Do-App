@@ -1,4 +1,19 @@
 @use '../abstracts/' as *;
 
 .footer {
+  margin: auto;
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+    padding: 0 0 0.7rem;
+    border-bottom: 0.1rem solid var(--clr-primary-100);
+    font-family: inherit;
+    transition: all 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+    &:hover {
+      color: var(--clr-primary-400);
+      border-bottom: 0.1rem solid var(--clr-primary-400);
+    }
+  }
 }
