@@ -31,4 +31,8 @@ html {
 .container {
   display: grid;
   grid-template-columns: $grid-columns;
+
+  & > * {
+    grid-column: $grid-col-center;
+  }
 }
