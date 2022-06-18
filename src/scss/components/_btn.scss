@@ -3,7 +3,8 @@
 .btn {
   display: block;
   @include reset-inherit;
-  border: transparent;
+  border: $border-btn;
+  box-shadow: $box-s-btn;
   background-image: $color-gradient-btn;
   cursor: pointer;
   grid-column: col-start 7;
@@ -11,9 +12,16 @@
   grid-row: 2 / 3;
   place-self: end;
   border-radius: 50%;
-  padding: var(--ws-200);
+  padding: var(--ws-100);
   position: sticky;
   inset: auto auto 3rem auto;
+  transform: scale(1);
+  transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  backface-visibility: hidden;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 
   &__icon {
     display: block;

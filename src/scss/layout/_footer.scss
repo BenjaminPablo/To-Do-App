@@ -1,7 +1,9 @@
 @use '../abstracts/' as *;
 
 .footer {
-  margin: auto;
+  padding-top: var(--ws-200);
+  border-top: $border-grey;
+  text-align: center;
 
   &__link {
     text-decoration: none;

@@ -4,7 +4,7 @@
   @include flex-column;
   gap: var(--ws-100);
   padding: var(--ws-400) 0 var(--ws-200);
-  border-bottom: 0.2rem solid var(--clr-primary-200);
+  border-bottom: $border-grey;
 
   &__status {
     color: var(--clr-neutral-200);
