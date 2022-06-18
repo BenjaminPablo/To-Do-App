@@ -2,19 +2,23 @@
 
 .footer {
   padding-top: var(--ws-200);
-  border-top: var(--border-grey);
+  border-top: var(--bor-300);
   text-align: center;
+  color: var(--clr-neutral-200);
 
   &__link {
+    display: inline-block;
     text-decoration: none;
     @include reset-inherit;
-    padding: 0 0 0.7rem;
-    border-bottom: 0.1rem solid var(--clr-primary-100);
+    padding: 0 0 0.1rem;
+    border-bottom: var(--bor-100);
+    transform: scale(1);
     transition: all 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 
     &:hover {
-      color: var(--clr-primary-400);
-      border-bottom: 0.1rem solid var(--clr-primary-400);
+      color: var(--clr-primary-500);
+      transform: scale(1.01);
+      border-bottom: var(--bor-200);
     }
   }
 }

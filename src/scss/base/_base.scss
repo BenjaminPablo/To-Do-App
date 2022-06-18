@@ -33,7 +33,7 @@ html {
   grid-template-columns: $grid-columns;
   row-gap: var(--ws-500);
   padding: var(--ws-200);
-  background-color: var(--clr-primary-300);
+  background-color: var(--clr-primary-400);
 
   & > * {
     grid-column: $grid-col-center;
