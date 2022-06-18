@@ -48,3 +48,9 @@ ORDER to add Media Queries: Base + typography > general layout + grid > page lay
   display: flex;
   flex-direction: column;
 }
+
+@mixin reset-inherit {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
