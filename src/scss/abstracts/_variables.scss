@@ -46,10 +46,14 @@ $line-heights: (
 // Colors
 $colors: (
   'primary': (
-    100: hsl(0, 0%, 100%),
-    200: hsl(0, 0%, 82%),
-    300: hsl(0, 0%, 97%),
-    400: hsl(234, 51%, 55%),
+    100: hsla(0, 0%, 0%, 0.25),
+    200: hsl(0, 0%, 100%),
+    300: hsl(0, 0%, 82%),
+    400: hsl(0, 0%, 97%),
+    500: hsl(231, 43%, 44%),
+    600: hsl(234, 50%, 55%),
+    700: hsl(234, 51%, 55%),
+    800: hsl(245, 43%, 44%),
   ),
   'neutral': (
     // #0e0e11
@@ -59,20 +63,24 @@ $colors: (
     // #b9b9be
     300: hsl(240, 4%, 74%),
   ),
-);
-
-$color-gradient-btn: linear-gradient(
-  180deg,
-  hsl(231, 43%, 44%) 0%,
-  hsl(245, 43%, 44%) 100%
+  'gradient': (
+    100:
+      linear-gradient(
+        180deg,
+        var(--clr-primary-500) 0%,
+        var(--clr-primary-800) 100%
+      ),
+  ),
 );
 
 // Border
-$border-grey: 0.2rem solid var(--clr-primary-200);
-$border-btn: 0.2rem solid hsla(234, 50%, 55%, 1);
+$borders: (
+  100: 0.2rem solid var(--clr-primary-300),
+  200: 0.2rem solid var(--clr-primary-600),
+);
 
 // Box-shadow
-$box-s-btn: 0 0.2rem 0.8rem 0 hsla(0, 0%, 0%, 0.25);
+$box-s-btn: 0 0.2rem 0.8rem 0 var(--clr-primary-100);
 
 // Grid system
 $grid-columns: [full-start] minmax(7rem, 1fr) [center-start]
@@ -83,25 +91,35 @@ $grid-col-center: col-start 2 / col-end 7;
 
 // Generating the classes
 :root {
+  // Colors
   @each $color, $shades in $colors {
     @each $shade, $value in $shades {
       --clr-#{$color}-#{$shade}: #{$value};
     }
   }
 
+  // Font Sizes
   @each $font-size, $value in $font-sizes {
     --fs-#{$font-size}: #{$value};
   }
 
+  // Font Weights
   @each $font-weight, $value in $font-weights {
     --fw-#{$font-weight}: #{$value};
   }
 
+  // Line Heights
   @each $line-height, $value in $line-heights {
     --lh-#{$line-height}: #{$value};
   }
 
+  // Whitespaces
   @each $whitespace, $value in $whitespaces {
     --ws-#{$whitespace}: #{$value};
+  }
+
+  // Borders
+  @each $border, $value in $borders {
+    --bor-#{$border}: #{$value};
   }
 }

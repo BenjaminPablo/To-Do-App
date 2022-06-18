@@ -3,9 +3,9 @@
 .btn {
   display: block;
   @include reset-inherit;
-  border: $border-btn;
+  border: var(--bor-200);
   box-shadow: $box-s-btn;
-  background-image: $color-gradient-btn;
+  background-image: var(--clr-gradient-100);
   cursor: pointer;
   grid-column: col-start 7;
   width: min-content;
