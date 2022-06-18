@@ -4,10 +4,21 @@
   display: block;
   @include reset-inherit;
   border: transparent;
-  background-color: transparent;
+  background-image: $color-gradient-btn;
   cursor: pointer;
   grid-column: col-start 7;
+  width: min-content;
   grid-row: 2 / 3;
-  align-self: end;
-  transform: translateY(-100%);
+  place-self: end;
+  border-radius: 50%;
+  padding: var(--ws-200);
+  position: sticky;
+  inset: auto auto 3rem auto;
+
+  &__icon {
+    display: block;
+    fill: var(--clr-primary-100);
+    width: 3rem;
+    height: 3rem;
+  }
 }
