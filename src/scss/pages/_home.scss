@@ -6,5 +6,5 @@
 
 .section-tasks {
   @include flex-column;
-  gap: var(--ws-400);
+  gap: var(--ws-300);
 }

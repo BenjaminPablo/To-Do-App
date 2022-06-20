@@ -2,7 +2,6 @@
 
 .header {
   @include flex-column;
-  gap: var(--ws-100);
   padding-bottom: var(--ws-200);
   border-bottom: var(--bor-300);
 

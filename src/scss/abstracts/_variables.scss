@@ -54,6 +54,13 @@ $line-heights: (
   ),
 );
 
+// Letter Spacing
+$letter-spacings: (
+  100: -0.13rem,
+  200: -0.17rem,
+  300: -0.2rem,
+);
+
 // Colors
 $colors: (
   'primary': (
@@ -123,6 +130,10 @@ $grid-col-center: col-start 2 / col-end 7;
   // Font Weights
   @each $font-weight, $value in $font-weights {
     --fw-#{$font-weight}: #{$value};
+  }
+
+  @each $letter-spacing, $value in $letter-spacings {
+    --ls-#{$letter-spacing}: #{$value};
   }
 
   // Whitespaces
