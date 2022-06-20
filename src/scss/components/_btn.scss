@@ -7,9 +7,8 @@
   box-shadow: $box-s-btn;
   background-image: var(--clr-gradient-100);
   cursor: pointer;
-  grid-column: col-start 7;
   width: min-content;
-  grid-row: 2 / 3;
+  grid-area: 2 / col-start 7 / 3;
   place-self: end;
   border-radius: 50%;
   padding: var(--ws-100);
@@ -17,6 +16,10 @@
   inset: auto auto 3rem auto;
   transform: scale(1);
   transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+
+  @include respond(phone) {
+    grid-area: 2 / col-start 8 / 3;
+  }
 
   &:hover {
     transform: scale(1.1);
