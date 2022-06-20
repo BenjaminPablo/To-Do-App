@@ -1,7 +1,7 @@
 @use '../abstracts/' as *;
 
 .footer {
-  padding-top: var(--ws-200);
+  padding: var(--ws-200) 0;
   border-top: var(--bor-300);
   text-align: center;
   color: var(--clr-neutral-200);

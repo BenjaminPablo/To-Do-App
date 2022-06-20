@@ -32,16 +32,22 @@ html {
   display: grid;
   grid-template-columns: $grid-columns;
   row-gap: var(--ws-400);
-  padding: var(--ws-400);
+  padding: var(--ws-400) var(--ws-400) 0;
   background-color: var(--clr-primary-400);
 
   & > * {
     grid-column: $grid-col-center;
   }
 
-  @include respond(phone) {
+  @include respond(tab-port) {
     & > * {
       grid-column: center-start / center-end;
+    }
+  }
+
+  @include respond(phone) {
+    & > * {
+      grid-column: full-start / full-end;
     }
   }
 }
