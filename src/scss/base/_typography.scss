@@ -4,16 +4,25 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: var(--fs-300);
   color: var(--clr-neutral-100);
-  line-height: var(--lh-400);
+  line-height: var(--lh-normal-300);
   font-weight: var(--fw-400);
 }
 
 .heading-primary {
   font-size: var(--fs-800);
   font-weight: var(--fw-700);
-  line-height: var(--lh-200);
+  line-height: var(--lh-big-400);
+  letter-spacing: -0.2rem;
 
   @include respond(phone) {
     font-size: var(--fs-700);
   }
+}
+
+.heading-secondary {
+  font-size: var(--fs-600);
+  font-weight: var(--fw-600);
+  line-height: var(--lh-big-400);
+  color: var(--clr-neutral-200);
+  letter-spacing: -0.13rem;
 }

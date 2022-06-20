@@ -3,7 +3,7 @@
 .header {
   @include flex-column;
   gap: var(--ws-100);
-  padding: var(--ws-400) 0 var(--ws-200);
+  padding-bottom: var(--ws-200);
   border-bottom: var(--bor-300);
 
   &__status {
