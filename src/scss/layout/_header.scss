@@ -1,7 +1,6 @@
 @use '../abstracts/' as *;
 
 .header {
-  @include flex-column;
   padding-bottom: var(--ws-200);
   border-bottom: var(--bor-300);
 

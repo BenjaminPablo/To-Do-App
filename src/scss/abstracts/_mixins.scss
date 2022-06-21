@@ -44,9 +44,13 @@ ORDER to add Media Queries: Base + typography > general layout + grid > page lay
 }
 
 // Other mixins
-@mixin flex-column {
+
+@mixin flex($direction) {
   display: flex;
-  flex-direction: column;
+  @if $direction == column {
+    flex-direction: column;
+  }
+  @content;
 }
 
 @mixin reset-base {
@@ -63,5 +67,17 @@ ORDER to add Media Queries: Base + typography > general layout + grid > page lay
 
 @mixin grid-columns-full {
   display: grid;
-  grid-template-columns: var(--grid-columns-200);
+  grid-template-columns: var(--grid-columns-100);
+}
+
+@mixin hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+@mixin fixCenter {
+  position: fixed;
+  inset: 50%;
+  transform: translate(-50%, -50%);
 }

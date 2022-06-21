@@ -10,20 +10,14 @@
     border: var(--bor-200);
     box-shadow: $box-s-btn;
     background-image: var(--clr-gradient-100);
-    width: min-content;
     border-radius: 50%;
     padding: var(--ws-100);
-    position: absolute;
-    inset: auto auto 3rem auto;
+    position: sticky;
+    width: fit-content;
+    inset: auto 0 3rem auto;
+    grid-row: 1;
+    place-self: end;
   }
-
-  // @include respond(tab-port) {
-  //   grid-area: 2 / col-start 8 / 3;
-  // }
-
-  // @include respond(phone) {
-  //   grid-area: 2 / col-start 9 / full-end / 3;
-  // }
 
   &:hover {
     transform: scale(1.1);

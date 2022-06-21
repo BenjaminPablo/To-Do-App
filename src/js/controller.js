@@ -1,4 +1,5 @@
 const btnNewEl = document.querySelector('.btn--new-task');
+const modalEl = document.querySelector('.modal');
 
 // ✨ Features:
 // 1. Be able to add new elements to a list
@@ -14,8 +15,7 @@ const btnNewEl = document.querySelector('.btn--new-task');
 // 1.1. Add a event listener to the btnEl.
 btnNewEl.addEventListener('click', () => {
   // 1.2. When the btn is clicked we render a modal window and fill the description and category.
-
-  console.log('Added the event listener');
+  modalEl.classList.toggle('hidden');
 });
 
 // 1.3. Store the values on variables.

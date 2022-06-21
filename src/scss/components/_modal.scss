@@ -1,5 +1,8 @@
 @use '../abstracts/' as *;
 
 .modal {
-  display: none;
+  @include fixCenter;
+  transition: all 0.2s;
+  opacity: 1;
+  pointer-events: auto;
 }
