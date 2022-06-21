@@ -1,29 +1,29 @@
 @use '../abstracts/' as *;
 
 .btn {
-  display: block;
   @include reset-inherit;
-  border: var(--bor-200);
-  box-shadow: $box-s-btn;
-  background-image: var(--clr-gradient-100);
   cursor: pointer;
-  width: min-content;
-  grid-area: 2 / col-start 7 / 3;
-  place-self: end;
-  border-radius: 50%;
-  padding: var(--ws-100);
-  position: sticky;
-  inset: auto auto 3rem auto;
   transform: scale(1);
   transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 
-  @include respond(tab-port) {
-    grid-area: 2 / col-start 8 / 3;
+  &--new-task {
+    border: var(--bor-200);
+    box-shadow: $box-s-btn;
+    background-image: var(--clr-gradient-100);
+    width: min-content;
+    border-radius: 50%;
+    padding: var(--ws-100);
+    position: absolute;
+    inset: auto auto 3rem auto;
   }
 
-  @include respond(phone) {
-    grid-area: 2 / col-start 9 / full-end / 3;
-  }
+  // @include respond(tab-port) {
+  //   grid-area: 2 / col-start 8 / 3;
+  // }
+
+  // @include respond(phone) {
+  //   grid-area: 2 / col-start 9 / full-end / 3;
+  // }
 
   &:hover {
     transform: scale(1.1);

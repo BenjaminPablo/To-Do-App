@@ -21,17 +21,15 @@
     align-items: baseline;
   }
 
-  &__input {
-    &--checkbox:disabled + &--label {
-      opacity: 0.5;
-      cursor: default;
-    }
+  &__checkbox:disabled + &__label {
+    opacity: 0.5;
+    cursor: default;
+  }
 
-    &--label {
-      font-size: var(--fs-200);
-      font-weight: var(--fw-500);
-      cursor: pointer;
-    }
+  &__label {
+    font-size: var(--fs-200);
+    font-weight: var(--fw-500);
+    cursor: pointer;
   }
 
   &__category {

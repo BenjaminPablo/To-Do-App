@@ -3,9 +3,7 @@
 *,
 *::before,
 *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
+  @include reset-base;
 }
 
 html {
@@ -29,25 +27,24 @@ html {
 }
 
 .container {
-  display: grid;
-  grid-template-columns: $grid-columns;
+  @include grid-columns-full;
   row-gap: var(--ws-400);
   padding: var(--ws-400) var(--ws-400) 0;
   background-color: var(--clr-primary-400);
 
   & > * {
-    grid-column: $grid-col-center;
+    grid-column: var(--grid-position-100);
   }
 
   @include respond(tab-port) {
     & > * {
-      grid-column: center-start / center-end;
+      grid-column: var(--grid-position-200);
     }
   }
 
   @include respond(phone) {
     & > * {
-      grid-column: full-start / full-end;
+      grid-column: var(--grid-position-300);
     }
   }
 }

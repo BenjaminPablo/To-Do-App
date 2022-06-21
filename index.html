@@ -37,13 +37,12 @@
             <div class="tasks__list">
               <div class="tasks__item">
                 <input
-                  class="tasks__input--checkbox"
+                  class="tasks__checkbox"
                   type="checkbox"
-                  name="tasks__check"
-                  id="tasks__item--1"
+                  id="Upload 1099-R to TurboTax"
                 />
                 <div class="tasks__description">
-                  <label class="tasks__input--label" for="tasks__item--1">
+                  <label class="tasks__label" for="Upload 1099-R to TurboTax">
                     Upload 1099-R to TurboTax
                   </label>
                   <p class="tasks__category">💰 Finance</p>
@@ -51,13 +50,12 @@
               </div>
               <div class="tasks__item">
                 <input
-                  class="tasks__input--checkbox"
+                  class="tasks__checkbox"
                   type="checkbox"
-                  name="tasks__check"
-                  id="tasks__item--2"
+                  id="Submit 2019 tax return"
                 />
                 <div class="tasks__description">
-                  <label class="tasks__input--label" for="tasks__item--2">
+                  <label class="tasks__label" for="Submit 2019 tax return">
                     Submit 2019 tax return
                   </label>
                   <p class="tasks__category">💰 Finance</p>
@@ -65,13 +63,12 @@
               </div>
               <div class="tasks__item">
                 <input
-                  class="tasks__input--checkbox"
+                  class="tasks__checkbox"
                   type="checkbox"
-                  name="tasks__check"
-                  id="tasks__item--3"
+                  id="Print parking passes"
                 />
                 <div class="tasks__description">
-                  <label class="tasks__input--label" for="tasks__item--3">
+                  <label class="tasks__label" for="Print parking passes">
                     Print parking passes
                   </label>
                   <p class="tasks__category">💞 Wedding</p>
@@ -79,13 +76,12 @@
               </div>
               <div class="tasks__item">
                 <input
-                  class="tasks__input--checkbox"
+                  class="tasks__checkbox"
                   type="checkbox"
-                  name="tasks__check"
-                  id="tasks__item--4"
+                  id="Sign contract, send back"
                 />
                 <div class="tasks__description">
-                  <label class="tasks__input--label" for="tasks__item--4">
+                  <label class="tasks__label" for="Sign contract, send back">
                     Sign contract, send back
                   </label>
                   <p class="tasks__category">🖥️ Freelance</p>
@@ -93,13 +89,12 @@
               </div>
               <div class="tasks__item">
                 <input
-                  class="tasks__input--checkbox"
+                  class="tasks__checkbox"
                   type="checkbox"
-                  name="tasks__check"
-                  id="tasks__item--5"
+                  id="Hand sanitizer"
                 />
                 <div class="tasks__description">
-                  <label class="tasks__input--label" for="tasks__item--5">
+                  <label class="tasks__label" for="Hand sanitizer">
                     Hand sanitizer
                   </label>
                   <p class="tasks__category">🛒 Shopping List</p>
@@ -113,85 +108,95 @@
             <div class="tasks__list">
               <div class="tasks__item">
                 <input
-                  class="tasks__input--checkbox"
+                  class="tasks__checkbox"
                   type="checkbox"
-                  name="tasks__check"
-                  id="tasks__item--6"
+                  id="Check on FedEx Order"
                   checked
                   disabled
                 />
-                <label class="tasks__input--label" for="tasks__item--6">
+                <label class="tasks__label" for="Check on FedEx Order">
                   Check on FedEx Order
                 </label>
               </div>
               <div class="tasks__item">
                 <input
-                  class="tasks__input--checkbox"
+                  class="tasks__checkbox"
                   type="checkbox"
-                  name="tasks__check"
-                  id="tasks__item--7"
+                  id="Look at new plugins"
                   checked
                   disabled
                 />
-                <label class="tasks__input--label" for="tasks__item--7">
+                <label class="tasks__label" for="Look at new plugins">
                   Look at new plugins
                 </label>
               </div>
               <div class="tasks__item">
                 <input
-                  class="tasks__input--checkbox"
+                  class="tasks__checkbox"
                   type="checkbox"
-                  name="tasks__check"
-                  id="tasks__item--8"
+                  id="Respond to catering company"
                   checked
                   disabled
                 />
-                <label class="tasks__input--label" for="tasks__item--8">
+                <label class="tasks__label" for="Respond to catering company">
                   Respond to catering company
                 </label>
               </div>
               <div class="tasks__item">
                 <input
-                  class="tasks__input--checkbox"
+                  class="tasks__checkbox"
                   type="checkbox"
-                  name="tasks__check"
-                  id="tasks__item--9"
+                  id="Reschedule morning coffee"
                   checked
                   disabled
                 />
-                <label class="tasks__input--label" for="tasks__item--9">
+                <label class="tasks__label" for="Reschedule morning coffee">
                   Reschedule morning coffee
                 </label>
               </div>
               <div class="tasks__item">
                 <input
-                  class="tasks__input--checkbox"
+                  class="tasks__checkbox"
                   type="checkbox"
-                  name="tasks__check"
-                  id="tasks__item--10"
+                  id="Check the latest on Community"
                   checked
                   disabled
                 />
-                <label class="tasks__input--label" for="tasks__item--10">
+                <label class="tasks__label" for="Check the latest on Community">
                   Check the latest on Community
                 </label>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Btn to add a new task -->
+        <button
+          class="btn btn--new-task"
+          title="Add a new task"
+          aria-label="Button to add a new task"
+        >
+          <svg class="btn__icon">
+            <use href="src/img/svg/sprite.svg#icon-add-new"></use>
+          </svg>
+        </button>
+
+        <form class="modal" action="#" method="post">
+          <p class="modal__heading">Adding a new task</p>
+          <div class="modal__list">
+            <div class="modal__item">
+              <label class="modal__label" for="description">Description</label>
+              <input class="modal__text" type="text" id="description" />
+            </div>
+            <div class="modal__item">
+              <label class="modal__label" for="Category">Category</label>
+              <input class="modal__text" type="text" id="Category" />
+            </div>
+          </div>
+          <button class="btn--modal">Add a new task</button>
+        </form>
       </section>
     </main>
-
-    <!-- Btn to add a new task -->
-    <button
-      class="btn"
-      title="Add a new task"
-      aria-label="Button to add a new task"
-    >
-      <svg class="btn__icon">
-        <use href="src/img/svg/sprite.svg#icon-add-new"></use>
-      </svg>
-    </button>
 
     <!-- Footer -->
     <footer class="footer">

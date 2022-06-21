@@ -1,10 +1,7 @@
 @use '../abstracts/' as *;
 
-.main {
-  grid-row: 2 / 3;
-}
-
 .section-tasks {
   @include flex-column;
   gap: var(--ws-300);
+  position: relative;
 }
