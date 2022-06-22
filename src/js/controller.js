@@ -15,27 +15,26 @@ const modalOverlayEl = document.querySelector('.modal__overlay');
 // 1. Be able to add new elements to a list
 // 1.1. Add a event listener to the btnOpen and btnClose.
 // 1.2. When the btn is clicked we render a modal window and fill the description and category.
-btnOpenEl.addEventListener('click', () => {
-  modalOverlayEl.classList.remove('hidden');
-  modalGroupEl.classList.remove('hidden');
-});
-
-btnCloseEl.addEventListener('click', () => {
-  modalOverlayEl.classList.add('hidden');
-  modalGroupEl.classList.add('hidden');
-});
-
-modalOverlayEl.addEventListener('click', () => {
-  modalOverlayEl.classList.add('hidden');
-  modalGroupEl.classList.add('hidden');
-});
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && !modalGroupEl.classList.contains('hidden')) {
+const modal = () => {
+  const openModal = () => {
+    modalOverlayEl.classList.remove('hidden');
+    modalGroupEl.classList.remove('hidden');
+  };
+  const closeModal = () => {
     modalOverlayEl.classList.add('hidden');
     modalGroupEl.classList.add('hidden');
-  }
-});
+  };
+
+  btnOpenEl.addEventListener('click', openModal);
+  btnCloseEl.addEventListener('click', closeModal);
+  modalOverlayEl.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e =>
+    e.key === 'Escape' && !modalGroupEl.classList.contains('hidden')
+      ? closeModal()
+      : ''
+  );
+};
+modal();
 
 // 1.3. Store the values on variables.
 // 1.4. Then we clicked the button add and we render the new tasks__item at the top of the tasks__list.
