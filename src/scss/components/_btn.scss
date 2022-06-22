@@ -4,11 +4,39 @@
   @include reset-inherit;
   cursor: pointer;
   transform: scale(1);
-  transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  border: none;
+  background-color: transparent;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 
-  &--new-task {
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &__icon {
+    display: block;
+
+    &--open {
+      fill: var(--clr-primary-300);
+      width: 3rem;
+      height: 3rem;
+    }
+
+    &--close {
+      fill: var(--clr-primary-200);
+      width: 3.3rem;
+      height: 3.3rem;
+      transition: fill 0.2s ease-in-out;
+
+      &:hover {
+        fill: #615554;
+      }
+    }
+  }
+
+  // Modifiers (Types of buttons)
+  &--open {
     border: var(--bor-200);
-    box-shadow: $box-s-btn;
+    box-shadow: var(--bxs-100);
     background-image: var(--clr-gradient-100);
     border-radius: 50%;
     padding: var(--ws-100);
@@ -19,14 +47,15 @@
     place-self: end;
   }
 
-  &:hover {
-    transform: scale(1.1);
+  &--close {
+    position: absolute;
+    inset: 4% 4% auto auto;
   }
 
-  &__icon {
-    display: block;
-    fill: var(--clr-primary-200);
-    width: 3rem;
-    height: 3rem;
+  &--new-task {
+    color: var(--clr-primary-500);
+    background-image: var(--clr-gradient-100);
+    padding: var(--ws-200);
+    border-radius: 1.3rem;
   }
 }

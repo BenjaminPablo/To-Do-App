@@ -30,7 +30,7 @@ html {
   @include grid-columns-full;
   row-gap: var(--ws-400);
   padding: var(--ws-400) var(--ws-400) 0;
-  background-color: var(--clr-primary-400);
+  background-color: var(--clr-primary-500);
 
   & > * {
     grid-column: var(--grid-position-100);

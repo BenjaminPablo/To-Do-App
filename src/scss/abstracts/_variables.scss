@@ -65,13 +65,14 @@ $letter-spacings: (
 $colors: (
   'primary': (
     100: hsla(0, 0%, 0%, 0.25),
-    200: hsl(0, 0%, 100%),
-    300: hsl(0, 0%, 82%),
-    400: hsl(0, 0%, 97%),
-    500: hsl(231, 43%, 44%),
-    600: hsl(234, 50%, 55%),
-    700: hsl(234, 51%, 55%),
-    800: hsl(245, 43%, 44%),
+    200: hsla(0, 0%, 0%, 0.4),
+    300: hsl(0, 0%, 100%),
+    400: hsl(0, 0%, 82%),
+    500: hsl(0, 0%, 97%),
+    600: hsl(231, 43%, 44%),
+    700: hsl(234, 50%, 55%),
+    800: hsl(234, 51%, 55%),
+    900: hsl(245, 43%, 44%),
   ),
   'neutral': (
     100: hsl(240, 10%, 6%),
@@ -82,22 +83,25 @@ $colors: (
     100:
       linear-gradient(
         180deg,
-        var(--clr-primary-500) 0%,
-        var(--clr-primary-800) 100%
+        var(--clr-primary-600) 0%,
+        var(--clr-primary-900) 100%
       ),
   ),
 );
 
 // Border
 $borders: (
-  100: 0.1rem solid var(--clr-primary-400),
-  200: 0.1rem solid var(--clr-primary-500),
-  300: 0.2rem solid var(--clr-primary-300),
-  400: 0.2rem solid var(--clr-primary-600),
+  100: 0.1rem solid var(--clr-primary-500),
+  200: 0.1rem solid var(--clr-primary-600),
+  300: 0.2rem solid var(--clr-primary-400),
+  400: 0.2rem solid var(--clr-primary-700),
 );
 
 // Box-shadow
-$box-s-btn: 0 0.2rem 0.8rem 0 var(--clr-primary-100);
+$box-shadows: (
+  100: 0 0.2rem 0.8rem 0 var(--clr-primary-100),
+  200: 0 4rem 6rem var(--clr-primary-100),
+);
 
 // Grid system
 $grids: (
@@ -113,7 +117,7 @@ $grids: (
   ),
 );
 
-// Generating the classes
+// Generating the variables
 :root {
   // Colors
   @each $color, $shades in $colors {
@@ -158,5 +162,10 @@ $grids: (
   // Borders
   @each $border, $value in $borders {
     --bor-#{$border}: #{$value};
+  }
+
+  // Box-Shadows
+  @each $box, $value in $box-shadows {
+    --bxs-#{$box}: #{$value};
   }
 }

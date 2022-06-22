@@ -168,28 +168,57 @@
           </div>
         </div>
 
-        <form class="modal hidden" action="#" method="post">
-          <p class="modal__heading">Adding a new task</p>
-          <div class="modal__list">
-            <div class="modal__item">
-              <label class="modal__label" for="description">Description</label>
-              <input class="modal__text" type="text" id="description" />
+        <div class="modal__overlay hidden">&nbsp;</div>
+        <div class="modal__group hidden">
+          <!-- Button to close the modal -->
+          <button
+            class="btn btn--close"
+            title="Close modal"
+            aria-label="Button to close the modal"
+          >
+            <svg class="btn__icon btn__icon--close">
+              <use href="src/img/svg/sprite.svg#icon-clear"></use>
+            </svg>
+          </button>
+          <!-- Form to fill the fields -->
+          <form class="modal__form">
+            <p class="modal__heading">New task</p>
+            <div class="modal__list">
+              <div class="modal__item">
+                <label class="modal__label" for="description">
+                  Description
+                </label>
+                <input
+                  class="modal__text"
+                  type="text"
+                  id="description"
+                  placeholder="Review coding lecture #1"
+                  required
+                />
+              </div>
+              <div class="modal__item">
+                <label class="modal__label" for="Category">Category</label>
+                <input
+                  class="modal__text"
+                  type="text"
+                  id="Category"
+                  placeholder="Web Development"
+                  required
+                />
+              </div>
             </div>
-            <div class="modal__item">
-              <label class="modal__label" for="Category">Category</label>
-              <input class="modal__text" type="text" id="Category" />
-            </div>
-          </div>
-          <button class="btn--modal">Add a new task</button>
-        </form>
+            <!-- Btn to add a new task -->
+            <button class="btn btn--new-task" action="">Add a new task</button>
+          </form>
+        </div>
       </section>
-      <!-- Btn to add a new task -->
+      <!-- Btn to open the modal-->
       <button
-        class="btn btn--new-task"
-        title="Add a new task"
-        aria-label="Button to add a new task"
+        class="btn btn--open"
+        title="Open modal"
+        aria-label="Button to open a modal"
       >
-        <svg class="btn__icon">
+        <svg class="btn__icon btn__icon--open">
           <use href="src/img/svg/sprite.svg#icon-add-new"></use>
         </svg>
       </button>

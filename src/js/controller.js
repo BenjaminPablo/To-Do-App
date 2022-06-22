@@ -1,5 +1,7 @@
-const btnNewEl = document.querySelector('.btn--new-task');
-const modalEl = document.querySelector('.modal');
+const btnOpenEl = document.querySelector('.btn--open');
+const btnCloseEl = document.querySelector('.btn--close');
+const modalGroupEl = document.querySelector('.modal__group');
+const modalOverlayEl = document.querySelector('.modal__overlay');
 
 // ✨ Features:
 // 1. Be able to add new elements to a list
@@ -9,13 +11,30 @@ const modalEl = document.querySelector('.modal');
 
 // Solving Problem Framework:
 // a. Make sure you 100% understand the problem. Ask the right questions to get a clear picture of the problem.
-// 1. Be able to add new elements to a list
-
 // b. Divide and conquer: Break a big problem into smaller sub-problems (task list).
-// 1.1. Add a event listener to the btnEl.
-btnNewEl.addEventListener('click', () => {
-  // 1.2. When the btn is clicked we render a modal window and fill the description and category.
-  modalEl.classList.toggle('hidden');
+// 1. Be able to add new elements to a list
+// 1.1. Add a event listener to the btnOpen and btnClose.
+// 1.2. When the btn is clicked we render a modal window and fill the description and category.
+btnOpenEl.addEventListener('click', () => {
+  modalOverlayEl.classList.remove('hidden');
+  modalGroupEl.classList.remove('hidden');
+});
+
+btnCloseEl.addEventListener('click', () => {
+  modalOverlayEl.classList.add('hidden');
+  modalGroupEl.classList.add('hidden');
+});
+
+modalOverlayEl.addEventListener('click', () => {
+  modalOverlayEl.classList.add('hidden');
+  modalGroupEl.classList.add('hidden');
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !modalGroupEl.classList.contains('hidden')) {
+    modalOverlayEl.classList.add('hidden');
+    modalGroupEl.classList.add('hidden');
+  }
 });
 
 // 1.3. Store the values on variables.
