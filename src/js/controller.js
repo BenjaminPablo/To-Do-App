@@ -1,26 +1,12 @@
 const btnOpenEl = document.querySelector('.btn--open');
 const btnCloseEl = document.querySelector('.btn--close');
 const dialogEl = document.querySelector('.dialog');
-const dialogGroupEl = document.querySelector('.dialog__group');
-const dialogOverlayEl = document.querySelector('.dialog__overlay');
 const dialogTextDesEl = document.querySelector('.dialog__text--description');
 const dialogTextCatEl = document.querySelector('.dialog__text--category');
 const tasksListIncompleteEl = document.querySelector(
   '.tasks__list--incomplete'
 );
 const btnAddNewTaskEl = document.querySelector('.btn--new-task');
-let previousActiveEl = dialogTextDesEl.focus();
-
-const openDialog = () => {
-  // To store the previousActiveEl
-  // previousActiveEl = document.activeElement;
-  // Array.from(document.body.children).forEach(child => {
-  // if (child !== dialogEl) child.inert = true;
-  // });
-  dialogOverlayEl.classList.remove('hidden');
-  dialogGroupEl.classList.remove('hidden');
-};
-btnOpenEl.addEventListener('click', openDialog);
 
 // ✨ Features:
 // 1. Be able to add new elements to a list
@@ -34,38 +20,27 @@ btnOpenEl.addEventListener('click', openDialog);
 // 1. Be able to add new elements to a list
 // 1.1. Open and closing the dialog with the btn.
 
-// const dialog = () => {
-//   const openDialog = () => {
-//     // To store the previousActiveEl
-//     previousActiveEl = document.activeElement;
-//     Array.from(document.body.children).forEach(child => {
-//       if (child !== dialogEl) child.inert = true;
-//     });
+const dialog = () => {
+  const openDialog = () => {
+    dialogEl.showModal();
+    dialogTextDesEl.focus();
+  };
 
-//     dialogOverlayEl.classList.remove('hidden');
-//     dialogGroupEl.classList.remove('hidden');
-//   };
+  const closeDialog = () => {
+    dialogEl.close();
+  };
 
-//   const closeDialog = () => {
-//     dialogOverlayEl.classList.add('hidden');
-//     dialogGroupEl.classList.add('hidden');
-//     Array.from(document.body.children).forEach(child => {
-//       if (child !== dialogEl) child.inert = false;
-//     });
-
-//     previousActiveEl.focus();
-//   };
-
-//   btnOpenEl.addEventListener('click', openDialog);
-//   btnCloseEl.addEventListener('click', closeDialog);
-//   dialogOverlayEl.addEventListener('click', closeDialog);
-//   document.addEventListener('keydown', e =>
-//     e.key === 'Escape' && !dialogGroupEl.classList.contains('hidden')
-//       ? closeDialog()
-//       : ''
-//   );
-// };
-// dialog();
+  btnOpenEl.addEventListener('click', openDialog);
+  btnCloseEl.addEventListener('click', closeDialog);
+  dialogEl.addEventListener('click', e => {
+    const dialogRect = dialogEl.getBoundingClientRect();
+    const checkClickInsideDialog = e.clientX >= dialogRect.left;
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDialog();
+  });
+};
+dialog();
 
 // // 1.2 Render the new task to the task list
 // const renderTasks = () => {
