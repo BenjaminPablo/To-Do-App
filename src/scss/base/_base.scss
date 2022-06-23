@@ -48,3 +48,8 @@ html {
     }
   }
 }
+
+::selection {
+  background-color: var(--clr-primary-700);
+  color: white;
+}

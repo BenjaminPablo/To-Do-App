@@ -72,7 +72,6 @@ ORDER to add Media Queries: Base + typography > general layout + grid > page lay
 
 @mixin hidden {
   opacity: 0;
-  pointer-events: none;
   visibility: hidden;
 }
 

@@ -1,7 +1,16 @@
 const btnOpenEl = document.querySelector('.btn--open');
 const btnCloseEl = document.querySelector('.btn--close');
-const modalGroupEl = document.querySelector('.modal__group');
-const modalOverlayEl = document.querySelector('.modal__overlay');
+const dialogEl = document.querySelector('.dialog');
+const dialogGroupEl = document.querySelector('.dialog__group');
+const dialogOverlayEl = document.querySelector('.dialog__overlay');
+const dialogTextDesEl = document.querySelector('.dialog__text--description');
+const dialogTextCatEl = document.querySelector('.dialog__text--category');
+const tasksListIncompleteEl = document.querySelector(
+  '.tasks__list--incomplete'
+);
+const btnAddNewTaskEl = document.querySelector('.btn--new-task');
+
+let previousActiveEl = dialogTextDesEl.focus();
 
 // ✨ Features:
 // 1. Be able to add new elements to a list
@@ -13,28 +22,67 @@ const modalOverlayEl = document.querySelector('.modal__overlay');
 // a. Make sure you 100% understand the problem. Ask the right questions to get a clear picture of the problem.
 // b. Divide and conquer: Break a big problem into smaller sub-problems (task list).
 // 1. Be able to add new elements to a list
-// 1.1. Add a event listener to the btnOpen and btnClose.
-// 1.2. When the btn is clicked we render a modal window and fill the description and category.
-const modal = () => {
-  const openModal = () => {
-    modalOverlayEl.classList.remove('hidden');
-    modalGroupEl.classList.remove('hidden');
-  };
-  const closeModal = () => {
-    modalOverlayEl.classList.add('hidden');
-    modalGroupEl.classList.add('hidden');
+// 1.1. Open and closing the dialog with the btn.
+
+const dialog = () => {
+  const openDialog = () => {
+    // To store the previousActiveEl
+    previousActiveEl = document.activeElement;
+    Array.from(document.body.children).forEach(child => {
+      if (child !== dialogEl) child.inert = true;
+    });
+
+    dialogOverlayEl.classList.remove('hidden');
+    dialogGroupEl.classList.remove('hidden');
   };
 
-  btnOpenEl.addEventListener('click', openModal);
-  btnCloseEl.addEventListener('click', closeModal);
-  modalOverlayEl.addEventListener('click', closeModal);
+  const closeDialog = () => {
+    dialogOverlayEl.classList.add('hidden');
+    dialogGroupEl.classList.add('hidden');
+    Array.from(document.body.children).forEach(child => {
+      if (child !== dialogEl) child.inert = false;
+    });
+
+    previousActiveEl.focus();
+  };
+
+  btnOpenEl.addEventListener('click', openDialog);
+  btnCloseEl.addEventListener('click', closeDialog);
+  dialogOverlayEl.addEventListener('click', closeDialog);
   document.addEventListener('keydown', e =>
-    e.key === 'Escape' && !modalGroupEl.classList.contains('hidden')
-      ? closeModal()
+    e.key === 'Escape' && !dialogGroupEl.classList.contains('hidden')
+      ? closeDialog()
       : ''
   );
 };
-modal();
+dialog();
+
+// 1.2 Render the new task to the task list
+const renderTasks = () => {
+  const html = `
+    <div class="tasks__item">
+      <input
+        class="tasks__checkbox"
+        type="checkbox"
+        id="${dialogTextDesEl.value}"
+      />
+      <div class="tasks__description">
+        <label class="tasks__label" for="${dialogTextDesEl.value}">${dialogTextDesEl.value}</label>
+        <p class="tasks__category">${dialogTextCatEl.value}</p>
+      </div>
+    </div>
+  `;
+  tasksListIncompleteEl.insertAdjacentHTML('afterbegin', html);
+  dialogOverlayEl.classList.add('hidden');
+  dialogGroupEl.classList.add('hidden');
+  Array.from(document.body.children).forEach(child => {
+    if (child !== dialogEl) child.inert = false;
+  });
+  dialogTextDesEl.value = '';
+  dialogTextCatEl.value = '';
+  dialogTextDesEl.focus();
+};
+btnAddNewTaskEl.addEventListener('click', renderTasks);
 
 // 1.3. Store the values on variables.
 // 1.4. Then we clicked the button add and we render the new tasks__item at the top of the tasks__list.
