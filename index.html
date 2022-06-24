@@ -180,57 +180,6 @@
       </button>
     </main>
 
-    <div class="dialog">
-      <div
-        class="dialog__group hidden"
-        role="dialog"
-        aria-labelledby="dialog__title"
-      >
-        <!-- Button to close the dialog -->
-        <button
-          class="btn btn--close"
-          title="Close dialog"
-          aria-label="Button to close the dialog"
-        >
-          <svg class="btn__icon btn__icon--close">
-            <use href="src/img/svg/sprite.svg#icon-clear"></use>
-          </svg>
-        </button>
-        <!-- Form to fill the fields -->
-        <form class="dialog__form">
-          <p class="dialog__title">New task</p>
-          <div class="dialog__list">
-            <div class="dialog__item">
-              <label class="dialog__label" for="description">
-                Description
-              </label>
-              <input
-                class="dialog__text dialog__text--description"
-                type="text"
-                id="description"
-                placeholder="Review coding lecture #1"
-                required
-              />
-            </div>
-            <div class="dialog__item">
-              <label class="dialog__label" for="Category">Category</label>
-              <input
-                class="dialog__text dialog__text--category"
-                type="text"
-                id="Category"
-                placeholder="Web Development"
-                required
-              />
-            </div>
-          </div>
-          <!-- Btn to add a new task -->
-          <button class="btn btn--new-task">Add a new task</button>
-        </form>
-      </div>
-      <div class="dialog__overlay hidden">&nbsp;</div>
-    </div>
-    <!-- dialog to add a new task -->
-
     <!-- Footer -->
     <footer class="footer">
       Made by
@@ -242,5 +191,47 @@
         Benjamin Pablo
       </a>
     </footer>
+
+    <dialog class="dialog">
+      <!-- Button to close the dialog -->
+      <button
+        class="btn btn--close"
+        title="Close dialog"
+        aria-label="Button to close the dialog"
+      >
+        <svg class="btn__icon btn__icon--close">
+          <use href="src/img/svg/sprite.svg#icon-clear"></use>
+        </svg>
+      </button>
+      <!-- Form to fill the fields -->
+      <form class="dialog__form" method="dialog">
+        <p class="dialog__title">New task</p>
+        <div class="dialog__list">
+          <div class="dialog__item">
+            <label class="dialog__label" for="description"> Description </label>
+            <input
+              class="dialog__text dialog__text--description"
+              type="text"
+              id="description"
+              placeholder="Review coding lecture #1"
+              required
+            />
+          </div>
+          <div class="dialog__item">
+            <label class="dialog__label" for="Category">Category</label>
+            <input
+              class="dialog__text dialog__text--category"
+              type="text"
+              id="Category"
+              placeholder="Web Development"
+              required
+            />
+          </div>
+        </div>
+        <!-- Btn to add a new task -->
+        <button class="btn btn--new-task">Add a new task</button>
+      </form>
+    </dialog>
+    <!-- dialog to add a new task -->
   </body>
 </html>
