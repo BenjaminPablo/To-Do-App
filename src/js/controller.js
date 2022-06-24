@@ -10,8 +10,6 @@ const tasksListIncompleteEl = document.querySelector(
 );
 const btnAddNewTaskEl = document.querySelector('.btn--new-task');
 
-let previousActiveEl = dialogTextDesEl.focus();
-
 // ✨ Features:
 // 1. Be able to add new elements to a list
 // 2. Be able to remove existing elements from a list
