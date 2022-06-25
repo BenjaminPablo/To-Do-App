@@ -5,16 +5,34 @@
   height: fit-content;
   z-index: 1000;
   background-color: var(--clr-primary-500);
-  border-radius: 0.9rem;
+  border-radius: 1rem;
   border: none;
   padding: 6rem 7rem;
   @include fixCenter;
   box-shadow: var(--bxs-200);
-  transition: all 0.5s ease-in-out;
+  display: block;
 
-  &::backdrop {
-    transition: all 0.5s ease-in-out;
+  &,
+  &[open]::backdrop {
+    @include hidden;
+    transition: all 0.2s ease-out;
+  }
+
+  &[open].open,
+  &[open].open::backdrop {
+    opacity: 1;
+    visibility: visible;
     backdrop-filter: blur(0.4rem);
+  }
+
+  @keyframes opacity {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
   }
 
   &__form {

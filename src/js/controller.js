@@ -24,10 +24,16 @@ const dialog = () => {
   const openDialog = () => {
     dialogEl.showModal();
     dialogTextDesEl.focus();
+    dialogEl.classList.add('open');
   };
 
   const closeDialog = () => {
+    dialogEl.classList.remove('open');
+    dialogEl.addEventListener('transitionend', killTransitionDialog);
+  };
+  const killTransitionDialog = () => {
     dialogEl.close();
+    dialogEl.removeEventListener('transitionend', killTransitionDialog);
   };
 
   btnOpenEl.addEventListener('click', openDialog);
