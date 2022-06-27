@@ -192,7 +192,9 @@
       </a>
     </footer>
 
-    <dialog class="dialog">
+    <!-- Dialog Section -->
+    <!-- Dialog to add a new task -->
+    <dialog class="dialog dialog--new-task">
       <!-- Button to close the dialog -->
       <button
         class="btn btn--close"
@@ -229,9 +231,21 @@
           </div>
         </div>
         <!-- Btn to add a new task -->
-        <button class="btn btn--new-task">Add a new task</button>
+        <button class="btn btn--principal">Add a new task</button>
       </form>
     </dialog>
-    <!-- dialog to add a new task -->
+
+    <!-- dialog of confirmation after adding a new task correctly -->
+    <dialog open class="dialog--confirmation">
+      <form method="dialog" class="dialog__form dialog__form--confirmation">
+        <header class="dialog__heading">
+          <svg class="icon icon-check-circle">
+            <use href="src/img/svg/sprite.svg#icon-check-circle"></use>
+          </svg>
+          <p>New task added successfully!</p>
+        </header>
+        <button class="btn btn--principal">Close</button>
+      </form>
+    </dialog>
   </body>
 </html>

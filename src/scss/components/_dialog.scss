@@ -3,85 +3,85 @@
 .dialog {
   width: fit-content;
   height: fit-content;
-  z-index: 1000;
-  background-color: var(--clr-primary-500);
-  border-radius: 1rem;
-  border: none;
-  padding: 6rem 7rem;
-  @include fixCenter;
-  box-shadow: var(--bxs-200);
-  display: block;
 
-  &,
-  &[open]::backdrop {
-    @include hidden;
-    transition: all 0.2s ease-out;
-  }
-
-  &[open].open,
-  &[open].open::backdrop {
-    opacity: 1;
-    visibility: visible;
+  &::backdrop {
     backdrop-filter: blur(0.4rem);
   }
 
-  @keyframes opacity {
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 1;
-    }
+  &[open] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: inherit;
   }
 
-  &__form {
-    display: grid;
-    place-content: center;
-    justify-items: center;
-    row-gap: var(--ws-700);
-  }
-
-  &__title {
-    font-size: var(--fs-700);
-    font-weight: var(--fw-700);
-    letter-spacing: var(--ls-200);
-    line-height: var(--lh-big-200);
-  }
-
-  &__list {
-    @include flex(column) {
-      gap: var(--ws-400);
-    }
-  }
-
-  &__item {
-    display: flex;
-    gap: var(--ws-200);
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  &__text {
-    padding: 1.5rem 2rem;
-    border-radius: 0.2rem;
-    background-color: hsl(0, 0%, 100%, 0.5);
+  &--new-task {
+    z-index: 1000;
+    background-color: var(--clr-primary-500);
+    border-radius: 1rem;
     border: none;
-    border-bottom: 0.3rem solid transparent;
-    transition: all 0.3s ease-in-out;
+    padding: 6rem 7rem;
+    @include fixCenter;
+    box-shadow: var(--bxs-200);
+    // With display added, transitions will work in the dialog
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
 
-    &:focus {
-      outline: none;
-      box-shadow: 0 1rem 2rem hsla(0, 0%, 0%, 0.1);
-      border-bottom: 0.3rem solid var(--clr-primary-700);
+    &__form {
+      display: grid;
+      place-content: center;
+      justify-items: center;
+      row-gap: var(--ws-700);
+    }
 
-      &:invalid {
-        border-bottom: 0.3rem solid orangered;
+    &__title {
+      font-size: var(--fs-700);
+      font-weight: var(--fw-700);
+      letter-spacing: var(--ls-200);
+      line-height: var(--lh-big-200);
+    }
+
+    &__list {
+      @include flex(column) {
+        gap: var(--ws-400);
       }
     }
 
-    &::placeholder {
-      color: #999;
+    &__item {
+      display: flex;
+      gap: var(--ws-200);
+      justify-content: space-between;
+      align-items: center;
     }
+
+    &__text {
+      padding: 1.5rem 2rem;
+      border-radius: 0.2rem;
+      background-color: hsl(0, 0%, 100%, 0.5);
+      border: none;
+      border-bottom: 0.3rem solid transparent;
+      transition: all 0.3s ease-in-out;
+      visibility: visible;
+
+      &:focus {
+        outline: none;
+
+        box-shadow: 0 1rem 2rem hsla(0, 0%, 0%, 0.1);
+        border-bottom: 0.3rem solid var(--clr-primary-700);
+
+        &:invalid {
+          border-bottom: 0.3rem solid orangered;
+        }
+      }
+
+      &::placeholder {
+        color: #999;
+      }
+    }
+  }
+
+  &--confirmation {
   }
 }

@@ -53,3 +53,7 @@ html {
   background-color: var(--clr-primary-700);
   color: white;
 }
+
+:focus {
+  outline: 0.4rem solid var(--clr-primary-700);
+}
