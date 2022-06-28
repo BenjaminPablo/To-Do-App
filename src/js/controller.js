@@ -18,14 +18,23 @@ const btnAddNewTaskEl = document.querySelector('[data-des="add-new-task"]');
 // 1.1. Open and closing the dialog with the btn.
 const dialog = () => {
   const validateEnterTask = e => {
-    // Checks if the user presses the enter button and if the inputs are empty, if all is true, then we block the enter key until the user fills boths inputs
+    // 1.2. Validade all the wrong input fills scenarios
+    // This functions checks if:
+    // 1. The user presses the Enter button and the two inputs are empty.
+    // 2. The user fills one input but no the other one and presses the key enter
+    // 3. The user filled all the inputs correctly
     if (
-      (e.key !== 'Escape' &&
-        e.key === 'Enter' &&
-        dialogTextDesEl.value === '') ||
+      e.key === 'Enter' &&
+      dialogTextDesEl.value === '' &&
       dialogTextCatEl.value === ''
     ) {
       e.preventDefault();
+    } else if (e.key === 'Enter' && dialogTextDesEl.value !== '') {
+      e.preventDefault();
+    } else if (e.key === 'Enter' && dialogTextCatEl.value !== '') {
+      e.preventDefault();
+    } else if (dialogTextDesEl.value !== '' && dialogTextCatEl.value !== '') {
+      dialogAddNewTaskEl.removeEventListener('keydown', validateEnterTask);
     }
   };
 
@@ -36,6 +45,7 @@ const dialog = () => {
     dialogAddNewTaskEl.addEventListener('keydown', validateEnterTask);
   });
 
+  // All the ways to close the dialog-new-task
   dialogsEl.forEach(dialog => {
     btnsCloseEl.forEach(btnClose =>
       btnClose.addEventListener('click', () => dialog.close())
@@ -54,15 +64,15 @@ const dialog = () => {
 };
 dialog();
 
-// 1.2 Render the new task to the task list
+// 1.2 Render the new task to the incomplete task list each time the add-new-task button is clicked
 const renderNewTask = () => {
-  const randomIDGenerator = Math.floor(Math.random() * 10000);
-  const inputsTextFormat = inputs => {
-    inputs.forEach(input => input[0].toUpperCase() + input.slice(1));
-  };
-
   const insertTask = () => {
+    // Function to format the value input to the first letter to be uppercase
+    const randomIDGenerator = Math.floor(Math.random() * 10000);
+    // Saving the random number to utilize it in two places at the same time
     const randomID = randomIDGenerator;
+
+    // Formatting the values and adding the randomid in the html
     const markup = `
       <div class="tasks__item">
         <input
@@ -72,20 +82,27 @@ const renderNewTask = () => {
         />
         <div class="tasks__description">
           <label class="tasks__label" for="${randomID}">
-          ${dialogTextDesEl.value}
+          ${
+            dialogTextDesEl.value[0].toUpperCase() +
+            dialogTextDesEl.value.slice(1).toLowerCase()
+          }
           </label>
-          <p class="tasks__category">${dialogTextCatEl.value}</p>
+          <p class="tasks__category">${
+            dialogTextCatEl.value[0].toUpperCase() +
+            dialogTextCatEl.value.slice(1).toLowerCase()
+          }</p>
           </div>
       </div>
     `;
 
-    // Adding the values inside the function inputTextFormat to format the first letter to uppercase and the rest as it is.
-    // inputsTextFormat(dialogTextsEl);
-
     // Checks if before clicking the add a new task button the inputs are empty, if they are, then we return the action until the user fills the inputs.
-    dialogAddNewTaskEl.addEventListener('keydown', validateEnterTask);
+    if (dialogTextCatEl.value === '' || dialogTextDesEl.value === '') {
+      return;
+    }
 
+    // Inserting the html
     tasksListIncompleteEl.insertAdjacentHTML('afterbegin', markup);
+    // Closing the dialog after adding the task and open the success dialog
     dialogAddNewTaskEl.close();
     dialogSuccessEl.showModal();
   };
