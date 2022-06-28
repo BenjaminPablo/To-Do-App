@@ -45,6 +45,10 @@
     &--success {
       row-gap: var(--ws-300);
     }
+
+    &--confirmation {
+      row-gap: var(--ws-400);
+    }
   }
 
   &__title {
@@ -105,5 +109,9 @@
   &--success {
     visibility: visible;
     padding: 2rem 3rem;
+  }
+
+  &--confirmation {
+    padding: 4rem;
   }
 }

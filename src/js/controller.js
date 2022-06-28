@@ -1,17 +1,19 @@
 import { random } from 'lodash';
 
 const btnOpenEl = document.querySelector('.btn--open');
-const btnsCloseEl = document.querySelectorAll('[data-des="close"]');
+const btnsCloseEl = document.querySelectorAll('[data-value="close"]');
 const dialogsEl = document.querySelectorAll('.dialog');
 const dialogAddNewTaskEl = document.querySelector('.dialog--new-task');
-const dialogTextsEl = document.querySelectorAll('.dialog__text');
 const dialogSuccessEl = document.querySelector('.dialog--success');
+const dialogConfirmationEl = document.querySelector('.dialog--confirmation');
+const dialogTextsEl = document.querySelectorAll('.dialog__text');
 const dialogTextDesEl = document.querySelector('.dialog__text--description');
 const dialogTextCatEl = document.querySelector('.dialog__text--category');
 const tasksListIncompleteEl = document.querySelector(
   '.tasks__list--incomplete'
 );
 const btnAddNewTaskEl = document.querySelector('[data-des="add-new-task"]');
+const sectionTasksEl = document.querySelector('.section-tasks');
 
 // ✨ Features:
 // 1. Be able to add new elements to a list
@@ -41,7 +43,7 @@ const dialog = () => {
   btnOpenEl.addEventListener('click', () => {
     dialogAddNewTaskEl.showModal();
     dialogTextsEl.forEach(dialText => (dialText.value = ''));
-    // I put this event handler here so it can work inmediately after we open the dialog.
+    // I put this event handler here so the validation can start right away.
     dialogAddNewTaskEl.addEventListener('keydown', validateEnterTask);
   });
 
@@ -92,6 +94,7 @@ const renderNewTask = () => {
             dialogTextCatEl.value.slice(1).toLowerCase()
           }</p>
           </div>
+          <button class="btn btn--delete">Delete</button>
       </div>
     `;
 
@@ -111,5 +114,15 @@ const renderNewTask = () => {
 renderNewTask();
 
 // 2. Be able to remove existing elements from a list
+// 2.1 Add event handler to the delete button to show the dialog of confirmation to delete the task.
+btnsDeleteEl.addEventListener('click', e => {
+  console.log(e.target);
+});
+
+// 2.2 If btn cancel is click the modal is closed and nothing happens
+// 2.3 If btn delete is click, then close the modal and
+// 2.4 Delete the task
+// 2.5 Show a dialog of success for the user to know that the task has been deleted successfully
+
 // 3. Be able to rename existing elements in a list
 // 4. Be able to see the number of complete and incomplete elements

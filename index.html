@@ -46,6 +46,7 @@
                 </label>
                 <p class="tasks__category">💰 Finance</p>
               </div>
+              <button class="btn btn--delete">Delete</button>
             </div>
             <div class="tasks__item">
               <input
@@ -59,6 +60,7 @@
                 </label>
                 <p class="tasks__category">💰 Finance</p>
               </div>
+              <button class="btn btn--delete">Delete</button>
             </div>
             <div class="tasks__item">
               <input
@@ -72,6 +74,7 @@
                 </label>
                 <p class="tasks__category">💞 Wedding</p>
               </div>
+              <button class="btn btn--delete">Delete</button>
             </div>
             <div class="tasks__item">
               <input
@@ -85,6 +88,7 @@
                 </label>
                 <p class="tasks__category">🖥️ Freelance</p>
               </div>
+              <button class="btn btn--delete">Delete</button>
             </div>
             <div class="tasks__item">
               <input
@@ -98,6 +102,7 @@
                 </label>
                 <p class="tasks__category">🛒 Shopping List</p>
               </div>
+              <button class="btn btn--delete">Delete</button>
             </div>
           </div>
         </div>
@@ -116,6 +121,7 @@
               <label class="tasks__label" for="Check on FedEx Order">
                 Check on FedEx Order
               </label>
+              <button class="btn btn--delete">Delete</button>
             </div>
             <div class="tasks__item">
               <input
@@ -128,6 +134,7 @@
               <label class="tasks__label" for="Look at new plugins">
                 Look at new plugins
               </label>
+              <button class="btn btn--delete">Delete</button>
             </div>
             <div class="tasks__item">
               <input
@@ -140,6 +147,7 @@
               <label class="tasks__label" for="Respond to catering company">
                 Respond to catering company
               </label>
+              <button class="btn btn--delete">Delete</button>
             </div>
             <div class="tasks__item">
               <input
@@ -152,6 +160,7 @@
               <label class="tasks__label" for="Reschedule morning coffee">
                 Reschedule morning coffee
               </label>
+              <button class="btn btn--delete">Delete</button>
             </div>
             <div class="tasks__item">
               <input
@@ -164,6 +173,7 @@
               <label class="tasks__label" for="Check the latest on Community">
                 Check the latest on Community
               </label>
+              <button class="btn btn--delete">Delete</button>
             </div>
           </div>
         </div>
@@ -192,7 +202,7 @@
       </a>
     </footer>
 
-    <!-- Dialog Section -->
+    <!-- Dialogs Section -->
     <!-- Dialog to add a new task -->
     <dialog class="dialog dialog--new-task">
       <!-- Button to close the dialog -->
@@ -200,7 +210,7 @@
         class="btn btn--close"
         title="Close dialog"
         aria-label="Button to close the dialog"
-        data-des="close"
+        data-value="close"
       >
         <svg class="btn__icon btn__icon--close">
           <use href="src/img/svg/sprite.svg#icon-clear"></use>
@@ -245,7 +255,34 @@
           <use href="src/img/svg/sprite.svg#icon-check-circle"></use>
         </svg>
         <p>New task added successfully!</p>
-        <button class="btn btn--principal" data-des="close">Close</button>
+        <button class="btn btn--principal" data-value="close">Close</button>
+      </form>
+    </dialog>
+
+    <!-- Dialog of confirmation -->
+    <dialog class="dialog dialog--confirmation">
+      <!-- Button to close the dialog -->
+      <button
+        class="btn btn--close"
+        title="Close dialog"
+        aria-label="Button to close the dialog"
+        data-value="close"
+      >
+        <svg class="btn__icon btn__icon--close">
+          <use href="src/img/svg/sprite.svg#icon-clear"></use>
+        </svg>
+      </button>
+      <form method="dialog" class="dialog__form dialog__form--confirmation">
+        <svg class="dialog__icon">
+          <use href="src/img/svg/sprite.svg#icon-notice"></use>
+        </svg>
+        <p>Are you sure you want to delete this task?</p>
+        <div class="btn__group">
+          <button class="btn btn--principal" data-value="cancel">Cancel</button>
+          <button class="btn btn--secondary" data-value="delete">
+            Delete task
+          </button>
+        </div>
       </form>
     </dialog>
   </body>

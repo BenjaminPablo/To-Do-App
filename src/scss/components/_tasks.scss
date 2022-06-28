@@ -23,6 +23,19 @@
       gap: var(--ws-200);
     }
     align-items: baseline;
+    border-radius: 0.7rem;
+    border: 1px solid transparent;
+    transition: border 0.2s ease-in-out;
+    padding: 0.5rem;
+
+    &:hover {
+      border: 1px solid #dee2e6;
+    }
+
+    &:hover > .btn--delete {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 
   &__checkbox:disabled + &__label {

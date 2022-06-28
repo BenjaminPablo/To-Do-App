@@ -42,7 +42,26 @@
     }
   }
 
+  &__group {
+    @include flex(normal) {
+      gap: var(--ws-400);
+    }
+  }
+
   // Modifiers (Types of buttons)
+  &--principal {
+    color: var(--clr-primary-500);
+    background-image: var(--clr-gradient-100);
+    padding: var(--ws-200);
+    border-radius: 1rem;
+  }
+
+  &--secondary {
+    border: 0.2rem solid var(--clr-primary-900);
+    padding: var(--ws-100);
+    border-radius: 1rem;
+  }
+
   &--open {
     border: var(--bor-200);
     box-shadow: var(--bxs-100);
@@ -52,8 +71,11 @@
     position: sticky;
     width: fit-content;
     inset: auto 0 3rem auto;
-    grid-row: 1;
     place-self: end;
+
+    @include respond(phone) {
+      grid-column: auto;
+    }
   }
 
   &--close {
@@ -61,10 +83,15 @@
     inset: 4% 4% auto auto;
   }
 
-  &--principal {
-    color: var(--clr-primary-500);
-    background-image: var(--clr-gradient-100);
-    padding: var(--ws-200);
-    border-radius: 1.3rem;
+  &--delete {
+    align-self: center;
+    margin-left: auto;
+    background-color: #f03e3e;
+    color: white;
+    padding: 0 2rem;
+    height: 100%;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
   }
 }
