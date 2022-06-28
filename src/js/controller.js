@@ -2,9 +2,17 @@ import { random } from 'lodash';
 
 const btnOpenEl = document.querySelector('.btn--open');
 const btnsCloseEl = document.querySelectorAll('[data-value="close"]');
+const btnDeleteEl = document.querySelector(
+  '.btn--secondary[data-value="delete"]'
+);
 const dialogsEl = document.querySelectorAll('.dialog');
 const dialogAddNewTaskEl = document.querySelector('.dialog--new-task');
-const dialogSuccessEl = document.querySelector('.dialog--success');
+const dialogSuccessTaskAddedEl = document.querySelector(
+  '.dialog--success[data-value="task-added"]'
+);
+const dialogSuccessTaskDeletedEl = document.querySelector(
+  '.dialog--success[data-value="task-deleted"]'
+);
 const dialogConfirmationEl = document.querySelector('.dialog--confirmation');
 const dialogTextsEl = document.querySelectorAll('.dialog__text');
 const dialogTextDesEl = document.querySelector('.dialog__text--description');
@@ -18,7 +26,7 @@ const sectionTasksEl = document.querySelector('.section-tasks');
 // ✨ Features:
 // 1. Be able to add new elements to a list
 // 1.1. Open and closing the dialog with the btn.
-const dialog = () => {
+const addNewTask = () => {
   const validateEnterTask = e => {
     // 1.2. Validade all the wrong input fills scenarios
     // This functions checks if:
@@ -63,19 +71,17 @@ const dialog = () => {
       if (!checkClickInsideDialog) dialog.close();
     });
   });
-};
-dialog();
 
-// 1.2 Render the new task to the incomplete task list each time the add-new-task button is clicked
-const renderNewTask = () => {
-  const insertTask = () => {
-    // Function to format the value input to the first letter to be uppercase
-    const randomIDGenerator = Math.floor(Math.random() * 10000);
-    // Saving the random number to utilize it in two places at the same time
-    const randomID = randomIDGenerator;
+  // 1.2 Render the new task to the incomplete task list each time the add-new-task button is clicked
+  const renderNewTask = () => {
+    const insertTask = () => {
+      // Function to format the value input to the first letter to be uppercase
+      const randomIDGenerator = Math.floor(Math.random() * 10000);
+      // Saving the random number to utilize it in two places at the same time
+      const randomID = randomIDGenerator;
 
-    // Formatting the values and adding the randomid in the html
-    const markup = `
+      // Formatting the values and adding the randomid in the html
+      const markup = `
       <div class="tasks__item">
         <input
           class="tasks__checkbox"
@@ -98,31 +104,45 @@ const renderNewTask = () => {
       </div>
     `;
 
-    // Checks if before clicking the add a new task button the inputs are empty, if they are, then we return the action until the user fills the inputs.
-    if (dialogTextCatEl.value === '' || dialogTextDesEl.value === '') {
-      return;
-    }
+      // Checks if before clicking the add a new task button the inputs are empty, if they are, then we return the action until the user fills the inputs.
+      if (dialogTextCatEl.value === '' || dialogTextDesEl.value === '') {
+        return;
+      }
 
-    // Inserting the html
-    tasksListIncompleteEl.insertAdjacentHTML('afterbegin', markup);
-    // Closing the dialog after adding the task and open the success dialog
-    dialogAddNewTaskEl.close();
-    dialogSuccessEl.showModal();
+      // Inserting the html
+      tasksListIncompleteEl.insertAdjacentHTML('afterbegin', markup);
+      // Closing the dialog after adding the task and open the success dialog
+      dialogAddNewTaskEl.close();
+      dialogSuccessTaskAddedEl.showModal();
+    };
+    btnAddNewTaskEl.addEventListener('click', insertTask);
   };
-  btnAddNewTaskEl.addEventListener('click', insertTask);
+  renderNewTask();
 };
-renderNewTask();
+addNewTask();
 
 // 2. Be able to remove existing elements from a list
 // 2.1 Add event handler to the delete button to show the dialog of confirmation to delete the task.
-btnsDeleteEl.addEventListener('click', e => {
-  console.log(e.target);
-});
+const deleteTask = () => {
+  sectionTasksEl.addEventListener('click', e => {
+    const closestButtonDelete = e.target.closest('.btn--delete');
 
-// 2.2 If btn cancel is click the modal is closed and nothing happens
-// 2.3 If btn delete is click, then close the modal and
-// 2.4 Delete the task
-// 2.5 Show a dialog of success for the user to know that the task has been deleted successfully
+    if (!closestButtonDelete) return;
+    dialogConfirmationEl.showModal();
+    btnDeleteEl.addEventListener('click', () => {
+      // 2.2 Delete the task
+      closestButtonDelete.parentElement.remove();
+      // 2.3 Show a dialog of success for the user to know that the task has been deleted successfully
+      dialogSuccessTaskDeletedEl.showModal();
+    });
+  });
+};
+deleteTask();
 
 // 3. Be able to rename existing elements in a list
+tasksListIncompleteEl.addEventListener('click', () => {
+  const taskLabel = e.target.closest('.task__label');
+  if (!taskLabel) return;
+  console.log('task label');
+});
 // 4. Be able to see the number of complete and incomplete elements

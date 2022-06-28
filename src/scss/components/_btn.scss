@@ -13,7 +13,7 @@
   }
 
   // Works with the mouse
-  &:focus {
+  &:focus-within {
     outline: 0.4rem solid var(--clr-primary-700);
   }
 
@@ -81,6 +81,14 @@
   &--close {
     position: absolute;
     inset: 4% 4% auto auto;
+
+    &:focus-within {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 0.4rem solid var(--clr-primary-700);
+    }
   }
 
   &--delete {
@@ -90,7 +98,6 @@
     color: white;
     padding: 0 2rem;
     height: 100%;
-    visibility: hidden;
     opacity: 0;
     transition: all 0.2s ease-in-out;
   }

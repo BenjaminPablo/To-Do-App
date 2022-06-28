@@ -62,6 +62,10 @@
     @include flex(column) {
       gap: var(--ws-400);
     }
+
+    @include respond(phone) {
+      width: 90%;
+    }
   }
 
   &__item {
@@ -69,6 +73,17 @@
     gap: var(--ws-200);
     justify-content: space-between;
     align-items: center;
+
+    @include respond(phone) {
+      flex-direction: column;
+      gap: var(--ws-100);
+    }
+  }
+
+  &__label {
+    @include respond(phone) {
+      align-self: start;
+    }
   }
 
   &__text {
@@ -79,6 +94,10 @@
     border-bottom: 0.3rem solid transparent;
     transition: all 0.3s ease-in-out;
     visibility: visible;
+
+    @include respond(phone) {
+      width: 100%;
+    }
 
     &:focus {
       outline: none;
@@ -104,6 +123,10 @@
 
   &--new-task {
     padding: 6rem 7rem;
+
+    @include respond(phone) {
+      padding: 3rem;
+    }
   }
 
   &--success {
@@ -112,6 +135,7 @@
   }
 
   &--confirmation {
+    visibility: visible;
     padding: 4rem;
   }
 }
