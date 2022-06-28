@@ -1,18 +1,13 @@
-const { random } = require('lodash');
+import { random } from 'lodash';
 
 const btnOpenEl = document.querySelector('.btn--open');
 const btnsCloseEl = document.querySelectorAll('[data-des="close"]');
 const dialogsEl = document.querySelectorAll('.dialog');
 const dialogAddNewTaskEl = document.querySelector('.dialog--new-task');
-const dialogTextEl = document.querySelectorAll('.dialog__text');
-console.log(dialogTextEl);
+const dialogTextsEl = document.querySelectorAll('.dialog__text');
 const dialogSuccessEl = document.querySelector('.dialog--success');
-const dialogTextDesValEl = document.querySelector(
-  '.dialog__text--description'
-).value;
-const dialogTextCatValEl = document.querySelector(
-  '.dialog__text--category'
-).value;
+const dialogTextDesEl = document.querySelector('.dialog__text--description');
+const dialogTextCatEl = document.querySelector('.dialog__text--category');
 const tasksListIncompleteEl = document.querySelector(
   '.tasks__list--incomplete'
 );
@@ -22,16 +17,29 @@ const btnAddNewTaskEl = document.querySelector('[data-des="add-new-task"]');
 // 1. Be able to add new elements to a list
 // 1.1. Open and closing the dialog with the btn.
 const dialog = () => {
+  const validateEnterTask = e => {
+    // Checks if the user presses the enter button and if the inputs are empty, if all is true, then we block the enter key until the user fills boths inputs
+    if (
+      (e.key !== 'Escape' &&
+        e.key === 'Enter' &&
+        dialogTextDesEl.value === '') ||
+      dialogTextCatEl.value === ''
+    ) {
+      e.preventDefault();
+    }
+  };
+
   btnOpenEl.addEventListener('click', () => {
     dialogAddNewTaskEl.showModal();
-    dialogTextDesValEl = '';
-    dialogTextCatValEl = '';
+    dialogTextsEl.forEach(dialText => (dialText.value = ''));
+    // I put this event handler here so it can work inmediately after we open the dialog.
+    dialogAddNewTaskEl.addEventListener('keydown', validateEnterTask);
   });
 
   dialogsEl.forEach(dialog => {
-    btnsCloseEl.forEach(btnClose => {
-      btnClose.addEventListener('click', () => dialog.close());
-    });
+    btnsCloseEl.forEach(btnClose =>
+      btnClose.addEventListener('click', () => dialog.close())
+    );
 
     dialog.addEventListener('click', e => {
       const dialogRect = dialog.getBoundingClientRect();
@@ -49,11 +57,13 @@ dialog();
 // 1.2 Render the new task to the task list
 const renderNewTask = () => {
   const randomIDGenerator = Math.floor(Math.random() * 10000);
-  const taskStringFormat = task => {};
+  const inputsTextFormat = inputs => {
+    inputs.forEach(input => input[0].toUpperCase() + input.slice(1));
+  };
 
   const insertTask = () => {
     const randomID = randomIDGenerator;
-    const html = `
+    const markup = `
       <div class="tasks__item">
         <input
           class="tasks__checkbox"
@@ -61,32 +71,21 @@ const renderNewTask = () => {
           id="${randomID}"
         />
         <div class="tasks__description">
-          <label class="tasks__label" for="${randomID}">${dialogTextDesValEl}</label>
-          <p class="tasks__category">${dialogTextCatValEl}</p>
-        </div>
+          <label class="tasks__label" for="${randomID}">
+          ${dialogTextDesEl.value}
+          </label>
+          <p class="tasks__category">${dialogTextCatEl.value}</p>
+          </div>
       </div>
     `;
-    // Adding the values inside
-    const dialogTexts = [dialogTextDesValEl, dialogTextCatValEl];
-    taskStringFormat(dialogTexts);
 
-    dialogAddNewTaskEl.addEventListener('keydown', e => {
-      // Checks if the user presses the enter button and if the inputs are empty, if all is true, then we block the enter key until the user fills boths inputs
-      if (
-        e.key === 'Enter' &&
-        dialogTextDesValEl.value === '' &&
-        dialogTextCatValEl.value === ''
-      ) {
-        e.preventDefault();
-      }
-    });
+    // Adding the values inside the function inputTextFormat to format the first letter to uppercase and the rest as it is.
+    // inputsTextFormat(dialogTextsEl);
 
     // Checks if before clicking the add a new task button the inputs are empty, if they are, then we return the action until the user fills the inputs.
-    if (dialogTextDesValEl.value === '' && dialogTextCatValEl.value === '') {
-      return;
-    }
+    dialogAddNewTaskEl.addEventListener('keydown', validateEnterTask);
 
-    tasksListIncompleteEl.insertAdjacentHTML('afterbegin', html);
+    tasksListIncompleteEl.insertAdjacentHTML('afterbegin', markup);
     dialogAddNewTaskEl.close();
     dialogSuccessEl.showModal();
   };

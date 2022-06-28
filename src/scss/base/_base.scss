@@ -54,6 +54,7 @@ html {
   color: white;
 }
 
+// Shows only when utilizing the keyboard
 :focus-visible {
   outline: 0.4rem solid var(--clr-primary-700);
 }

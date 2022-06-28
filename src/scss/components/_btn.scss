@@ -12,6 +12,11 @@
     transform: scale(1.1);
   }
 
+  // Works with the mouse
+  &:focus {
+    outline: 0.4rem solid var(--clr-primary-700);
+  }
+
   &:active {
     transform: scale(1.03);
   }
