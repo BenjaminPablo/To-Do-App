@@ -146,47 +146,32 @@ const deleteTask = () => {
 deleteTask();
 
 // 3. Be able to rename existing elements in a list
+// 3.1. Replace the label with a new input field by double clicking the label, of course, to edit it.
+
 tasksListIncompleteEl.addEventListener('dblclick', e => {
   const taskLabel = e.target.closest('.tasks__label');
+  console.log(taskLabel.firstChild);
 
   if (!taskLabel) return;
 
-  taskLabel.dataset.editorShown = true;
-
   const newInput = document.createElement('input');
-  newInput.classList.add('dialog__text');
+  newInput.classList.add('input-text');
   newInput.value = taskLabel.textContent;
 
   taskLabel.replaceChild(newInput, taskLabel.firstChild);
   newInput.focus();
 });
+
+tasksListIncompleteEl.addEventListener('click', e => {
+  // const notTaskLabel = !e.target.closest('.tasks__label');
+  // console.log(notTaskLabel);
+  // if (notTaskLabel) return;
+});
+
 // const updateTaskLabel = e => {
 //   const updatedText = document.createTextNode(e.target.value);
 //   taskLabel.replaceChild(updatedText, e.target);
 //   taskLabel.dataset.editorShown = false;
 // };
 
-tasksListIncompleteEl.addEventListener('click', e => {
-  const notTaskLabel = !e.target.closest('.tasks__label');
-  console.log(notTaskLabel);
-
-  if (notTaskLabel) return;
-});
-// tasksListIncompleteEl.addEventListener('focusout', updateTaskLabel);
-
-// tasksListIncompleteEl.addEventListener('click', e => {
-//   const taskLabel = e.target.closest('.tasks__label');
-//   const taskDescription = taskLabel.parentElement;
-
-//   if (!taskLabel && !taskDescription) return;
-
-//   taskLabel.addEventListener('click', () => {
-//     const newInput = document.createElement('input');
-//     newInput.classList.add('dialog__text');
-//     newInput.value = taskLabel.textContent;
-
-//     taskDescription.replaceChild(newInput, taskLabel);
-//     newInput.focus();
-//   });
-// });
 // 4. Be able to see the number of complete and incomplete elements

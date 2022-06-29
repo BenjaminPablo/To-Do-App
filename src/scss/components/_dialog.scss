@@ -94,34 +94,6 @@
     }
   }
 
-  &__text {
-    padding: 1.5rem 2rem;
-    border-radius: 0.2rem;
-    background-color: hsl(0, 0%, 100%, 0.5);
-    border: none;
-    border-bottom: 0.3rem solid transparent;
-    transition: all 0.3s ease-in-out;
-    visibility: visible;
-
-    @include respond(phone) {
-      width: 100%;
-    }
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 1rem 2rem hsla(0, 0%, 0%, 0.1);
-      border-bottom: 0.3rem solid var(--clr-primary-700);
-
-      &:invalid {
-        border-bottom: 0.3rem solid orangered;
-      }
-    }
-
-    &::placeholder {
-      color: #999;
-    }
-  }
-
   &__icon {
     display: block;
     fill: var(--clr-primary-900);
