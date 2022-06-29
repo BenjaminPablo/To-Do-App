@@ -23,11 +23,15 @@
 
   &__icon {
     display: block;
+    width: 3rem;
+    height: 3rem;
+
+    &--delete {
+      fill: white;
+    }
 
     &--open {
       fill: var(--clr-primary-300);
-      width: 3rem;
-      height: 3rem;
     }
 
     &--close {
@@ -100,5 +104,9 @@
     height: 100%;
     opacity: 0;
     transition: all 0.2s ease-in-out;
+
+    @include respond(phone) {
+      padding: 0;
+    }
   }
 }

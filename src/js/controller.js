@@ -1,4 +1,5 @@
 import { random } from 'lodash';
+const icons = require('../img/svg/sprite.svg');
 
 const btnOpenEl = document.querySelector('.btn--open');
 const btnsCloseEl = document.querySelectorAll('[data-value="close"]');
@@ -74,12 +75,9 @@ const addNewTask = () => {
 
   // 1.2 Render the new task to the incomplete task list each time the add-new-task button is clicked
   const renderNewTask = () => {
+    // Function to format the value input to the first letter to be uppercase
+    const randomID = Math.floor(Math.random() * 10000);
     const insertTask = () => {
-      // Function to format the value input to the first letter to be uppercase
-      const randomIDGenerator = Math.floor(Math.random() * 10000);
-      // Saving the random number to utilize it in two places at the same time
-      const randomID = randomIDGenerator;
-
       // Formatting the values and adding the randomid in the html
       const markup = `
       <div class="tasks__item">
@@ -89,7 +87,7 @@ const addNewTask = () => {
           id="${randomID}"
         />
         <div class="tasks__description">
-          <label class="tasks__label" for="${randomID}">
+          <label class="tasks__label">
           ${
             dialogTextDesEl.value[0].toUpperCase() +
             dialogTextDesEl.value.slice(1).toLowerCase()
@@ -100,7 +98,15 @@ const addNewTask = () => {
             dialogTextCatEl.value.slice(1).toLowerCase()
           }</p>
           </div>
-          <button class="btn btn--delete">Delete</button>
+          <button
+            class="btn btn--delete"
+            aria-label="Remove task item"
+            title="Remove task item"
+            >
+            <svg class="btn__icon btn__icon--delete">
+            <use href="${icons}#icon-trashcan"></use>
+            </svg>
+            </button>
       </div>
     `;
 
@@ -140,9 +146,47 @@ const deleteTask = () => {
 deleteTask();
 
 // 3. Be able to rename existing elements in a list
-tasksListIncompleteEl.addEventListener('click', () => {
-  const taskLabel = e.target.closest('.task__label');
+tasksListIncompleteEl.addEventListener('dblclick', e => {
+  const taskLabel = e.target.closest('.tasks__label');
+
   if (!taskLabel) return;
-  console.log('task label');
+
+  taskLabel.dataset.editorShown = true;
+
+  const newInput = document.createElement('input');
+  newInput.classList.add('dialog__text');
+  newInput.value = taskLabel.textContent;
+
+  taskLabel.replaceChild(newInput, taskLabel.firstChild);
+  newInput.focus();
 });
+// const updateTaskLabel = e => {
+//   const updatedText = document.createTextNode(e.target.value);
+//   taskLabel.replaceChild(updatedText, e.target);
+//   taskLabel.dataset.editorShown = false;
+// };
+
+tasksListIncompleteEl.addEventListener('click', e => {
+  const notTaskLabel = !e.target.closest('.tasks__label');
+  console.log(notTaskLabel);
+
+  if (notTaskLabel) return;
+});
+// tasksListIncompleteEl.addEventListener('focusout', updateTaskLabel);
+
+// tasksListIncompleteEl.addEventListener('click', e => {
+//   const taskLabel = e.target.closest('.tasks__label');
+//   const taskDescription = taskLabel.parentElement;
+
+//   if (!taskLabel && !taskDescription) return;
+
+//   taskLabel.addEventListener('click', () => {
+//     const newInput = document.createElement('input');
+//     newInput.classList.add('dialog__text');
+//     newInput.value = taskLabel.textContent;
+
+//     taskDescription.replaceChild(newInput, taskLabel);
+//     newInput.focus();
+//   });
+// });
 // 4. Be able to see the number of complete and incomplete elements
