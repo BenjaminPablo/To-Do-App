@@ -15,9 +15,9 @@ const dialogSuccessTaskDeletedEl = document.querySelector(
   '.dialog--success[data-value="task-deleted"]'
 );
 const dialogConfirmationEl = document.querySelector('.dialog--confirmation');
-const dialogTextsEl = document.querySelectorAll('.dialog__text');
-const dialogTextDesEl = document.querySelector('.dialog__text--description');
-const dialogTextCatEl = document.querySelector('.dialog__text--category');
+const inputTextsEl = document.querySelectorAll('.input-text');
+const inputTextDesEl = document.querySelector('.input-text--description');
+const inputTextCatEl = document.querySelector('.input-text--category');
 const tasksListIncompleteEl = document.querySelector(
   '.tasks__list--incomplete'
 );
@@ -36,27 +36,30 @@ const addNewTask = () => {
     // 3. The user filled all the inputs correctly
     if (
       e.key === 'Enter' &&
-      dialogTextDesEl.value === '' &&
-      dialogTextCatEl.value === ''
+      inputTextDesEl.value === '' &&
+      inputTextCatEl.value === ''
     ) {
       e.preventDefault();
-    } else if (e.key === 'Enter' && dialogTextDesEl.value !== '') {
+    } else if (e.key === 'Enter' && inputTextDesEl.value !== '') {
       e.preventDefault();
-    } else if (e.key === 'Enter' && dialogTextCatEl.value !== '') {
+    } else if (e.key === 'Enter' && inputTextCatEl.value !== '') {
       e.preventDefault();
-    } else if (dialogTextDesEl.value !== '' && dialogTextCatEl.value !== '') {
+    }
+    // If we have pressed the enter already and we want to press it with both of the inputs filled, we remove the event listener for it to work
+    else if (inputTextDesEl.value !== '' && inputTextCatEl.value !== '') {
       dialogAddNewTaskEl.removeEventListener('keydown', validateEnterTask);
     }
   };
 
   btnOpenEl.addEventListener('click', () => {
     dialogAddNewTaskEl.showModal();
-    dialogTextsEl.forEach(dialText => (dialText.value = ''));
+    // Doing a foreach because i want to clean both of the inputs before opening the dialog
+    inputTextsEl.forEach(dialText => (dialText.value = ''));
     // I put this event handler here so the validation can start right away.
     dialogAddNewTaskEl.addEventListener('keydown', validateEnterTask);
   });
 
-  // All the ways to close the dialog-new-task
+  // All the ways to close the dialogs
   dialogsEl.forEach(dialog => {
     btnsCloseEl.forEach(btnClose =>
       btnClose.addEventListener('click', () => dialog.close())
@@ -78,6 +81,9 @@ const addNewTask = () => {
     // Function to format the value input to the first letter to be uppercase
     const randomID = Math.floor(Math.random() * 10000);
     const insertTask = () => {
+      // Checks if the inputs are empty, if they are, then we return until the user fills the inputs.
+      if (inputTextCatEl.value === '' || inputTextDesEl.value === '') return;
+
       // Formatting the values and adding the randomid in the html
       const markup = `
       <div class="tasks__item">
@@ -89,13 +95,13 @@ const addNewTask = () => {
         <div class="tasks__description">
           <label class="tasks__label">
           ${
-            dialogTextDesEl.value[0].toUpperCase() +
-            dialogTextDesEl.value.slice(1).toLowerCase()
+            inputTextDesEl.value[0].toUpperCase() +
+            inputTextDesEl.value.slice(1).toLowerCase()
           }
           </label>
           <p class="tasks__category">${
-            dialogTextCatEl.value[0].toUpperCase() +
-            dialogTextCatEl.value.slice(1).toLowerCase()
+            inputTextCatEl.value[0].toUpperCase() +
+            inputTextCatEl.value.slice(1).toLowerCase()
           }</p>
           </div>
           <button
@@ -110,15 +116,11 @@ const addNewTask = () => {
       </div>
     `;
 
-      // Checks if before clicking the add a new task button the inputs are empty, if they are, then we return the action until the user fills the inputs.
-      if (dialogTextCatEl.value === '' || dialogTextDesEl.value === '') {
-        return;
-      }
-
       // Inserting the html
       tasksListIncompleteEl.insertAdjacentHTML('afterbegin', markup);
       // Closing the dialog after adding the task and open the success dialog
       dialogAddNewTaskEl.close();
+      // Showing the dialog success
       dialogSuccessTaskAddedEl.showModal();
     };
     btnAddNewTaskEl.addEventListener('click', insertTask);
@@ -131,57 +133,62 @@ addNewTask();
 // 2.1 Add event handler to the delete button to show the dialog of confirmation to delete the task.
 const deleteTask = () => {
   sectionTasksEl.addEventListener('click', e => {
-    const closestButtonDelete = e.target.closest('.btn--delete');
+    const btnDelete = e.target.closest('.btn--delete');
 
-    if (!closestButtonDelete) return;
+    if (!btnDelete) return;
     dialogConfirmationEl.showModal();
+
     btnDeleteEl.addEventListener('click', () => {
       // 2.2 Delete the task
-      closestButtonDelete.parentElement.remove();
-      // 2.3 Show a dialog of success for the user to know that the task has been deleted successfully
-      dialogSuccessTaskDeletedEl.showModal();
+      btnDelete.parentElement.remove();
+      // Then we close the confirmation dialog
+      dialogConfirmationEl.close();
+
+      // Check if this dialog is already open, if it's not, then we show it.
+      if (!dialogSuccessTaskDeletedEl.hasAttribute('open'))
+        dialogSuccessTaskDeletedEl.showModal();
     });
   });
 };
 deleteTask();
 
-// 3. Be able to rename existing elements in a list
-const renameTask = () => {
-  // 3.1. Replace the label with a new input field by double clicking the label, of course, to edit it.
-  tasksListIncompleteEl.addEventListener('dblclick', e => {
-    const taskLabel = e.target.closest('.tasks__label');
-    const taskCategory = e.target.closest('.tasks__category');
+// // 3. Be able to rename existing elements in a list
+// const renameTask = () => {
+//   // 3.1. Replace the label with a new input field by double clicking the label, of course, to edit it.
+//   tasksListIncompleteEl.addEventListener('dblclick', e => {
+//     const taskLabel = e.target.closest('.tasks__label');
+//     const taskCategory = e.target.closest('.tasks__category');
 
-    if (!taskLabel && !taskCategory) return;
+//     if (!taskLabel && !taskCategory) return;
 
-    const newInput = document.createElement('input');
-    newInput.classList.add('input-text');
+//     const newInput = document.createElement('input');
+//     newInput.classList.add('input-text');
 
-    // We assign the value of the task label to the new input
-    newInput.value = taskLabel.textContent;
-    // Then, we replace the task label with the new input whenever the user double clicks the label.
-    taskLabel.replaceWith(newInput);
-    newInput.focus();
+//     // We assign the value of the task label to the new input
+//     newInput.value = taskLabel.textContent;
+//     // Then, we replace the task label with the new input whenever the user double clicks the label.
+//     taskLabel.replaceWith(newInput);
+//     newInput.focus();
 
-    // I chose the blur event because it was only the new input which was going to change, so there wasn't any need to bubble up.
-    newInput.addEventListener('blur', function () {
-      // So, if we lose the focus on the input, we replace it with the label that was preceding it.
-      this.replaceWith(taskLabel);
-    });
+//     // I chose the blur event because it was only the new input which was going to change, so there wasn't any need to bubble up.
+//     newInput.addEventListener('blur', function () {
+//       // So, if we lose the focus on the input, we replace it with the label that was preceding it.
+//       this.replaceWith(taskLabel);
+//     });
 
-    newInput.addEventListener('keydown', function (e) {
-      // We first check that they we pressed is not enter neither escape, if that happens, then we inmediately return.
-      if (!e.key === 'Enter' && !e.key === 'Escape') return;
-      // If we just hit escape, we do replace the input with the label, but with any changes at all.
-      if (e.key === 'Escape') this.replaceWith(taskLabel);
-      // If we hit enter, whatever value we put in the new input, is going to be assigned to the tasklabel, even if we didn't do any changes at all.
-      if (e.key === 'Enter') {
-        taskLabel.textContent = this.value;
-        this.replaceWith(taskLabel);
-      }
-    });
-  });
-};
-renameTask();
+//     // newInput.addEventListener('keydown', function (e) {
+//     //   // We first check that they we pressed is not enter neither escape, if that happens, then we inmediately return.
+//     //   // if (!e.key === 'Enter' && !e.key === 'Escape') return;
+//     //   // If we just hit escape, we do replace the input with the label, but with any changes at all.
+//     //   if (e.key === 'Escape') this.replaceWith(taskLabel);
+//     //   // If we hit enter, whatever value we put in the new input, is going to be assigned to the tasklabel, even if we didn't do any changes at all.
+//     //   if (e.key === 'Enter') {
+//     //     taskLabel.textContent = this.value;
+//     //     this.replaceWith(taskLabel);
+//     //   }
+//     // });
+//   });
+// };
+// renameTask();
 
 // 4. Be able to see the number of complete and incomplete elements
