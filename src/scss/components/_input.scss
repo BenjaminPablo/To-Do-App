@@ -28,13 +28,18 @@
     color: #999;
   }
 
-  &--description {
-    padding: 1rem;
-    font-size: var(--fs-200);
-  }
+  // These are inputs that are going to be used when editing the tasks__items
+  &__update {
+    &--description {
+      padding: 1rem;
+      font-size: var(--fs-200);
+      margin-bottom: var(--ws-100);
+    }
 
-  &--category {
-    padding: 1rem;
-    font-size: var(--fs-100);
+    &--category {
+      padding: 1rem;
+      font-size: var(--fs-100);
+      margin-top: 0.5rem;
+    }
   }
 }

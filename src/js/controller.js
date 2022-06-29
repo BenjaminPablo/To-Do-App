@@ -1,4 +1,4 @@
-import { random } from 'lodash';
+import { random, update } from 'lodash';
 const icons = require('../img/svg/sprite.svg');
 
 const btnOpenEl = document.querySelector('.btn--open');
@@ -161,20 +161,20 @@ const renameTask = () => {
     if (!taskLabel) return;
 
     const newInput = document.createElement('input');
-    newInput.classList.add('input-text', 'input-text--description');
+    newInput.classList.add('input-text', 'input-text__update--description');
 
-    // We assign the value of the task label to the new input
-    newInput.value = taskLabel.textContent;
+    // We assign the value of the task label to the new input, and we also delete the spaces.
+    newInput.value = taskLabel.textContent.trim();
     // Then, we replace the task label with the new input whenever the user double clicks the label.
     taskLabel.replaceWith(newInput);
-    newInput.setSelectionRange(0, 0);
+    // newInput.setSelectionRange(0, 0);
     newInput.focus();
 
     newInput.addEventListener('keydown', function (e) {
       // If we just hit escape, we do replace the input with the label, but with any changes at all.
       if (e.key === 'Escape') this.replaceWith(taskLabel);
-      // If we hit enter, whatever value we put in the new input, is going to be assigned to the tasklabel, even if we didn't do any changes at all.
-      if (e.key === 'Enter') {
+      // Meanwhile we hit enter and the value is not empty, we can store that value to the task and display it
+      if (e.key === 'Enter' && this.value !== '') {
         taskLabel.textContent = this.value;
         this.replaceWith(taskLabel);
       }
@@ -192,7 +192,7 @@ const renameTask = () => {
     if (!taskCategory) return;
 
     const newInput = document.createElement('input');
-    newInput.classList.add('input-text', 'input-text--category');
+    newInput.classList.add('input-text', 'input-text__update--category');
 
     newInput.value = taskCategory.textContent;
     taskCategory.replaceWith(newInput);
@@ -200,7 +200,7 @@ const renameTask = () => {
 
     newInput.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') this.replaceWith(taskCategory);
-      if (e.key === 'Enter') {
+      if (e.key === 'Enter' && this.value !== '') {
         taskCategory.textContent = this.value;
         this.replaceWith(taskCategory);
       }
@@ -214,3 +214,5 @@ const renameTask = () => {
 renameTask();
 
 // 4. Be able to see the number of complete and incomplete elements
+const updateNumberTasks = () => {};
+updateNumberTasks();

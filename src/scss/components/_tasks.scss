@@ -44,10 +44,6 @@
 
   &__description {
     @include flex(column);
-
-    @include respond(phone) {
-      gap: var(--ws-100);
-    }
   }
 
   &__label {
