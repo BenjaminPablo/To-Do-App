@@ -16,6 +16,10 @@
   visibility: hidden;
   transition: all 0.2s ease-in-out;
 
+  @include respond(phone) {
+    width: 90%;
+  }
+
   &::backdrop {
     backdrop-filter: blur(0.4rem);
   }
@@ -40,6 +44,10 @@
 
     &--new-task {
       row-gap: var(--ws-700);
+
+      @include respond(phone) {
+        row-gap: var(--ws-500);
+      }
     }
 
     &--success {
@@ -125,7 +133,7 @@
     padding: 6rem 7rem;
 
     @include respond(phone) {
-      padding: 3rem;
+      padding: 3rem 2rem;
     }
   }
 
@@ -136,6 +144,6 @@
 
   &--confirmation {
     visibility: visible;
-    padding: 4rem;
+    padding: 3rem;
   }
 }

@@ -100,13 +100,12 @@
     margin-left: auto;
     background-color: #f03e3e;
     color: white;
-    padding: 0 2rem;
-    height: 100%;
+    padding: 0.7rem;
     opacity: 0;
     transition: all 0.2s ease-in-out;
 
     @include respond(phone) {
-      padding: 0;
+      padding: 0.3rem;
     }
   }
 }
