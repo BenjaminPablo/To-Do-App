@@ -42,6 +42,14 @@
     cursor: default;
   }
 
+  &__description {
+    @include flex(column);
+
+    @include respond(phone) {
+      gap: var(--ws-100);
+    }
+  }
+
   &__label {
     cursor: pointer;
   }

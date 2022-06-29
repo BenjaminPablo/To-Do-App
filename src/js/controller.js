@@ -152,43 +152,65 @@ const deleteTask = () => {
 };
 deleteTask();
 
-// // 3. Be able to rename existing elements in a list
-// const renameTask = () => {
-//   // 3.1. Replace the label with a new input field by double clicking the label, of course, to edit it.
-//   tasksListIncompleteEl.addEventListener('dblclick', e => {
-//     const taskLabel = e.target.closest('.tasks__label');
-//     const taskCategory = e.target.closest('.tasks__category');
+// 3. Be able to rename existing elements in a list
+const renameTask = () => {
+  // 3.1. Replace the label with a new input field by double clicking the label, of course, to edit it.
+  tasksListIncompleteEl.addEventListener('dblclick', e => {
+    const taskLabel = e.target.closest('.tasks__label');
 
-//     if (!taskLabel && !taskCategory) return;
+    if (!taskLabel) return;
 
-//     const newInput = document.createElement('input');
-//     newInput.classList.add('input-text');
+    const newInput = document.createElement('input');
+    newInput.classList.add('input-text', 'input-text--description');
 
-//     // We assign the value of the task label to the new input
-//     newInput.value = taskLabel.textContent;
-//     // Then, we replace the task label with the new input whenever the user double clicks the label.
-//     taskLabel.replaceWith(newInput);
-//     newInput.focus();
+    // We assign the value of the task label to the new input
+    newInput.value = taskLabel.textContent;
+    // Then, we replace the task label with the new input whenever the user double clicks the label.
+    taskLabel.replaceWith(newInput);
+    newInput.setSelectionRange(0, 0);
+    newInput.focus();
 
-//     // I chose the blur event because it was only the new input which was going to change, so there wasn't any need to bubble up.
-//     newInput.addEventListener('blur', function () {
-//       // So, if we lose the focus on the input, we replace it with the label that was preceding it.
-//       this.replaceWith(taskLabel);
-//     });
+    newInput.addEventListener('keydown', function (e) {
+      // If we just hit escape, we do replace the input with the label, but with any changes at all.
+      if (e.key === 'Escape') this.replaceWith(taskLabel);
+      // If we hit enter, whatever value we put in the new input, is going to be assigned to the tasklabel, even if we didn't do any changes at all.
+      if (e.key === 'Enter') {
+        taskLabel.textContent = this.value;
+        this.replaceWith(taskLabel);
+      }
+    });
 
-//     // newInput.addEventListener('keydown', function (e) {
-//     //   // We first check that they we pressed is not enter neither escape, if that happens, then we inmediately return.
-//     //   // if (!e.key === 'Enter' && !e.key === 'Escape') return;
-//     //   // If we just hit escape, we do replace the input with the label, but with any changes at all.
-//     //   if (e.key === 'Escape') this.replaceWith(taskLabel);
-//     //   // If we hit enter, whatever value we put in the new input, is going to be assigned to the tasklabel, even if we didn't do any changes at all.
-//     //   if (e.key === 'Enter') {
-//     //     taskLabel.textContent = this.value;
-//     //     this.replaceWith(taskLabel);
-//     //   }
-//     // });
-//   });
-// };
-// renameTask();
+    newInput.addEventListener('focusout', function () {
+      // So, if we lose the focus on the input, we replace it with the label that was preceding it.
+      this.replaceWith(taskLabel);
+    });
+  });
+
+  tasksListIncompleteEl.addEventListener('dblclick', e => {
+    const taskCategory = e.target.closest('.tasks__category');
+
+    if (!taskCategory) return;
+
+    const newInput = document.createElement('input');
+    newInput.classList.add('input-text', 'input-text--category');
+
+    newInput.value = taskCategory.textContent;
+    taskCategory.replaceWith(newInput);
+    newInput.focus();
+
+    newInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') this.replaceWith(taskCategory);
+      if (e.key === 'Enter') {
+        taskCategory.textContent = this.value;
+        this.replaceWith(taskCategory);
+      }
+    });
+
+    newInput.addEventListener('focusout', function () {
+      this.replaceWith(taskCategory);
+    });
+  });
+};
+renameTask();
 
 // 4. Be able to see the number of complete and incomplete elements

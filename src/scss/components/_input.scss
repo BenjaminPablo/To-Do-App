@@ -27,4 +27,14 @@
   &::placeholder {
     color: #999;
   }
+
+  &--description {
+    padding: 1rem;
+    font-size: var(--fs-200);
+  }
+
+  &--category {
+    padding: 1rem;
+    font-size: var(--fs-100);
+  }
 }
