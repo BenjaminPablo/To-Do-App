@@ -146,32 +146,42 @@ const deleteTask = () => {
 deleteTask();
 
 // 3. Be able to rename existing elements in a list
-// 3.1. Replace the label with a new input field by double clicking the label, of course, to edit it.
+const renameTask = () => {
+  // 3.1. Replace the label with a new input field by double clicking the label, of course, to edit it.
+  tasksListIncompleteEl.addEventListener('dblclick', e => {
+    const taskLabel = e.target.closest('.tasks__label');
+    const taskCategory = e.target.closest('.tasks__category');
 
-tasksListIncompleteEl.addEventListener('dblclick', e => {
-  const taskLabel = e.target.closest('.tasks__label');
-  console.log(taskLabel.firstChild);
+    if (!taskLabel && !taskCategory) return;
 
-  if (!taskLabel) return;
+    const newInput = document.createElement('input');
+    newInput.classList.add('input-text');
 
-  const newInput = document.createElement('input');
-  newInput.classList.add('input-text');
-  newInput.value = taskLabel.textContent;
+    // We assign the value of the task label to the new input
+    newInput.value = taskLabel.textContent;
+    // Then, we replace the task label with the new input whenever the user double clicks the label.
+    taskLabel.replaceWith(newInput);
+    newInput.focus();
 
-  taskLabel.replaceChild(newInput, taskLabel.firstChild);
-  newInput.focus();
-});
+    // I chose the blur event because it was only the new input which was going to change, so there wasn't any need to bubble up.
+    newInput.addEventListener('blur', function () {
+      // So, if we lose the focus on the input, we replace it with the label that was preceding it.
+      this.replaceWith(taskLabel);
+    });
 
-tasksListIncompleteEl.addEventListener('click', e => {
-  // const notTaskLabel = !e.target.closest('.tasks__label');
-  // console.log(notTaskLabel);
-  // if (notTaskLabel) return;
-});
-
-// const updateTaskLabel = e => {
-//   const updatedText = document.createTextNode(e.target.value);
-//   taskLabel.replaceChild(updatedText, e.target);
-//   taskLabel.dataset.editorShown = false;
-// };
+    newInput.addEventListener('keydown', function (e) {
+      // We first check that they we pressed is not enter neither escape, if that happens, then we inmediately return.
+      if (!e.key === 'Enter' && !e.key === 'Escape') return;
+      // If we just hit escape, we do replace the input with the label, but with any changes at all.
+      if (e.key === 'Escape') this.replaceWith(taskLabel);
+      // If we hit enter, whatever value we put in the new input, is going to be assigned to the tasklabel, even if we didn't do any changes at all.
+      if (e.key === 'Enter') {
+        taskLabel.textContent = this.value;
+        this.replaceWith(taskLabel);
+      }
+    });
+  });
+};
+renameTask();
 
 // 4. Be able to see the number of complete and incomplete elements
