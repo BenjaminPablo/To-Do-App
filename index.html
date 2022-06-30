@@ -23,7 +23,10 @@
     <!-- Header -->
     <header class="header">
       <h1 class="heading-primary">March 9, 2020</h1>
-      <p class="header__status">5 incomplete, 5 completed</p>
+      <p class="header__status">
+        <span class="header__status--incompleted">5</span> incompleted,
+        <span class="header__status--completed">5</span> completed
+      </p>
     </header>
 
     <!-- Main -->
@@ -32,7 +35,7 @@
       <section class="section-tasks">
         <h2 class="heading-secondary">Task List</h2>
         <div class="tasks">
-          <h3 class="heading-tertiary">Incomplete</h3>
+          <h3 class="heading-tertiary">Incompleted</h3>
           <div class="tasks__list tasks__list--incomplete">
             <div class="tasks__item">
               <input
@@ -41,7 +44,9 @@
                 id="Upload 1099-R to TurboTax"
               />
               <div class="tasks__description">
-                <label class="tasks__label">Upload 1099-R to TurboTax</label>
+                <label class="tasks__label" for="Upload 1099-R to TurboTax"
+                  >Upload 1099-R to TurboTax</label
+                >
                 <p class="tasks__category">💰 Finance</p>
               </div>
               <button

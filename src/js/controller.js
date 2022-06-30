@@ -23,6 +23,12 @@ const tasksListIncompleteEl = document.querySelector(
 );
 const btnAddNewTaskEl = document.querySelector('[data-des="add-new-task"]');
 const sectionTasksEl = document.querySelector('.section-tasks');
+const headerStatusIncompletedEl = document.querySelector(
+  '.header__status--incompleted'
+);
+const headerStatusCompletedEl = document.querySelector(
+  '.header__status--completed'
+);
 
 // ✨ Features:
 // 1. Be able to add new elements to a list
@@ -214,5 +220,33 @@ const renameTask = () => {
 renameTask();
 
 // 4. Be able to see the number of complete and incomplete elements
-const updateNumberTasks = () => {};
+const updateNumberTasks = () => {
+  // 4.1. Add an event listener for all the incompleted tasks checkboxes
+  let counterTasksIncompleted = 5;
+  let counterTasksCompleted = 5;
+  headerStatusIncompletedEl.textContent = counterTasksIncompleted;
+  headerStatusCompletedEl.textContent = counterTasksCompleted;
+  tasksListIncompleteEl.addEventListener('click', e => {
+    const checkbox = e.target.closest('.tasks__checkbox');
+    if (!checkbox) return;
+
+    if (checkbox.checked) {
+      counterTasksIncompleted--;
+      counterTasksCompleted++;
+    } else {
+      counterTasksIncompleted++;
+      counterTasksCompleted--;
+    }
+
+    headerStatusIncompletedEl.textContent = counterTasksIncompleted;
+    headerStatusCompletedEl.textContent = counterTasksCompleted;
+  });
+  // 4.2. If clicked, move to the completed list
+  // 4.3. Decrease the header__status--incomplete -1
+  // 4.4. Validate when it reaches to 0, if it does, stop the counter
+};
 updateNumberTasks();
+// the score of completed tasks increases +1 and the score of incomplete tasks decreases -1
+// When adding a new item, the score of the one belonging to the list increases.
+// When deleting an item, it decreases the counter of the item belonging to the list.
+// If one of them reaches 0, it stops the counter of that list.
