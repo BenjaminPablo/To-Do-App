@@ -21,6 +21,7 @@ const inputTextCatEl = document.querySelector('.input-text--category');
 const tasksListIncompleteEl = document.querySelector(
   '.tasks__list--incomplete'
 );
+const tasksListCompletedEl = document.querySelector('.tasks__list--completed');
 const btnAddNewTaskEl = document.querySelector('[data-des="add-new-task"]');
 const sectionTasksEl = document.querySelector('.section-tasks');
 const headerStatusIncompletedEl = document.querySelector(
@@ -221,29 +222,37 @@ renameTask();
 
 // 4. Be able to see the number of complete and incomplete elements
 const updateNumberTasks = () => {
-  // 4.1. Add an event listener for all the incompleted tasks checkboxes
   let counterTasksIncompleted = 5;
   let counterTasksCompleted = 5;
   headerStatusIncompletedEl.textContent = counterTasksIncompleted;
   headerStatusCompletedEl.textContent = counterTasksCompleted;
+  // 4.1. Add an event listener for all the incompleted tasks checkboxes
   tasksListIncompleteEl.addEventListener('click', e => {
-    const checkbox = e.target.closest('.tasks__checkbox');
-    if (!checkbox) return;
+    const taskCheckbox = e.target.closest('.tasks__checkbox');
+    if (!taskCheckbox) return;
+    const taskItem = taskCheckbox.parentElement;
+    const taskDescription = taskItem.querySelector('.tasks__description');
+    // To select its children
+    const taskDesChildren = Array.from(taskDescription.children);
 
-    if (checkbox.checked) {
-      counterTasksIncompleted--;
-      counterTasksCompleted++;
-    } else {
-      counterTasksIncompleted++;
-      counterTasksCompleted--;
-    }
+    // First, if we check the checkbox, we increase the counter in the completed list and decrease it in the incompleted list
+    counterTasksIncompleted--;
+    counterTasksCompleted++;
+    // Then, we disable and check the checkbox
+    taskCheckbox.disabled = true;
+    taskCheckbox.setAttribute('checked', '');
+    // We desactivate the label and category
+    taskDescription.classList.add('u-opacity-0-5');
+    taskDesChildren.forEach(child => (child.style.cursor = 'default'));
+    // Finally, we remove the task from the incomplete list
+    taskItem.remove();
+    // And we add it to the completed list
+    tasksListCompletedEl.insertAdjacentHTML('afterbegin', taskItem.outerHTML);
 
+    // Then, we update the results in the header__status for each one of those.
     headerStatusIncompletedEl.textContent = counterTasksIncompleted;
     headerStatusCompletedEl.textContent = counterTasksCompleted;
   });
-  // 4.2. If clicked, move to the completed list
-  // 4.3. Decrease the header__status--incomplete -1
-  // 4.4. Validate when it reaches to 0, if it does, stop the counter
 };
 updateNumberTasks();
 // the score of completed tasks increases +1 and the score of incomplete tasks decreases -1
