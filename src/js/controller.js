@@ -277,3 +277,8 @@ const updateNumberTasks = () => {
   });
 };
 updateNumberTasks();
+
+// Advanced:
+// Be able to create separate lists
+// Be able to tag and group elements
+// Automatically sorting complete and incomplete elements
