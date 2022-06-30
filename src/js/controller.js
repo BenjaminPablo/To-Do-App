@@ -30,9 +30,13 @@ const headerStatusIncompletedEl = document.querySelector(
 const headerStatusCompletedEl = document.querySelector(
   '.header__status--completed'
 );
+let counterTasksIncompleted = 5;
+let counterTasksCompleted = 5;
+headerStatusIncompletedEl.textContent = counterTasksIncompleted;
+headerStatusCompletedEl.textContent = counterTasksCompleted;
 
-// ✨ Features:
-// 1. Be able to add new elements to a list
+// ✅ ✨ Features:
+// ✅ 1. Be able to add new elements to a list
 // 1.1. Open and closing the dialog with the btn.
 const addNewTask = () => {
   const validateEnterTask = e => {
@@ -93,7 +97,7 @@ const addNewTask = () => {
 
       // Formatting the values and adding the randomid in the html
       const markup = `
-      <div class="tasks__item">
+      <div class="tasks__item" data-status="incompleted">
         <input
           class="tasks__checkbox"
           type="checkbox"
@@ -123,6 +127,10 @@ const addNewTask = () => {
       </div>
     `;
 
+      // When adding a new item, the score of the one belonging to the list increases.
+      counterTasksIncompleted++;
+      headerStatusIncompletedEl.textContent = counterTasksIncompleted;
+
       // Inserting the html
       tasksListIncompleteEl.insertAdjacentHTML('afterbegin', markup);
       // Closing the dialog after adding the task and open the success dialog
@@ -136,30 +144,42 @@ const addNewTask = () => {
 };
 addNewTask();
 
-// 2. Be able to remove existing elements from a list
+// ✅ 2. Be able to remove existing elements from a list
 // 2.1 Add event handler to the delete button to show the dialog of confirmation to delete the task.
 const deleteTask = () => {
   sectionTasksEl.addEventListener('click', e => {
     const btnDelete = e.target.closest('.btn--delete');
+    const taskItem = btnDelete.parentElement;
 
     if (!btnDelete) return;
     dialogConfirmationEl.showModal();
 
     btnDeleteEl.addEventListener('click', () => {
       // 2.2 Delete the task
-      btnDelete.parentElement.remove();
+      taskItem.remove();
       // Then we close the confirmation dialog
       dialogConfirmationEl.close();
-
       // Check if this dialog is already open, if it's not, then we show it.
       if (!dialogSuccessTaskDeletedEl.hasAttribute('open'))
         dialogSuccessTaskDeletedEl.showModal();
     });
+
+    if (counterTasksIncompleted < 1 && counterTasksCompleted < 1) {
+      counterTasksIncompleted = 0;
+      counterTasksCompleted = 0;
+    }
+
+    // When deleting an item, it decreases the counter of the item belonging to the list.
+    if (taskItem.dataset.status === 'incompleted') counterTasksIncompleted--;
+    else if (taskItem.dataset.status === 'completed') counterTasksCompleted--;
+
+    headerStatusIncompletedEl.textContent = counterTasksIncompleted;
+    headerStatusCompletedEl.textContent = counterTasksCompleted;
   });
 };
 deleteTask();
 
-// 3. Be able to rename existing elements in a list
+// ✅ 3. Be able to rename existing elements in a list
 const renameTask = () => {
   // 3.1. Replace the label with a new input field by double clicking the label, of course, to edit it.
   tasksListIncompleteEl.addEventListener('dblclick', e => {
@@ -220,12 +240,8 @@ const renameTask = () => {
 };
 renameTask();
 
-// 4. Be able to see the number of complete and incomplete elements
+// ✅ 4. Be able to see the number of complete and incomplete elements
 const updateNumberTasks = () => {
-  let counterTasksIncompleted = 5;
-  let counterTasksCompleted = 5;
-  headerStatusIncompletedEl.textContent = counterTasksIncompleted;
-  headerStatusCompletedEl.textContent = counterTasksCompleted;
   // 4.1. Add an event listener for all the incompleted tasks checkboxes
   tasksListIncompleteEl.addEventListener('click', e => {
     const taskCheckbox = e.target.closest('.tasks__checkbox');
@@ -244,10 +260,16 @@ const updateNumberTasks = () => {
     // We desactivate the label and category
     taskDescription.classList.add('u-opacity-0-5');
     taskDesChildren.forEach(child => (child.style.cursor = 'default'));
-    // Finally, we remove the task from the incomplete list
+    // Finally, we change the status of the dataset and remove the task item
+    taskItem.dataset.status = 'completed';
     taskItem.remove();
     // And we add it to the completed list
     tasksListCompletedEl.insertAdjacentHTML('afterbegin', taskItem.outerHTML);
+
+    if (counterTasksIncompleted < 1 && counterTasksCompleted < 1) {
+      counterTasksIncompleted = 0;
+      counterTasksCompleted = 0;
+    }
 
     // And we update the counters.
     headerStatusIncompletedEl.textContent = counterTasksIncompleted;
@@ -255,7 +277,3 @@ const updateNumberTasks = () => {
   });
 };
 updateNumberTasks();
-// the score of completed tasks increases +1 and the score of incomplete tasks decreases -1
-// When adding a new item, the score of the one belonging to the list increases.
-// When deleting an item, it decreases the counter of the item belonging to the list.
-// If one of them reaches 0, it stops the counter of that list.
