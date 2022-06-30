@@ -249,7 +249,7 @@ const updateNumberTasks = () => {
     // And we add it to the completed list
     tasksListCompletedEl.insertAdjacentHTML('afterbegin', taskItem.outerHTML);
 
-    // Then, we update the results in the header__status for each one of those.
+    // And we update the counters.
     headerStatusIncompletedEl.textContent = counterTasksIncompleted;
     headerStatusCompletedEl.textContent = counterTasksCompleted;
   });
