@@ -1,11 +1,5 @@
 @use '../abstracts/' as *;
 
-.main {
-  display: grid;
-  grid-template-columns: 1fr min-content;
-  column-gap: var(--ws-300);
-}
-
 .section-tasks {
   @include flex(column) {
     gap: var(--ws-400);

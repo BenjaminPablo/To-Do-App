@@ -22,11 +22,11 @@
   <body class="container">
     <!-- Header -->
     <header class="header">
-      <h1 class="heading-primary">March 9, 2020</h1>
+      <h1 class="heading-primary">July 02, 2022</h1>
       <p class="header__description">
-        <span class="header__status header__status--incompleted">5</span>
+        <span class="header__status" data-status="incompleted">5</span>
         incompleted,
-        <span class="header__status header__status--completed">5</span>
+        <span class="header__status" data-status="completed">5</span>
         completed
       </p>
     </header>
@@ -36,225 +36,210 @@
       <!-- Tasks -->
       <section class="section-tasks">
         <h2 class="heading-secondary">Task List</h2>
-        <div class="tasks">
+        <article class="tasks tasks--incompleted">
           <h3 class="heading-tertiary">Incompleted</h3>
-          <div class="tasks__list tasks__list--incomplete">
-            <div class="tasks__item" data-status="incompleted">
-              <input
-                class="tasks__checkbox"
-                type="checkbox"
-                id="checkbox-incompleted"
-              />
-              <div class="tasks__description">
-                <label class="tasks__label">Upload 1099-R to TurboTax</label>
-                <p class="tasks__category">💰 Finance</p>
-              </div>
-              <button
-                class="btn btn--delete"
-                aria-label="Remove task item"
-                title="Remove task item"
-              >
-                <svg class="btn__icon btn__icon--delete">
-                  <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-                </svg>
-              </button>
-            </div>
-            <div class="tasks__item" data-status="incompleted">
-              <input
-                class="tasks__checkbox"
-                type="checkbox"
-                id="checkbox-incompleted"
-              />
-              <div class="tasks__description">
-                <label class="tasks__label">Submit 2019 tax return</label>
-                <p class="tasks__category">💰 Finance</p>
-              </div>
-              <button
-                class="btn btn--delete"
-                aria-label="Remove task item"
-                title="Remove task item"
-              >
-                <svg class="btn__icon btn__icon--delete">
-                  <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-                </svg>
-              </button>
-            </div>
-            <div class="tasks__item" data-status="incompleted">
-              <input
-                class="tasks__checkbox"
-                type="checkbox"
-                id="checkbox-incompleted"
-              />
-              <div class="tasks__description">
-                <label class="tasks__label">Print parking passes</label>
-                <p class="tasks__category">💞 Wedding</p>
-              </div>
-              <button
-                class="btn btn--delete"
-                aria-label="Remove task item"
-                title="Remove task item"
-              >
-                <svg class="btn__icon btn__icon--delete">
-                  <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-                </svg>
-              </button>
-            </div>
-            <div class="tasks__item" data-status="incompleted">
-              <input
-                class="tasks__checkbox"
-                type="checkbox"
-                id="checkbox-incompleted"
-              />
-              <div class="tasks__description">
-                <label class="tasks__label">Sign contract, send back</label>
-                <p class="tasks__category">🖥️ Freelance</p>
-              </div>
-              <button
-                class="btn btn--delete"
-                aria-label="Remove task item"
-                title="Remove task item"
-              >
-                <svg class="btn__icon btn__icon--delete">
-                  <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-                </svg>
-              </button>
-            </div>
-            <div class="tasks__item" data-status="incompleted">
-              <input
-                class="tasks__checkbox"
-                type="checkbox"
-                id="checkbox-incompleted"
-              />
-              <div class="tasks__description">
-                <label class="tasks__label">Hand sanitizer</label>
-                <p class="tasks__category">🛒 Shopping List</p>
-              </div>
-              <button
-                class="btn btn--delete"
-                aria-label="Remove task item"
-                title="Remove task item"
-              >
-                <svg class="btn__icon btn__icon--delete">
-                  <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
+          <fieldset class="tasks__item" data-status="incompleted">
+            <input
+              class="tasks__checkbox"
+              type="checkbox"
+              id="checkbox-incompleted"
+            />
+            <label class="tasks__label">Upload 1099-R to TurboTax </label>
+            <label class="tasks__label tasks__label--small">💰 Finance</label>
+            <button
+              class="btn btn--delete task__btn"
+              aria-label="Remove task item"
+              title="Remove task item"
+            >
+              <svg class="btn__icon btn__icon--delete">
+                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
+              </svg>
+            </button>
+          </fieldset>
+          <fieldset class="tasks__item" data-status="incompleted">
+            <input
+              class="tasks__checkbox"
+              type="checkbox"
+              id="checkbox-incompleted"
+            />
+            <label class="tasks__label">Submit 2019 tax return</label>
+            <label class="tasks__label tasks__label--small">💰 Finance</label>
+            <button
+              class="btn btn--delete"
+              aria-label="Remove task item"
+              title="Remove task item"
+            >
+              <svg class="btn__icon btn__icon--delete">
+                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
+              </svg>
+            </button>
+          </fieldset>
+          <fieldset class="tasks__item" data-status="incompleted">
+            <input
+              class="tasks__checkbox"
+              type="checkbox"
+              id="checkbox-incompleted"
+            />
+            <label class="tasks__label">Print parking passes</label>
+            <label class="tasks__label tasks__label--small">💞 Wedding</label>
+            <button
+              class="btn btn--delete"
+              aria-label="Remove task item"
+              title="Remove task item"
+            >
+              <svg class="btn__icon btn__icon--delete">
+                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
+              </svg>
+            </button>
+          </fieldset>
+          <fieldset class="tasks__item" data-status="incompleted">
+            <input
+              class="tasks__checkbox"
+              type="checkbox"
+              id="checkbox-incompleted"
+            />
+            <label class="tasks__label">Sign contract, send back</label>
+            <label class="tasks__label tasks__label--small">🖥️ Freelance</label>
+            <button
+              class="btn btn--delete"
+              aria-label="Remove task item"
+              title="Remove task item"
+            >
+              <svg class="btn__icon btn__icon--delete">
+                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
+              </svg>
+            </button>
+          </fieldset>
+          <fieldset class="tasks__item" data-status="incompleted">
+            <input
+              class="tasks__checkbox"
+              type="checkbox"
+              id="checkbox-incompleted"
+            />
+            <label class="tasks__label">Submit 2019 tax return</label>
+            <label class="tasks__label tasks__label--small">💰 Finance</label>
+            <button
+              class="btn btn--delete"
+              aria-label="Remove task item"
+              title="Remove task item"
+            >
+              <svg class="btn__icon btn__icon--delete">
+                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
+              </svg>
+            </button>
+          </fieldset>
+        </article>
 
-        <div class="tasks">
+        <article class="tasks tasks--completed">
           <h3 class="heading-tertiary">Completed</h3>
-          <div class="tasks__list tasks__list--completed">
-            <div class="tasks__item" data-status="completed">
-              <input
-                class="tasks__checkbox"
-                type="checkbox"
-                id="Check on FedEx Order"
-                checked
-                disabled
-              />
-              <label class="tasks__label"> Check on FedEx Order </label>
-              <button
-                class="btn btn--delete"
-                aria-label="Remove task item"
-                title="Remove task item"
-              >
-                <svg class="btn__icon btn__icon--delete">
-                  <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-                </svg>
-              </button>
-            </div>
-            <div class="tasks__item" data-status="completed">
-              <input
-                class="tasks__checkbox"
-                type="checkbox"
-                id="Look at new plugins"
-                checked
-                disabled
-              />
-              <label class="tasks__label"> Look at new plugins </label>
-              <button
-                class="btn btn--delete"
-                aria-label="Remove task item"
-                title="Remove task item"
-              >
-                <svg class="btn__icon btn__icon--delete">
-                  <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-                </svg>
-              </button>
-            </div>
-            <div class="tasks__item" data-status="completed">
-              <input
-                class="tasks__checkbox"
-                type="checkbox"
-                id="Respond to catering company"
-                checked
-                disabled
-              />
-              <label class="tasks__label"> Respond to catering company </label>
-              <button
-                class="btn btn--delete"
-                aria-label="Remove task item"
-                title="Remove task item"
-              >
-                <svg class="btn__icon btn__icon--delete">
-                  <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-                </svg>
-              </button>
-            </div>
-            <div class="tasks__item" data-status="completed">
-              <input
-                class="tasks__checkbox"
-                type="checkbox"
-                id="Reschedule morning coffee"
-                checked
-                disabled
-              />
-              <label class="tasks__label"> Reschedule morning coffee </label>
-              <button
-                class="btn btn--delete"
-                aria-label="Remove task item"
-                title="Remove task item"
-              >
-                <svg class="btn__icon btn__icon--delete">
-                  <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-                </svg>
-              </button>
-            </div>
-            <div class="tasks__item" data-status="completed">
-              <input
-                class="tasks__checkbox"
-                type="checkbox"
-                id="Check the latest on Community"
-                checked
-                disabled
-              />
-              <label class="tasks__label">
-                Check the latest on Community
-              </label>
-              <button
-                class="btn btn--delete"
-                aria-label="Remove task item"
-                title="Remove task item"
-              >
-                <svg class="btn__icon btn__icon--delete">
-                  <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
+          <fieldset class="tasks__item" data-status="completed">
+            <input
+              class="tasks__checkbox"
+              type="checkbox"
+              id="Check on FedEx Order"
+              checked
+              disabled
+            />
+            <label class="tasks__label">Check on FedEx Order</label>
+            <button
+              class="btn btn--delete"
+              aria-label="Remove task item"
+              title="Remove task item"
+            >
+              <svg class="btn__icon btn__icon--delete">
+                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
+              </svg>
+            </button>
+          </fieldset>
+          <fieldset class="tasks__item" data-status="completed">
+            <input
+              class="tasks__checkbox"
+              type="checkbox"
+              id="Look at new plugins"
+              checked
+              disabled
+            />
+            <label class="tasks__label">Look at new plugins</label>
+            <button
+              class="btn btn--delete"
+              aria-label="Remove task item"
+              title="Remove task item"
+            >
+              <svg class="btn__icon btn__icon--delete">
+                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
+              </svg>
+            </button>
+          </fieldset>
+          <fieldset class="tasks__item" data-status="completed">
+            <input
+              class="tasks__checkbox"
+              type="checkbox"
+              id="Respond to catering company"
+              checked
+              disabled
+            />
+            <label class="tasks__label">Respond to catering company</label>
+            <button
+              class="btn btn--delete"
+              aria-label="Remove task item"
+              title="Remove task item"
+            >
+              <svg class="btn__icon btn__icon--delete">
+                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
+              </svg>
+            </button>
+          </fieldset>
+          <fieldset class="tasks__item" data-status="completed">
+            <input
+              class="tasks__checkbox"
+              type="checkbox"
+              id="Reschedule morning coffee"
+              checked
+              disabled
+            />
+            <label class="tasks__label">Reschedule morning coffee</label>
+            <button
+              class="btn btn--delete"
+              aria-label="Remove task item"
+              title="Remove task item"
+            >
+              <svg class="btn__icon btn__icon--delete">
+                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
+              </svg>
+            </button>
+          </fieldset>
+          <fieldset class="tasks__item" data-status="completed">
+            <input
+              class="tasks__checkbox"
+              type="checkbox"
+              id="Check the latest on Community"
+              checked
+              disabled
+            />
+            <label class="tasks__label">Check the latest on Community</label>
+            <button
+              class="btn btn--delete"
+              aria-label="Remove task item"
+              title="Remove task item"
+            >
+              <svg class="btn__icon btn__icon--delete">
+                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
+              </svg>
+            </button>
+          </fieldset>
+        </article>
+
+        <!-- Btn to open the dialog-->
+        <button
+          class="btn btn--open"
+          title="Open dialog"
+          aria-label="Button to open a dialog"
+        >
+          <svg class="btn__icon btn__icon--open">
+            <use href="src/img/svg/sprite.svg#icon-add-new"></use>
+          </svg>
+        </button>
       </section>
-      <!-- Btn to open the dialog-->
-      <button
-        class="btn btn--open"
-        title="Open dialog"
-        aria-label="Button to open a dialog"
-      >
-        <svg class="btn__icon btn__icon--open">
-          <use href="src/img/svg/sprite.svg#icon-add-new"></use>
-        </svg>
-      </button>
     </main>
 
     <!-- Footer -->
@@ -286,9 +271,9 @@
       <!-- Form to fill the fields -->
       <form class="dialog__form dialog__form--new-task" method="dialog">
         <p class="dialog__title">New task</p>
-        <div class="dialog__list">
-          <div class="dialog__item">
-            <label class="dialog__label"> Description </label>
+        <ul class="dialog__list">
+          <fieldset class="dialog__item">
+            <label class="dialog__label">Description</label>
             <input
               class="input-text input-text--description"
               type="text"
@@ -296,8 +281,8 @@
               placeholder="Review coding lecture #1"
               required
             />
-          </div>
-          <div class="dialog__item">
+          </fieldset>
+          <fieldset class="dialog__item">
             <label class="dialog__label">Category</label>
             <input
               class="input-text input-text--category"
@@ -306,8 +291,8 @@
               placeholder="Web Development"
               required
             />
-          </div>
-        </div>
+          </fieldset>
+        </ul>
         <!-- Btn to add a new task -->
         <button class="btn btn--principal" data-des="add-new-task">
           Add a new task
@@ -346,14 +331,14 @@
         <p class="u-text-align-center">
           Are you sure you want to delete this task?
         </p>
-        <div class="btn__group">
+        <ul class="btn__group">
           <button class="btn btn--principal" data-value="cancel" autofocus>
             Cancel
           </button>
           <button class="btn btn--secondary" data-value="delete">
             Delete task
           </button>
-        </div>
+        </ul>
       </form>
     </dialog>
 
