@@ -149,9 +149,9 @@ addNewTask();
 const deleteTask = () => {
   sectionTasksEl.addEventListener('click', e => {
     const btnDelete = e.target.closest('.btn--delete');
+    if (!btnDelete) return;
     const taskItem = btnDelete.parentElement;
 
-    if (!btnDelete) return;
     dialogConfirmationEl.showModal();
 
     btnDeleteEl.addEventListener('click', () => {
@@ -197,19 +197,20 @@ const renameTask = () => {
     // newInput.setSelectionRange(0, 0);
     newInput.focus();
 
+    newInput.addEventListener('focusout', function () {
+      // So, if we lose the focus on the input, we replace it with the label that was preceding it.
+      this.replaceWith(taskLabel);
+    });
+
     newInput.addEventListener('keydown', function (e) {
       // If we just hit escape, we do replace the input with the label, but with any changes at all.
       if (e.key === 'Escape') this.replaceWith(taskLabel);
+
       // Meanwhile we hit enter and the value is not empty, we can store that value to the task and display it
       if (e.key === 'Enter' && this.value !== '') {
         taskLabel.textContent = this.value;
         this.replaceWith(taskLabel);
       }
-    });
-
-    newInput.addEventListener('focusout', function () {
-      // So, if we lose the focus on the input, we replace it with the label that was preceding it.
-      this.replaceWith(taskLabel);
     });
   });
 
@@ -225,7 +226,11 @@ const renameTask = () => {
     taskCategory.replaceWith(newInput);
     newInput.focus();
 
+    let removed = false;
     newInput.addEventListener('keydown', function (e) {
+      if (removed) return;
+      removed = true;
+
       if (e.key === 'Escape') this.replaceWith(taskCategory);
       if (e.key === 'Enter' && this.value !== '') {
         taskCategory.textContent = this.value;
@@ -234,6 +239,8 @@ const renameTask = () => {
     });
 
     newInput.addEventListener('focusout', function () {
+      if (removed) return;
+      removed = true;
       this.replaceWith(taskCategory);
     });
   });
