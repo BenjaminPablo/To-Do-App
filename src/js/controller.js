@@ -21,6 +21,9 @@ const inputTextCatEl = document.querySelector('.input-text--category');
 const tasksListIncompleteEl = document.querySelector(
   '.tasks__list--incomplete'
 );
+const tasksDescriptionEl = Array.from(
+  document.querySelector('.tasks__description').children
+);
 const tasksListCompletedEl = document.querySelector('.tasks__list--completed');
 const btnAddNewTaskEl = document.querySelector('[data-des="add-new-task"]');
 const sectionTasksEl = document.querySelector('.section-tasks');
@@ -34,6 +37,10 @@ let counterTasksIncompleted = 5;
 let counterTasksCompleted = 5;
 headerStatusIncompletedEl.textContent = counterTasksIncompleted;
 headerStatusCompletedEl.textContent = counterTasksCompleted;
+const p = document.createElement('p');
+const pCompleted = document.createElement('p');
+p.textContent = `You don't have any tasks for the moment to complete! 🎉`;
+pCompleted.textContent = `Your completed tasks are empty! 🎉`;
 
 // ✅ ✨ Features:
 // ✅ 1. Be able to add new elements to a list
@@ -131,6 +138,8 @@ const addNewTask = () => {
       counterTasksIncompleted++;
       headerStatusIncompletedEl.textContent = counterTasksIncompleted;
 
+      p.replaceWith(tasksListIncompleteEl);
+
       // Inserting the html
       tasksListIncompleteEl.insertAdjacentHTML('afterbegin', markup);
       // Closing the dialog after adding the task and open the success dialog
@@ -157,17 +166,23 @@ const deleteTask = () => {
     btnDeleteEl.addEventListener('click', () => {
       // 2.2 Delete the task
       taskItem.remove();
+
+      if (counterTasksIncompleted < 1 && counterTasksCompleted < 1) {
+        tasksListIncompleteEl.replaceWith(p);
+        tasksListCompletedEl.replaceWith(pCompleted);
+      }
+      if (counterTasksIncompleted < 1) {
+        tasksListIncompleteEl.replaceWith(p);
+      }
+      if (counterTasksCompleted < 1)
+        tasksListCompletedEl.replaceWith(pCompleted);
+
       // Then we close the confirmation dialog
       dialogConfirmationEl.close();
       // Check if this dialog is already open, if it's not, then we show it.
       if (!dialogSuccessTaskDeletedEl.hasAttribute('open'))
         dialogSuccessTaskDeletedEl.showModal();
     });
-
-    if (counterTasksIncompleted < 1 && counterTasksCompleted < 1) {
-      counterTasksIncompleted = 0;
-      counterTasksCompleted = 0;
-    }
 
     // When deleting an item, it decreases the counter of the item belonging to the list.
     if (taskItem.dataset.status === 'incompleted') counterTasksIncompleted--;
@@ -181,67 +196,48 @@ deleteTask();
 
 // ✅ 3. Be able to rename existing elements in a list
 const renameTask = () => {
-  // 3.1. Replace the label with a new input field by double clicking the label, of course, to edit it.
-  tasksListIncompleteEl.addEventListener('dblclick', e => {
-    const taskLabel = e.target.closest('.tasks__label');
+  tasksDescriptionEl.forEach(task => {
+    // 3.1. Replace the label with a new input field by double clicking the label, of course, to edit it.
+    tasksListIncompleteEl.addEventListener('dblclick', e => {
+      const taskDesChild = e.target.closest(`.${task.className}`);
+      if (!taskDesChild) return;
 
-    if (!taskLabel) return;
+      const newInput = document.createElement('input');
+      const typeChild =
+        task.className === 'tasks__label'
+          ? 'input-text__update--description'
+          : 'input-text__update--category';
+      newInput.classList.add('input-text', typeChild);
 
-    const newInput = document.createElement('input');
-    newInput.classList.add('input-text', 'input-text__update--description');
+      // We assign the value of the task label to the new input, and we also delete the spaces.
+      newInput.value = taskDesChild.textContent.trim();
+      // Then, we replace the task label with the new input whenever the user double clicks the label.
+      taskDesChild.replaceWith(newInput);
+      // newInput.setSelectionRange(0, 0);
+      newInput.focus();
 
-    // We assign the value of the task label to the new input, and we also delete the spaces.
-    newInput.value = taskLabel.textContent.trim();
-    // Then, we replace the task label with the new input whenever the user double clicks the label.
-    taskLabel.replaceWith(newInput);
-    // newInput.setSelectionRange(0, 0);
-    newInput.focus();
+      const onFocus = function () {
+        // We delete the listener and the replace with each time so we can get a new replacewith method working
+        this.removeEventListener('blur', onFocus);
+        // So, if we lose the focus on the input, we replace it with the label that was preceding it.
+        this.replaceWith(taskDesChild);
+      };
 
-    newInput.addEventListener('focusout', function () {
-      // So, if we lose the focus on the input, we replace it with the label that was preceding it.
-      this.replaceWith(taskLabel);
-    });
+      newInput.addEventListener('blur', onFocus);
+      newInput.addEventListener('keydown', function (e) {
+        // If we just hit escape, we do replace the input with the label, but with any changes at all.
+        if (e.key === 'Escape') {
+          this.removeEventListener('blur', onFocus);
+          this.replaceWith(taskDesChild);
+        }
 
-    newInput.addEventListener('keydown', function (e) {
-      // If we just hit escape, we do replace the input with the label, but with any changes at all.
-      if (e.key === 'Escape') this.replaceWith(taskLabel);
-
-      // Meanwhile we hit enter and the value is not empty, we can store that value to the task and display it
-      if (e.key === 'Enter' && this.value !== '') {
-        taskLabel.textContent = this.value;
-        this.replaceWith(taskLabel);
-      }
-    });
-  });
-
-  tasksListIncompleteEl.addEventListener('dblclick', e => {
-    const taskCategory = e.target.closest('.tasks__category');
-
-    if (!taskCategory) return;
-
-    const newInput = document.createElement('input');
-    newInput.classList.add('input-text', 'input-text__update--category');
-
-    newInput.value = taskCategory.textContent;
-    taskCategory.replaceWith(newInput);
-    newInput.focus();
-
-    let removed = false;
-    newInput.addEventListener('keydown', function (e) {
-      if (removed) return;
-      removed = true;
-
-      if (e.key === 'Escape') this.replaceWith(taskCategory);
-      if (e.key === 'Enter' && this.value !== '') {
-        taskCategory.textContent = this.value;
-        this.replaceWith(taskCategory);
-      }
-    });
-
-    newInput.addEventListener('focusout', function () {
-      if (removed) return;
-      removed = true;
-      this.replaceWith(taskCategory);
+        // Meanwhile we hit enter and the value is not empty, we can store that value to the task and display it
+        if (e.key === 'Enter' && this.value !== '') {
+          this.removeEventListener('blur', onFocus);
+          taskDesChild.textContent = this.value;
+          this.replaceWith(taskDesChild);
+        }
+      });
     });
   });
 };
@@ -261,6 +257,8 @@ const updateNumberTasks = () => {
     // First, if we check the checkbox, we increase the counter in the completed list and decrease it in the incompleted list
     counterTasksIncompleted--;
     counterTasksCompleted++;
+    pCompleted.replaceWith(tasksListCompletedEl);
+
     // Then, we disable and check the checkbox
     taskCheckbox.disabled = true;
     taskCheckbox.setAttribute('checked', '');
@@ -273,9 +271,9 @@ const updateNumberTasks = () => {
     // And we add it to the completed list
     tasksListCompletedEl.insertAdjacentHTML('afterbegin', taskItem.outerHTML);
 
-    if (counterTasksIncompleted < 1 && counterTasksCompleted < 1) {
+    if (counterTasksIncompleted < 1) {
       counterTasksIncompleted = 0;
-      counterTasksCompleted = 0;
+      tasksListIncompleteEl.replaceWith(p);
     }
 
     // And we update the counters.
@@ -284,8 +282,3 @@ const updateNumberTasks = () => {
   });
 };
 updateNumberTasks();
-
-// Advanced:
-// Be able to create separate lists
-// Be able to tag and group elements
-// Automatically sorting complete and incomplete elements
