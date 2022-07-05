@@ -9,14 +9,14 @@
   &__item {
     display: grid;
     grid-template-columns: min-content 1fr min-content;
-    align-items: baseline;
     border-radius: 0.7rem;
-    border: 1px solid transparent;
+    border: 0.1rem solid transparent;
     transition: border 0.2s ease-in-out;
-    padding: 0.5rem;
+    align-items: center;
+    column-gap: 1.7rem;
 
     &:hover {
-      border: 1px solid #dee2e6;
+      border: 0.1rem solid #dee2e6;
     }
 
     &:hover > .btn--delete {
@@ -24,6 +24,19 @@
     }
   }
 
+  &__checkbox {
+    accent-color: var(--clr-primary-900);
+    height: 2.7rem;
+    width: 2.7rem;
+    cursor: pointer;
+    grid-row: 1 / 3;
+
+    &:disabled {
+      cursor: default;
+    }
+  }
+
+  // checkboxes that belong to the completed list
   &__checkbox:disabled + &__label {
     opacity: 0.5;
     cursor: default;
