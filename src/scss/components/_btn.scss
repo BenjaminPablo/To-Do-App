@@ -76,6 +76,7 @@
     width: fit-content;
     inset: auto 0 3rem auto;
     place-self: end;
+    grid-row: 3 / 4;
 
     @include respond(phone) {
       grid-column: auto;
@@ -89,10 +90,6 @@
     &:focus-within {
       outline: none;
     }
-
-    &:focus-visible {
-      outline: 0.4rem solid var(--clr-primary-700);
-    }
   }
 
   &--delete {
@@ -103,6 +100,7 @@
     transition: all 0.2s ease-in-out;
     grid-column: 3;
     grid-row: 1 / 3;
+    margin-left: auto;
 
     @include respond(phone) {
       padding: 0.3rem;

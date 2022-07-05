@@ -1,13 +1,8 @@
 @use '../abstracts/' as *;
 
 .section-tasks {
-  @include flex(column) {
-    gap: var(--ws-400);
-  }
-  grid-column: 1;
-  grid-row: 1;
-
-  @include respond(phone) {
-    grid-column: auto;
-  }
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  row-gap: 3.7rem;
+  column-gap: 1.7rem;
 }
