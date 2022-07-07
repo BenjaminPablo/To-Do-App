@@ -103,20 +103,6 @@ $box-shadows: (
   200: 0 4rem 6rem var(--clr-primary-100),
 );
 
-// Grid system
-$grids: (
-  'columns': (
-    100: [full-start] minmax(7rem, 1fr) [center-start]
-      repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end]
-      minmax(7rem, 1fr) [full-end],
-  ),
-  'position': (
-    100: col-start 2 / col-end 7,
-    200: center-start / center-end,
-    300: full-start / full-end,
-  ),
-);
-
 // Generating the variables
 :root {
   // Colors
@@ -130,13 +116,6 @@ $grids: (
   @each $line-height, $types in $line-heights {
     @each $type, $value in $types {
       --lh-#{$line-height}-#{$type}: #{$value};
-    }
-  }
-
-  // Grids
-  @each $grid, $types in $grids {
-    @each $type, $value in $types {
-      --grid-#{$grid}-#{$type}: #{$value};
     }
   }
 

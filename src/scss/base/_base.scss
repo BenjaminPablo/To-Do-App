@@ -30,33 +30,33 @@ html {
   @include grid-columns-full;
   grid-template-rows: min-content 1fr min-content;
   min-height: 100vh;
-  row-gap: var(--ws-400);
-  padding: var(--ws-400) var(--ws-400) 0;
-  background-color: var(--clr-primary-500);
+  row-gap: var(--size-8);
+  padding: var(--size-8) var(--size-8) 0;
+  background-color: var(--gray-1);
 
   & > * {
-    grid-column: var(--grid-position-100);
+    grid-column: col-start 2 / col-end 7;
   }
 
   @include respond(tab-port) {
     & > * {
-      grid-column: var(--grid-position-200);
+      grid-column: center-start / center-end;
     }
   }
 
   @include respond(phone) {
     & > * {
-      grid-column: var(--grid-position-300);
+      grid-column: full-start / full-end;
     }
   }
 }
 
 ::selection {
-  background-color: var(--clr-primary-700);
-  color: white;
+  background-color: var(--violet-9);
+  color: var(--gray-0);
 }
 
 // Shows only when utilizing the keyboard
 :focus-visible {
-  outline: 0.4rem solid var(--clr-primary-700);
+  outline: var(--border-size-3) solid var(--violet-9);
 }

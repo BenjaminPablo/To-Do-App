@@ -67,7 +67,10 @@ ORDER to add Media Queries: Base + typography > general layout + grid > page lay
 
 @mixin grid-columns-full {
   display: grid;
-  grid-template-columns: var(--grid-columns-100);
+  grid-template-columns:
+    [full-start] minmax(7rem, 1fr) [center-start]
+    repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end]
+    minmax(7rem, 1fr) [full-end];
 }
 
 @mixin hidden {
