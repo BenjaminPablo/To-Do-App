@@ -17,7 +17,7 @@
   &:focus {
     outline: none;
     box-shadow: 0 1rem 2rem hsla(0, 0%, 0%, 0.1);
-    border-bottom: 0.3rem solid var(--clr-primary-700);
+    border-bottom: 0.3rem solid var(--violet-9);
 
     &:invalid {
       border-bottom: 0.3rem solid orangered;
@@ -32,13 +32,13 @@
   &__update {
     &--description {
       padding: 1rem;
-      font-size: var(--fs-200);
-      margin-bottom: var(--ws-100);
+      font-size: var(--font-size-4);
+      margin-bottom: var(--size-4);
     }
 
     &--category {
       padding: 1rem;
-      font-size: var(--fs-100);
+      font-size: var(--font-size-3);
       margin-top: 0.5rem;
     }
   }

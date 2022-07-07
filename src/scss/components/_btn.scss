@@ -14,7 +14,7 @@
 
   // Works with the mouse
   &:focus-within {
-    outline: 0.4rem solid var(--clr-primary-700);
+    outline: 0.4rem solid var(--violet-9);
   }
 
   &:active {
@@ -27,15 +27,15 @@
     height: 3rem;
 
     &--delete {
-      fill: white;
+      fill: var(--gray-0);
     }
 
     &--open {
-      fill: var(--clr-primary-300);
+      fill: var(--gray-0);
     }
 
     &--close {
-      fill: var(--clr-primary-200);
+      fill: var(--gray-6);
       width: 3.3rem;
       height: 3.3rem;
       transition: fill 0.2s ease-in-out;
@@ -48,30 +48,34 @@
 
   &__group {
     @include flex(normal) {
-      gap: var(--ws-400);
+      gap: var(--size-8);
     }
   }
 
   // Modifiers (Types of buttons)
   &--principal {
-    color: var(--clr-primary-500);
-    background-image: var(--clr-gradient-100);
-    padding: var(--ws-200);
+    color: var(--gray-4);
+    background-image: var(--gradient-2);
+    padding: var(--size-5);
     border-radius: 1rem;
   }
 
   &--secondary {
-    border: 0.2rem solid var(--clr-primary-900);
-    padding: var(--ws-100);
+    border: 0.2rem solid var(--violet-9);
+    padding: var(--size-4);
     border-radius: 1rem;
   }
 
   &--open {
-    border: var(--bor-200);
-    box-shadow: var(--bxs-100);
-    background-image: var(--clr-gradient-100);
+    border: 0.1rem solid hsl(231, 43%, 44%);
+    box-shadow: 0 0.2rem 0.8rem 0 hsla(0, 0%, 0%, 0.25);
+    background-image: linear-gradient(
+      180deg,
+      hsl(231, 43%, 44%) 0%,
+      hsl(245, 43%, 44%) 100%
+    );
     border-radius: 50%;
-    padding: var(--ws-100);
+    padding: 1.2rem;
     position: sticky;
     width: fit-content;
     inset: auto 0 3rem auto;

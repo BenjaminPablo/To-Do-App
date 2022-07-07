@@ -2,9 +2,9 @@
 
 .tasks {
   @include flex(column) {
-    gap: var(--ws-100);
+    gap: var(--size-4);
   }
-  color: var(--clr-neutral-200);
+  color: var(--violet-3);
 
   &--incompleted {
     grid-column: 1;
@@ -46,7 +46,7 @@
   }
 
   &__checkbox {
-    accent-color: var(--clr-primary-900);
+    accent-color: var(--violet-9);
     height: 2.7rem;
     width: 2.7rem;
     cursor: pointer;
@@ -67,7 +67,7 @@
     cursor: pointer;
 
     &--small {
-      font-size: var(--fs-100);
+      font-size: var(--font-size-3);
       grid-column: 2;
     }
   }

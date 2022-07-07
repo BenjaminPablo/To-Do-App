@@ -4,10 +4,10 @@
   width: fit-content;
   height: fit-content;
   border: none;
-  background-color: var(--clr-primary-500);
+  background-color: var(--gray-2);
   border-radius: 1rem;
   @include fixCenter;
-  box-shadow: var(--bxs-200);
+  box-shadow: 0 4rem 6rem hsla(0, 0%, 0%, 0.25);
   z-index: 1000;
   // With display added, transitions will work in the dialog
   display: block;
@@ -32,7 +32,7 @@
 
   &__heading {
     @include flex(column) {
-      gap: var(--ws-200);
+      gap: 1.6rem;
     }
     align-items: center;
   }
@@ -43,32 +43,32 @@
     justify-items: center;
 
     &--new-task {
-      row-gap: var(--ws-700);
+      row-gap: 8rem;
 
       @include respond(phone) {
-        row-gap: var(--ws-500);
+        row-gap: 4.8rem;
       }
     }
 
     &--success {
-      row-gap: var(--ws-300);
+      row-gap: 2.4rem;
     }
 
     &--confirmation {
-      row-gap: var(--ws-400);
+      row-gap: 3.2rem;
     }
   }
 
   &__title {
-    font-size: var(--fs-700);
-    font-weight: var(--fw-700);
-    letter-spacing: var(--ls-200);
-    line-height: var(--lh-big-200);
+    font-size: 4.4rem;
+    font-weight: var(--font-weight-7);
+    letter-spacing: var(--font-letterspacing-0);
+    line-height: var(--font-lineheight-0);
   }
 
   &__list {
     @include flex(column) {
-      gap: var(--ws-400);
+      gap: var(--size-8);
     }
 
     @include respond(phone) {
@@ -78,13 +78,13 @@
 
   &__item {
     display: flex;
-    gap: var(--ws-200);
+    gap: var(--size-6);
     justify-content: space-between;
     align-items: center;
 
     @include respond(phone) {
       flex-direction: column;
-      gap: var(--ws-100);
+      gap: var(--size-4);
     }
   }
 
@@ -96,7 +96,7 @@
 
   &__icon {
     display: block;
-    fill: var(--clr-primary-900);
+    fill: var(--violet-9);
     width: 10rem;
     height: 10rem;
   }
