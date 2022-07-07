@@ -1,5 +1,4 @@
-import { random, update } from 'lodash';
-const icons = require('../img/svg/sprite.svg');
+import icons from '../img/svg/sprite.svg';
 
 const btnOpenEl = document.querySelector('.btn--open');
 const btnsCloseEl = document.querySelectorAll('[data-value="close"]');
@@ -30,7 +29,6 @@ const headerStatusEl = document.querySelectorAll('.header__status');
 let counterTasksIncompleted = 5;
 let counterTasksCompleted = 5;
 headerStatusEl.forEach(headerStatus => (headerStatus.textContent = 5));
-console.log(headerStatusEl);
 
 // const p = document.createElement('p');
 // const pCompleted = document.createElement('p');
