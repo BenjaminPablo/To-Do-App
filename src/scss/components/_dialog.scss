@@ -31,7 +31,7 @@
   &__heading {
     display: flex;
     flex-direction: column;
-    gap: 1.6rem;
+    gap: var(--size-6);
     align-items: center;
   }
 

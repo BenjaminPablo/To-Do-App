@@ -1,12 +1,11 @@
 @use '../abstracts/' as *;
 
 .header {
-  padding-bottom: var(--size-7);
-  border-bottom: var(--border-size-2) solid var(--gray-3);
+  padding-bottom: var(--size-6);
+  border-bottom: var(--border-size-2) solid var(--gray-4);
 
   &__description {
-    color: var(--gray-6);
     font-size: var(--font-size-4);
-    font-weight: var(--font-weight-6);
+    font-weight: var(--font-weight-5);
   }
 }

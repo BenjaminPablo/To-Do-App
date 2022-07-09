@@ -22,11 +22,11 @@
   <body class="container">
     <!-- Header -->
     <header class="header">
-      <h1 class="heading-primary">July 02, 2022</h1>
+      <h1 class="heading-primary">July 09, 2022</h1>
       <p class="header__description">
-        <span class="header__status" data-status="incompleted">5</span>
+        <span data-status="incompleted">5</span>
         incompleted,
-        <span class="header__status" data-status="completed">5</span>
+        <span data-status="completed">5</span>
         completed
       </p>
     </header>
@@ -40,8 +40,10 @@
           <h3 class="heading-tertiary">Incompleted</h3>
           <fieldset class="tasks__item" data-status="incompleted" tabindex="0">
             <input class="tasks__checkbox" type="checkbox" />
-            <label class="tasks__label">Upload 1099-R to TurboTax </label>
-            <label class="tasks__label tasks__label--small">💰 Finance</label>
+            <div class="tasks__group">
+              <label class="tasks__label">Upload 1099-R to TurboTax </label>
+              <label class="tasks__label tasks__label--small">💰 Finance</label>
+            </div>
             <button
               class="btn btn--delete"
               aria-label="Remove task item"

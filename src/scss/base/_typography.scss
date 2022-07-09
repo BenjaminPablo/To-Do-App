@@ -1,10 +1,9 @@
 @use '../abstracts/' as *;
 
-body {
+.container {
   font-family: 'Inter', sans-serif;
-  font-size: var(--font-size-fluid-2);
+  font-size: var(--font-size-5);
   line-height: var(--font-lineheight-4);
-  font-weight: var(--font-weight-4);
 }
 
 %headings {
@@ -13,10 +12,12 @@ body {
 
 .heading-primary {
   font-weight: var(--font-weight-7);
+  color: var(--gray-8);
   @extend %headings;
 }
 
 .heading-secondary {
+  font-size: var(--font-size-fluid-2);
   font-weight: var(--font-weight-6);
   line-height: var(--font-lineheight-0);
   @extend %headings;
