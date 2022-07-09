@@ -2,22 +2,22 @@
 
 .footer {
   padding: var(--size-5) 0;
-  border-top: 0.2rem solid var(--gray-4);
+  border-top: var(--border-size-2) solid var(--gray-4);
   text-align: center;
-  color: var(--violet-3);
 
   &__link {
     display: inline-block;
     text-decoration: none;
-    @include reset-inherit;
-    padding: 0 0 0.1rem;
-    border-bottom: 0.1rem solid var(--gray-3);
-    transition: all 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0 0 var(--size-1);
+    transition: all 0.2s var(--ease-elastic-1);
 
     &:hover {
       color: var(--violet-7);
       transform: scale(1.01);
-      border-bottom: 0.1rem solid var(--violet-9);
+      border-bottom: var(--border-size-1) solid var(--violet-9);
     }
   }
 }

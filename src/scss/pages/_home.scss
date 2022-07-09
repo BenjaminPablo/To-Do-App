@@ -3,6 +3,6 @@
 .section-tasks {
   display: grid;
   grid-template-columns: 1fr min-content;
-  row-gap: 3.7rem;
-  column-gap: 1.7rem;
+  row-gap: var(--size-9);
+  column-gap: var(--size-6);
 }

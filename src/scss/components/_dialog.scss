@@ -5,20 +5,18 @@
   height: fit-content;
   border: none;
   background-color: var(--gray-2);
-  border-radius: 1rem;
-  @include fixCenter;
-  box-shadow: 0 4rem 6rem hsla(0, 0%, 0%, 0.25);
-  z-index: 1000;
+  border-radius: var(--radius-3);
+  position: fixed;
+  inset: 50% 0 0 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: var(--shadow-4);
+  z-index: var(--layer-3);
   // With display added, transitions will work in the dialog
   display: block;
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
-  transition: all 0.2s ease-in-out;
-
-  @include respond(phone) {
-    width: 90%;
-  }
+  transition: all 0.2s var(--ease-1);
 
   &::backdrop {
     backdrop-filter: blur(0.4rem);
@@ -31,9 +29,9 @@
   }
 
   &__heading {
-    @include flex(column) {
-      gap: 1.6rem;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
     align-items: center;
   }
 
@@ -43,37 +41,29 @@
     justify-items: center;
 
     &--new-task {
-      row-gap: 8rem;
-
-      @include respond(phone) {
-        row-gap: 4.8rem;
-      }
+      row-gap: var(--size-11);
     }
 
     &--success {
-      row-gap: 2.4rem;
+      row-gap: var(--size-7);
     }
 
     &--confirmation {
-      row-gap: 3.2rem;
+      row-gap: var(--size-8);
     }
   }
 
   &__title {
-    font-size: 4.4rem;
+    font-size: var(--font-size-fluid-2);
     font-weight: var(--font-weight-7);
     letter-spacing: var(--font-letterspacing-0);
     line-height: var(--font-lineheight-0);
   }
 
   &__list {
-    @include flex(column) {
-      gap: var(--size-8);
-    }
-
-    @include respond(phone) {
-      width: 90%;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-8);
   }
 
   &__item {
@@ -81,41 +71,26 @@
     gap: var(--size-6);
     justify-content: space-between;
     align-items: center;
-
-    @include respond(phone) {
-      flex-direction: column;
-      gap: var(--size-4);
-    }
-  }
-
-  &__label {
-    @include respond(phone) {
-      align-self: start;
-    }
   }
 
   &__icon {
     display: block;
     fill: var(--violet-9);
-    width: 10rem;
-    height: 10rem;
+    width: var(--size-12);
+    height: var(--size-12);
   }
 
   &--new-task {
-    padding: 6rem 7rem;
-
-    @include respond(phone) {
-      padding: 3rem 2rem;
-    }
+    padding: var(--size-10) var(--size-11);
   }
 
   &--success {
     visibility: visible;
-    padding: 2rem 3rem;
+    padding: var(--size-7) var(--size-8);
   }
 
   &--confirmation {
     visibility: visible;
-    padding: 3rem;
+    padding: var(--size-8);
   }
 }

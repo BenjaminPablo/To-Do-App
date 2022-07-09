@@ -1,10 +1,9 @@
 @use '../abstracts/' as *;
 
 .tasks {
-  @include flex(column) {
-    gap: var(--size-4);
-  }
-  color: var(--violet-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-4);
 
   &--incompleted {
     grid-column: 1;
@@ -15,12 +14,12 @@
   }
 
   &__item {
-    border-radius: 0.7rem;
-    border: 0.1rem solid transparent;
-    transition: border 0.2s ease-in-out;
+    border-radius: var(--radius-3);
+    border: var(--border-size-1) solid transparent;
+    transition: border 0.2s var(--ease-3);
 
     &:hover {
-      outline: 0.1rem solid #dee2e6;
+      outline: var(--border-size-1) solid var(--gray-3);
     }
 
     &:hover > .btn--delete {
@@ -31,24 +30,24 @@
       display: grid;
       grid-template-columns: min-content 1fr min-content;
       align-items: center;
-      column-gap: 1.7rem;
+      column-gap: var(--size-6);
     }
 
     &[data-status='completed'] {
       display: flex;
       align-items: center;
-      gap: 1.7rem;
+      gap: var(--size-6);
     }
 
     &:focus-visible {
-      outline: 0.1rem solid #dee2e6;
+      outline: var(--border-size-1) solid var(--gray-3);
     }
   }
 
   &__checkbox {
     accent-color: var(--violet-9);
-    height: 2.7rem;
-    width: 2.7rem;
+    height: var(--size-8);
+    width: var(--size-8);
     cursor: pointer;
     grid-row: 1 / 3;
 

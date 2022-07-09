@@ -9,19 +9,70 @@
   1440px - 1920px:  xxl
 
 $breakpoint argument choices:
-- xxs watch
-- xs phone
-- sm phone
-- md tablet
-- lg tablet
-- xl laptop
-- xxl pc
+- xxs
+- xs
+- sm
+- md
+- lg
+- xl
+- xxl
 
 ORDER to add Media Queries: Base + typography > general layout + grid > page layout > components
 
 1em = 16px
 */
 @mixin respond($breakpoint) {
+  // Checking Motion
+  @if $breakpoint == motionOK {
+    @media only screen and (prefers-reduced-motion: no-preference) {
+      @content;
+    }
+  }
+  @if $breakpoint == motionNotOK {
+    @media only screen and (prefers-reduced-motion: reduce) {
+      @content;
+    }
+  }
+
+  // Checking theme
+  @if $breakpoint == OSdark {
+    @media only screen and (prefers-color-scheme: dark) {
+      @content;
+    }
+  }
+  @if $breakpoint == OSlight {
+    @media only screen and (prefers-color-scheme: light) {
+      @content;
+    }
+  }
+
+  // Checking contrast
+  @if $breakpoint == highContrast {
+    @media only screen and (prefers-contrast: more) {
+      @content;
+    }
+  }
+  @if $breakpoint == lowContrast {
+    @media only screen and (prefers-contrast: less) {
+      @content;
+    }
+  }
+
+  // Dynamic range
+  @if $breakpoint == HDcolor {
+    @media only screen and (dynamic-range: high) {
+      @content;
+    }
+  }
+
+  // For not hover
+  @if $breakpoint == touch {
+    @media only screen and (hover: none) {
+      @content;
+    }
+  }
+
+  // For sizes
   @if $breakpoint == xxs {
     @media only screen and (max-width: 15em) {
       // 240px
@@ -59,49 +110,9 @@ ORDER to add Media Queries: Base + typography > general layout + grid > page lay
     }
   }
   @if $breakpoint == xxl {
-    @media only screen and (max-width: 120em) {
+    @media only screen and (min-width: 120em) {
       // 1920px
       @content;
     }
   }
-}
-
-// Other mixins
-@mixin flex($direction) {
-  display: flex;
-  @if $direction == column {
-    flex-direction: column;
-  }
-  @content;
-}
-
-@mixin reset-base {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-}
-
-@mixin reset-inherit {
-  color: inherit;
-  font-family: inherit;
-  font-size: inherit;
-}
-
-@mixin grid-columns-full {
-  display: grid;
-  grid-template-columns:
-    [full-start] minmax(7rem, 1fr) [center-start]
-    repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end]
-    minmax(7rem, 1fr) [full-end];
-}
-
-@mixin hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-@mixin fixCenter {
-  position: fixed;
-  inset: 50% 0 0 50%;
-  transform: translate(-50%, -50%);
 }
