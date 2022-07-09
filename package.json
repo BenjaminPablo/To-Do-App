@@ -11,6 +11,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.7",
     "core-js": "^3.23.3",
+    "cssnano": "^5.1.12",
     "open-props": "^1.4.1",
     "postcss": "^8.4.14",
     "postcss-cli": "^10.0.0",
