@@ -5,4 +5,8 @@
   grid-template-columns: 1fr min-content;
   row-gap: var(--size-8);
   column-gap: var(--size-5);
+
+  @include respond(xs) {
+    grid-template-columns: auto;
+  }
 }

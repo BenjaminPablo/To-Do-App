@@ -12,11 +12,14 @@
     font-family: inherit;
     font-size: inherit;
     padding: 0 0 var(--size-1);
-    transition: all 0.2s var(--ease-elastic-1);
+    transform: scale(1);
+    border-bottom: var(--border-size-1) solid transparent;
+    transition: transform 0.2s var(--ease-elastic-1),
+      border-bottom 0.2s var(--ease-elastic-3);
 
     &:hover {
-      color: var(--violet-7);
       transform: scale(1.01);
+      color: var(--violet-7);
       border-bottom: var(--border-size-1) solid var(--violet-9);
     }
   }
