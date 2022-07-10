@@ -1,31 +1,5 @@
 import icons from '../img/svg/sprite.svg';
 
-const btnOpenEl = document.querySelector('.btn--open');
-const btnsCloseEl = document.querySelectorAll('[data-value="close"]');
-const btnDeleteEl = document.querySelector(
-  '.btn--secondary[data-value="delete"]'
-);
-const dialogsEl = document.querySelectorAll('.dialog');
-const dialogAddNewTaskEl = document.querySelector('.dialog--new-task');
-const dialogSuccessTaskAddedEl = document.querySelector(
-  '.dialog--success[data-value="task-added"]'
-);
-const dialogSuccessTaskDeletedEl = document.querySelector(
-  '.dialog--success[data-value="task-deleted"]'
-);
-const dialogConfirmationEl = document.querySelector('.dialog--confirmation');
-const inputTextsEl = document.querySelectorAll('.input-text');
-const inputTextDesEl = document.querySelector('.input-text--description');
-const inputTextCatEl = document.querySelector('.input-text--category');
-const tasksIncompletedEl = document.querySelector('.tasks--incomplete');
-// const tasksDescriptionEl = Array.from(
-//   document.querySelector('.tasks__description').children
-// );
-const tasksCompletedEl = document.querySelector('.tasks--completed');
-const btnAddNewTaskEl = document.querySelector('[data-des="add-new-task"]');
-const sectionTasksEl = document.querySelector('.section-tasks');
-const headerStatusEl = document.querySelectorAll('.header__status');
-
 let counterTasksIncompleted = 5;
 let counterTasksCompleted = 5;
 headerStatusEl.forEach(headerStatus => (headerStatus.textContent = 5));
@@ -35,9 +9,12 @@ headerStatusEl.forEach(headerStatus => (headerStatus.textContent = 5));
 // p.textContent = `You don't have any tasks for the moment to complete! 🎉`;
 // pCompleted.textContent = `Your completed tasks are empty! 🎉`;
 
-// // ✅ ✨ Features:
-// // ✅ 1. Be able to add new elements to a list
-// // 1.1. Open and closing the dialog with the btn.
+// ✅ ✨ Features:
+// ✅ 1. Be able to add new elements to a list
+// How to add a new element to the incompleted list?
+// Adding an eventlistener to the btnRenderFormTaskEl.
+// Render a new incompleted task with the checkbox, the deleteTask button and two input texts(tasks__description & tasks__category) with placeholders showing examples
+
 // const addNewTask = () => {
 //   const validateEnterTask = e => {
 //     // 1.2. Validade all the wrong input fills scenarios

@@ -9,4 +9,11 @@
   @include respond(xs) {
     grid-template-columns: auto;
   }
+
+  &__btn {
+    inset: auto 0 var(--size-8) auto;
+    place-self: end;
+    grid-row: 3 / 4;
+    border-radius: var(--radius-round);
+  }
 }
