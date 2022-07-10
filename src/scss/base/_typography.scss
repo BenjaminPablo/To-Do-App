@@ -3,6 +3,7 @@
 .container {
   font-family: 'Inter', sans-serif;
   font-size: var(--font-size-5);
+  font-weight: var(--font-weight-4);
   line-height: var(--font-lineheight-4);
 }
 
@@ -17,7 +18,6 @@
 }
 
 .heading-secondary {
-  font-size: var(--font-size-fluid-2);
   font-weight: var(--font-weight-6);
   line-height: var(--font-lineheight-0);
   @extend %headings;
