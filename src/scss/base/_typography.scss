@@ -22,12 +22,7 @@
 }
 
 .heading-secondary {
-  font-weight: var(--font-weight-6);
-  line-height: var(--font-lineheight-0);
-  @extend %headings;
-}
-
-.heading-tertiary {
+  font-size: var(--font-size-6);
   font-weight: var(--font-weight-5);
   line-height: var(--font-lineheight-1);
   @extend %headings;

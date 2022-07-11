@@ -2,7 +2,7 @@ import icons from '../img/svg/sprite.svg';
 
 let counterTasksIncompleted = 5;
 let counterTasksCompleted = 5;
-headerStatusEl.forEach(headerStatus => (headerStatus.textContent = 5));
+// headerStatusEl.forEach(headerStatus => (headerStatus.textContent = 5));
 
 // const p = document.createElement('p');
 // const pCompleted = document.createElement('p');

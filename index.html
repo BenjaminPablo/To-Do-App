@@ -22,7 +22,7 @@
   <body class="container">
     <!-- Header -->
     <header class="header">
-      <h1 class="heading-primary">July 10, 2022</h1>
+      <h1 class="heading-primary">July 11, 2022</h1>
       <p class="header__description">
         <span data-status="incompleted">5</span>
         incompleted,
@@ -35,9 +35,15 @@
     <main class="main">
       <!-- Tasks -->
       <section class="section-tasks">
-        <h2 class="heading-secondary">Task List</h2>
-        <article class="tasks tasks--incompleted">
-          <h3 class="heading-tertiary u-margin-bottom-md">Incompleted</h3>
+        <article class="tasks">
+          <h2 class="heading-secondary">Incompleted</h2>
+          <!-- Btn to add a new task-->
+          <button class="btn btn--add">
+            <svg class="btn__icon">
+              <use href="src/img/svg/sprite.svg#icon-add-new"></use>
+            </svg>
+            <span class="btn__text">Add a new task</span>
+          </button>
           <fieldset class="tasks__item" data-status="incompleted" tabindex="0">
             <input
               class="tasks__checkbox"
@@ -53,7 +59,7 @@
               aria-label="Remove task item"
               title="Remove task item"
             >
-              <svg class="btn__icon">
+              <svg class="btn__icon btn__icon--delete-task">
                 <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
               </svg>
             </button>
@@ -73,7 +79,7 @@
               aria-label="Remove task item"
               title="Remove task item"
             >
-              <svg class="btn__icon">
+              <svg class="btn__icon btn__icon--delete-task">
                 <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
               </svg>
             </button>
@@ -93,7 +99,7 @@
               aria-label="Remove task item"
               title="Remove task item"
             >
-              <svg class="btn__icon">
+              <svg class="btn__icon btn__icon--delete-task">
                 <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
               </svg>
             </button>
@@ -113,7 +119,7 @@
               aria-label="Remove task item"
               title="Remove task item"
             >
-              <svg class="btn__icon">
+              <svg class="btn__icon btn__icon--delete-task">
                 <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
               </svg>
             </button>
@@ -133,15 +139,15 @@
               aria-label="Remove task item"
               title="Remove task item"
             >
-              <svg class="btn__icon">
+              <svg class="btn__icon btn__icon--delete-task">
                 <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
               </svg>
             </button>
           </fieldset>
         </article>
 
-        <article class="tasks tasks--completed">
-          <h3 class="heading-tertiary u-margin-bottom-md">Completed</h3>
+        <article class="tasks">
+          <h2 class="heading-secondary u-margin-bottom-md">Completed</h2>
           <fieldset class="tasks__item" data-status="completed">
             <input
               class="tasks__checkbox"
@@ -156,7 +162,7 @@
               aria-label="Remove task item"
               title="Remove task item"
             >
-              <svg class="btn__icon">
+              <svg class="btn__icon btn__icon--delete-task">
                 <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
               </svg>
             </button>
@@ -175,7 +181,7 @@
               aria-label="Remove task item"
               title="Remove task item"
             >
-              <svg class="btn__icon">
+              <svg class="btn__icon btn__icon--delete-task">
                 <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
               </svg>
             </button>
@@ -196,7 +202,7 @@
               aria-label="Remove task item"
               title="Remove task item"
             >
-              <svg class="btn__icon">
+              <svg class="btn__icon btn__icon--delete-task">
                 <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
               </svg>
             </button>
@@ -217,7 +223,7 @@
               aria-label="Remove task item"
               title="Remove task item"
             >
-              <svg class="btn__icon">
+              <svg class="btn__icon btn__icon--delete-task">
                 <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
               </svg>
             </button>
@@ -238,23 +244,12 @@
               aria-label="Remove task item"
               title="Remove task item"
             >
-              <svg class="btn__icon">
+              <svg class="btn__icon btn__icon--delete-task">
                 <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
               </svg>
             </button>
           </fieldset>
         </article>
-
-        <!-- Btn to open the dialog-->
-        <button
-          class="btn section-tasks__btn"
-          title="Open dialog"
-          aria-label="Button to open a dialog"
-        >
-          <svg class="btn__icon">
-            <use href="src/img/svg/sprite.svg#icon-add-new"></use>
-          </svg>
-        </button>
       </section>
     </main>
 

@@ -1,19 +1,7 @@
 @use '../abstracts/' as *;
 
 .section-tasks {
-  display: grid;
-  grid-template-columns: 1fr min-content;
-  row-gap: var(--size-8);
-  column-gap: var(--size-5);
-
-  @include respond(xs) {
-    grid-template-columns: auto;
-  }
-
-  &__btn {
-    inset: auto 0 var(--size-8) auto;
-    place-self: end;
-    grid-row: 3 / 4;
-    border-radius: var(--radius-round);
-  }
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-fluid-5);
 }
