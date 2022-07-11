@@ -11,117 +11,119 @@ let counterTasksCompleted = 5;
 
 // ✅ ✨ Features:
 // ✅ 1. Be able to add new elements to a list
+const addNewTask = () => {
+  // To validate success and fail scenarios
+  const validateTaskForm = e => {
+    if (
+      e.key === 'Enter' &&
+      inputTextDesEl.value === '' &&
+      inputTextCatEl.value === ''
+    ) {
+      e.preventDefault();
+    } else if (e.key === 'Enter' && inputTextDesEl.value !== '') {
+      e.preventDefault();
+    } else if (e.key === 'Enter' && inputTextCatEl.value !== '') {
+      e.preventDefault();
+    } else if (inputTextDesEl.value !== '' && inputTextCatEl.value !== '') {
+      dialogAddNewTaskEl.removeEventListener('keydown', validateEnterTask);
+    }
+  };
+
+  btnOpenEl.addEventListener('click', () => {
+    dialogAddNewTaskEl.showModal();
+    // Doing a foreach because i want to clean both of the inputs before opening the dialog
+    inputTextsEl.forEach(dialText => (dialText.value = ''));
+    // I put this event handler here so the validation can start right away.
+    dialogAddNewTaskEl.addEventListener('keydown', validateEnterTask);
+  });
+
+  // All the ways to close the dialogs
+  dialogsEl.forEach(dialog => {
+    btnsCloseEl.forEach(btnClose =>
+      btnClose.addEventListener('click', () => dialog.close())
+    );
+
+    dialog.addEventListener('click', e => {
+      const dialogRect = dialog.getBoundingClientRect();
+      const checkClickInsideDialog =
+        e.clientY >= dialogRect.top &&
+        e.clientY <= dialogRect.top + dialogRect.height &&
+        e.clientX >= dialogRect.left &&
+        e.clientX <= dialogRect.left + dialogRect.width;
+      if (!checkClickInsideDialog) dialog.close();
+    });
+  });
+
+  // 1.2 Render the new task to the incomplete task list each time the add-new-task button is clicked
+  const renderNewTask = () => {
+    // Function to format the value input to the first letter to be uppercase
+    const randomID = Math.floor(Math.random() * 10000);
+    const insertTask = () => {
+      // Checks if the inputs are empty, if they are, then we return until the user fills the inputs.
+      if (inputTextCatEl.value === '' || inputTextDesEl.value === '') return;
+
+      // Formatting the values and adding the randomid in the html
+      const markup = `
+      <div class="tasks__item" data-status="incompleted">
+        <input
+          class="tasks__checkbox"
+          type="checkbox"
+          id="${randomID}"
+        />
+        <div class="tasks__description">
+          <label class="tasks__label">
+          ${
+            inputTextDesEl.value[0].toUpperCase() +
+            inputTextDesEl.value.slice(1).toLowerCase()
+          }
+          </label>
+          <p class="tasks__category">${
+            inputTextCatEl.value[0].toUpperCase() +
+            inputTextCatEl.value.slice(1).toLowerCase()
+          }</p>
+          </div>
+          <button
+            class="btn btn--delete"
+            aria-label="Remove task item"
+            title="Remove task item"
+            >
+            <svg class="btn__icon btn__icon--delete">
+            <use href="${icons}#icon-trashcan"></use>
+            </svg>
+            </button>
+      </div>
+    `;
+
+      // When adding a new item, the score of the one belonging to the list increases.
+      counterTasksIncompleted++;
+      headerStatusIncompletedEl.textContent = counterTasksIncompleted;
+
+      p.replaceWith(tasksIncompletedEl);
+
+      // Inserting the html
+      tasksIncompletedEl.insertAdjacentHTML('afterbegin', markup);
+      // Closing the dialog after adding the task and open the success dialog
+      dialogAddNewTaskEl.close();
+      // Showing the dialog success
+      dialogSuccessTaskAddedEl.showModal();
+    };
+    btnAddNewTaskEl.addEventListener('click', insertTask);
+  };
+  renderNewTask();
+};
+addNewTask();
 // How to add a new element to the incompleted list?
 // Adding an eventlistener to the btnRenderFormTaskEl.
-// Render a new incompleted task with the checkbox, the deleteTask button and two input texts(tasks__description & tasks__category) with placeholders showing examples
+// When the user clicks this button, it gets replaced by the formTaskEl, it should contain:
+// 1.1. the checkbox with the inert property set.
+// 1.2. tasks__description with a placeholder and focused.
+// 1.3. tasks__category with the options or values by default to choose.
+// 1.4. the btnSubmitEl disabled until tasks__description has some text.
+// 1.5. the btnCancelEl
 
-// const addNewTask = () => {
-//   const validateEnterTask = e => {
-//     // 1.2. Validade all the wrong input fills scenarios
-//     // This functions checks if:
-//     // 1. The user presses the Enter button and the two inputs are empty.
-//     // 2. The user fills one input but no the other one and presses the key enter
-//     // 3. The user filled all the inputs correctly
-//     if (
-//       e.key === 'Enter' &&
-//       inputTextDesEl.value === '' &&
-//       inputTextCatEl.value === ''
-//     ) {
-//       e.preventDefault();
-//     } else if (e.key === 'Enter' && inputTextDesEl.value !== '') {
-//       e.preventDefault();
-//     } else if (e.key === 'Enter' && inputTextCatEl.value !== '') {
-//       e.preventDefault();
-//     }
-//     // If we have pressed the enter already and we want to press it with both of the inputs filled, we remove the event listener for it to work
-//     else if (inputTextDesEl.value !== '' && inputTextCatEl.value !== '') {
-//       dialogAddNewTaskEl.removeEventListener('keydown', validateEnterTask);
-//     }
-//   };
-
-//   btnOpenEl.addEventListener('click', () => {
-//     dialogAddNewTaskEl.showModal();
-//     // Doing a foreach because i want to clean both of the inputs before opening the dialog
-//     inputTextsEl.forEach(dialText => (dialText.value = ''));
-//     // I put this event handler here so the validation can start right away.
-//     dialogAddNewTaskEl.addEventListener('keydown', validateEnterTask);
-//   });
-
-//   // All the ways to close the dialogs
-//   dialogsEl.forEach(dialog => {
-//     btnsCloseEl.forEach(btnClose =>
-//       btnClose.addEventListener('click', () => dialog.close())
-//     );
-
-//     dialog.addEventListener('click', e => {
-//       const dialogRect = dialog.getBoundingClientRect();
-//       const checkClickInsideDialog =
-//         e.clientY >= dialogRect.top &&
-//         e.clientY <= dialogRect.top + dialogRect.height &&
-//         e.clientX >= dialogRect.left &&
-//         e.clientX <= dialogRect.left + dialogRect.width;
-//       if (!checkClickInsideDialog) dialog.close();
-//     });
-//   });
-
-//   // 1.2 Render the new task to the incomplete task list each time the add-new-task button is clicked
-//   const renderNewTask = () => {
-//     // Function to format the value input to the first letter to be uppercase
-//     const randomID = Math.floor(Math.random() * 10000);
-//     const insertTask = () => {
-//       // Checks if the inputs are empty, if they are, then we return until the user fills the inputs.
-//       if (inputTextCatEl.value === '' || inputTextDesEl.value === '') return;
-
-//       // Formatting the values and adding the randomid in the html
-//       const markup = `
-//       <div class="tasks__item" data-status="incompleted">
-//         <input
-//           class="tasks__checkbox"
-//           type="checkbox"
-//           id="${randomID}"
-//         />
-//         <div class="tasks__description">
-//           <label class="tasks__label">
-//           ${
-//             inputTextDesEl.value[0].toUpperCase() +
-//             inputTextDesEl.value.slice(1).toLowerCase()
-//           }
-//           </label>
-//           <p class="tasks__category">${
-//             inputTextCatEl.value[0].toUpperCase() +
-//             inputTextCatEl.value.slice(1).toLowerCase()
-//           }</p>
-//           </div>
-//           <button
-//             class="btn btn--delete"
-//             aria-label="Remove task item"
-//             title="Remove task item"
-//             >
-//             <svg class="btn__icon btn__icon--delete">
-//             <use href="${icons}#icon-trashcan"></use>
-//             </svg>
-//             </button>
-//       </div>
-//     `;
-
-//       // When adding a new item, the score of the one belonging to the list increases.
-//       counterTasksIncompleted++;
-//       headerStatusIncompletedEl.textContent = counterTasksIncompleted;
-
-//       p.replaceWith(tasksIncompletedEl);
-
-//       // Inserting the html
-//       tasksIncompletedEl.insertAdjacentHTML('afterbegin', markup);
-//       // Closing the dialog after adding the task and open the success dialog
-//       dialogAddNewTaskEl.close();
-//       // Showing the dialog success
-//       dialogSuccessTaskAddedEl.showModal();
-//     };
-//     btnAddNewTaskEl.addEventListener('click', insertTask);
-//   };
-//   renderNewTask();
-// };
-// addNewTask();
+// If the user clicks outside the new tasks__item or presses the esc key or clicks the btnCancelEl, then the taskFormEl disappears and the btnRenderFormTaskEl should appear.
+// If the user presses the enter key without filling anything, it returns.
+// If the user presses the enter key or clicks the btnSubmit after filling the input texts, then the taskFormEl is replaced with the button and it's added to the incompleted tasks. The counter for the incompleted tasks increases +1.
 
 // // ✅ 2. Be able to remove existing elements from a list
 // // 2.1 Add event handler to the delete button to show the dialog of confirmation to delete the task.

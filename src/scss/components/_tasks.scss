@@ -7,17 +7,13 @@
 
   &--completed {
     gap: var(--size-fluid-1);
-
-    .btn__icon {
-      width: var(--size-7);
-      height: var(--size-7);
-    }
   }
 
   &__heading {
     display: flex;
     flex-direction: column;
-    gap: var(--size-fluid-1);
+    gap: var(--size-4);
+    margin-bottom: var(--size-3);
   }
 
   &__item {

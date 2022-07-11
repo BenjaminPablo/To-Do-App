@@ -39,12 +39,39 @@
           <header class="tasks__heading">
             <h2 class="heading-secondary">Incompleted</h2>
             <!-- Btn to add a new task-->
-            <button class="btn btn--add">
+            <button class="btn btn--render-form-task">
               <svg class="btn__icon">
                 <use href="src/img/svg/sprite.svg#icon-add-new"></use>
               </svg>
               <span class="btn__text">Add a new task</span>
             </button>
+            <form class="form">
+              <header class="form__heading">
+                <input
+                  class="form__text"
+                  type="text"
+                  name="description"
+                  placeholder="e.g Coding time"
+                  required
+                  autofocus
+                  aria-label="Description of the task"
+                />
+                <select
+                  class="form__select"
+                  name="category"
+                  aria-label="Category of the task"
+                  required
+                >
+                  <option value="finance">💰 Finance</option>
+                  <option value="wedding">💞 Wedding</option>
+                  <option value="freelance">🖥️ Freelance</option>
+                </select>
+              </header>
+              <footer class="form__footer">
+                <button class="btn btn--submit">Add new task</button>
+                <button class="btn btn--cancel">Cancel</button>
+              </footer>
+            </form>
           </header>
           <fieldset class="tasks__item" data-status="incompleted" tabindex="0">
             <input

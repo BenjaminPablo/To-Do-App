@@ -6,45 +6,56 @@
   font-size: inherit;
   cursor: pointer;
   border: none;
-  box-shadow: var(--shadow-2);
-  background-color: var(--violet-9);
-  border-radius: var(--radius-3);
-  position: sticky;
-  width: fit-content;
+  background-color: transparent;
+  transform: scale(1);
+  transition: transform 0.2s var(--ease-elastic-1);
 
   &:active {
-    transform: scale(1.03);
-  }
-
-  // Works with the mouse
-  &:focus-within {
-    outline: var(--border-size-2) solid var(--violet-9);
+    transform: scale(0.97);
   }
 
   // Modifiers (Types of buttons)
-  &--add {
+  &--render-form-task {
     display: flex;
     align-items: center;
     gap: var(--size-3);
-    background-color: transparent;
-    box-shadow: none;
     font-size: var(--font-size-4);
     opacity: 0.8;
+    width: fit-content;
     transition: color 0.2s var(--ease-squish-1),
       opacity 0.2s var(--ease-elastic-5);
 
     &:hover {
       opacity: 1;
       color: var(--violet-9);
+      font-weight: var(--font-weight-5);
     }
   }
 
-  &--add:hover &__text {
-    border-bottom: var(--border-size-2) solid currentColor;
+  &--submit,
+  &--cancel {
+    font-size: var(--font-size-4);
+    border-radius: var(--radius-2);
+    transition: background-color 0.2s var(--ease-in-out-3);
   }
 
-  &--secondary {
-    background-color: transparent;
+  &--submit {
+    background-color: var(--violet-9);
+    color: var(--gray-0);
+    padding: var(--size-3);
+
+    &:hover {
+      background-color: var(--violet-7);
+    }
+  }
+
+  &--cancel {
+    padding: var(--size-3);
+    border: var(--border-size-2) solid var(--gray-4);
+
+    &:hover {
+      background-color: var(--gray-2);
+    }
   }
 
   &--delete {
@@ -53,12 +64,14 @@
     opacity: 0;
     border-radius: var(--radius-2);
     margin-left: auto;
-    transform: scale(1);
-    transition: transform 0.2s var(--ease-elastic-1),
-      opacity 0.2s var(--ease-elastic-3);
+    transition: opacity 0.2s var(--ease-elastic-3), transform 0.2s var(--ease-4);
 
     &:hover {
       transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.97);
     }
 
     &:focus-visible {
@@ -66,16 +79,10 @@
     }
   }
 
-  &__text {
-    padding-bottom: var(--size-2);
-    border-bottom: var(--border-size-2) solid transparent;
-    transition: border-bottom 0.3s var(--ease-squish-4);
-  }
-
   &__icon {
     display: block;
-    width: var(--size-8);
-    height: var(--size-8);
+    width: var(--size-7);
+    height: var(--size-7);
     fill: currentColor;
 
     &--delete-task {

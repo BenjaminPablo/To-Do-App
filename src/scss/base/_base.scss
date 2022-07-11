@@ -61,5 +61,5 @@ html {
 // Shows only when utilizing the keyboard
 :focus-visible {
   outline: var(--border-size-2) solid var(--violet-9);
-  outline-offset: var(--size-1);
+  // outline-offset: var(--size-1);
 }

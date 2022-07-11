@@ -1,0 +1,44 @@
+@use '../abstracts/' as *;
+
+.form {
+  padding: var(--size-5);
+  outline: var(--border-size-2) solid var(--gray-3);
+  border-radius: var(--radius-3);
+  display: flex;
+  justify-content: space-between;
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  &__text,
+  &__select {
+    font-family: inherit;
+    font-size: var(--font-size-4);
+    border: none;
+    padding: var(--size-2) var(--size-1);
+    border-radius: var(--radius-1);
+    background-color: inherit;
+    border-bottom: var(--border-size-2) solid transparent;
+    transition: border-bottom 0.3s var(--ease-2);
+    visibility: visible;
+  }
+
+  &__text {
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &__select:focus-visible {
+    outline-offset: 0;
+  }
+
+  &__footer {
+    align-self: end;
+    display: flex;
+    gap: var(--size-5);
+  }
+}
