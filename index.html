@@ -36,14 +36,16 @@
       <!-- Tasks -->
       <section class="section-tasks">
         <article class="tasks">
-          <h2 class="heading-secondary">Incompleted</h2>
-          <!-- Btn to add a new task-->
-          <button class="btn btn--add">
-            <svg class="btn__icon">
-              <use href="src/img/svg/sprite.svg#icon-add-new"></use>
-            </svg>
-            <span class="btn__text">Add a new task</span>
-          </button>
+          <header class="tasks__heading">
+            <h2 class="heading-secondary">Incompleted</h2>
+            <!-- Btn to add a new task-->
+            <button class="btn btn--add">
+              <svg class="btn__icon">
+                <use href="src/img/svg/sprite.svg#icon-add-new"></use>
+              </svg>
+              <span class="btn__text">Add a new task</span>
+            </button>
+          </header>
           <fieldset class="tasks__item" data-status="incompleted" tabindex="0">
             <input
               class="tasks__checkbox"
@@ -146,8 +148,8 @@
           </fieldset>
         </article>
 
-        <article class="tasks">
-          <h2 class="heading-secondary u-margin-bottom-md">Completed</h2>
+        <article class="tasks tasks--completed">
+          <h2 class="heading-secondary">Completed</h2>
           <fieldset class="tasks__item" data-status="completed">
             <input
               class="tasks__checkbox"
