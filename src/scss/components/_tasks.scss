@@ -3,7 +3,7 @@
 .tasks {
   display: flex;
   flex-direction: column;
-  gap: var(--size-fluid-3);
+  gap: var(--size-3);
 
   &--completed {
     gap: var(--size-fluid-1);
@@ -13,6 +13,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--size-4);
+    position: relative;
     margin-bottom: var(--size-3);
   }
 

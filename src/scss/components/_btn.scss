@@ -15,15 +15,14 @@
   }
 
   // Modifiers (Types of buttons)
-  &--render-form-task {
+  &--render-task-form {
     display: flex;
     align-items: center;
     gap: var(--size-3);
     font-size: var(--font-size-4);
     opacity: 0.8;
     width: fit-content;
-    transition: color 0.2s var(--ease-squish-1),
-      opacity 0.2s var(--ease-elastic-5);
+    transition: color 0.2s var(--ease-squish-1);
 
     &:hover {
       opacity: 1;
@@ -56,6 +55,10 @@
     &:hover {
       background-color: var(--gray-2);
     }
+  }
+
+  &--disabled {
+    opacity: 0.5;
   }
 
   &--delete {

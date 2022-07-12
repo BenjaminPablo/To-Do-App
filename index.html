@@ -38,8 +38,8 @@
         <article class="tasks">
           <header class="tasks__heading">
             <h2 class="heading-secondary">Incompleted</h2>
-            <!-- Btn to add a new task-->
-            <button class="btn btn--render-form-task">
+            <!-- Btn to render the task form-->
+            <button class="btn btn--render-task-form">
               <svg class="btn__icon">
                 <use href="src/img/svg/sprite.svg#icon-add-new"></use>
               </svg>
@@ -53,7 +53,6 @@
                   name="description"
                   placeholder="e.g Coding time"
                   required
-                  autofocus
                   aria-label="Description of the task"
                 />
                 <select
@@ -62,6 +61,7 @@
                   aria-label="Category of the task"
                   required
                 >
+                  <option value="default">--Choose the category--</option>
                   <option value="finance">💰 Finance</option>
                   <option value="wedding">💞 Wedding</option>
                   <option value="freelance">🖥️ Freelance</option>

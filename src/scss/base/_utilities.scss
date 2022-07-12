@@ -1,3 +1,15 @@
 .u-margin-bottom-md {
-  margin-bottom: var(--size-3);
+  margin-bottom: var(--size-3) !important;
+}
+
+.u-opacity-0-5 {
+  opacity: 0.5 !important;
+}
+
+.u-display-none {
+  display: none !important;
+}
+
+.u-display-block {
+  display: block !important;
 }
