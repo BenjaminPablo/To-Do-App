@@ -1,167 +1,174 @@
 import icons from '../img/svg/sprite.svg';
 
+// Header component
+const headerStatusChildrenEl = Array.from(
+  document.querySelector('.header__status').children
+);
+const headerCounterIncompletedEl = document.querySelector(
+  '.header__incompleted'
+);
+// Tasks Component
+const tasksHeadingEl = document.querySelector('.tasks__heading');
+// Buttons
+const btnRenderTaskFormEl = document.querySelector('.btn--render-task-form');
+const btnSubmitEl = document.querySelector('.btn--submit');
+const btnCancelEl = document.querySelector('.btn--cancel');
+// Form
+const formEl = document.querySelector('.form');
+const formTextEl = document.querySelector('.form__text');
+const formSelectEl = document.querySelector('.form__select');
+
+// Counters for header__status
 let counterTasksIncompleted = 5;
 let counterTasksCompleted = 5;
-// headerStatusEl.forEach(headerStatus => (headerStatus.textContent = 5));
+// We set the text content to both header status children
+headerStatusChildrenEl.forEach(headerStatus => (headerStatus.textContent = 5));
 
 // const p = document.createElement('p');
 // const pCompleted = document.createElement('p');
 // p.textContent = `You don't have any tasks for the moment to complete! 🎉`;
 // pCompleted.textContent = `Your completed tasks are empty! 🎉`;
 
-const tasksHeadingEl = document.querySelector('.tasks__heading');
-
-// Buttons
-const btnRenderTaskFormEl = document.querySelector('.btn--render-task-form');
-const btnSubmitEl = document.querySelector('.btn--submit');
-const btnCancelEl = document.querySelector('.btn--cancel');
-
-// Form
-const formEl = document.querySelector('.form');
-const formTextEl = document.querySelector('.form__text');
-
-// ✅ ✨ Features:
-
-// Function to disable any element
-const disableEl = element => {
-  element.setAttribute('inert', '');
-  element.classList.add('u-opacity-0-5');
+// Task 1 - Functions
+// To disable the btnSubmit
+const disableBtnSubmit = () => {
+  btnSubmitEl.setAttribute('inert', '');
+  btnSubmitEl.classList.add('u-opacity-0-5');
 };
 
-// ✅ 1. Be able to add new elements to a list
-formEl.classList.add('u-display-none');
+// To enable the btnSubmit
+const enableBtnSubmit = () => {
+  btnSubmitEl.removeAttribute('inert');
+  btnSubmitEl.classList.remove('u-opacity-0-5');
+};
 
-// 1.1. Add an event listener to the btnRenderTaskFormEl
-btnRenderTaskFormEl.addEventListener('click', function (e) {
-  // 1.1.1. Set focus on the formTextEl
-  // 1.1.2. Hide the btnRenderTaskFormEl
-  this.replaceWith(formEl);
-  formEl.classList.remove('u-display-none');
-
+const renderTaskForm = () => {
+  btnRenderTaskFormEl.replaceWith(formEl);
   formTextEl.focus();
-  // 1.1.3. Render the formEl
-  // 1.1.4. Disable the btnSubmit until some text is typed
-  disableEl(btnSubmitEl);
-});
+};
 
-formEl.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') {
-    this.replaceWith(btnRenderTaskFormEl);
-  }
-});
-
-formEl.addEventListener('click', function (e) {});
-
-btnCancelEl.addEventListener('click', e => {
-  e.preventDefault();
+const showBtnRenderTaskForm = e => {
+  btnRenderTaskFormEl.focus();
+  formEl.removeEventListener('focusout', closeFormOnClick);
   formEl.replaceWith(btnRenderTaskFormEl);
-});
+  restartForm();
+  // if (!tasksHeadingEl.contains(btnRenderTaskFormEl)) {
+  //   e.preventDefault();
+  // }
+  // Removes the focusevent so we don't have two events active, only one, focusout or click
+};
 
-// If the user clicks outside the new tasks__item or presses the esc key or clicks the btnCancelEl, then the taskFormEl disappears and the btnRenderTaskFormEl should appear.
-// If the user presses the enter key without filling anything, it returns.
-// If the user presses the enter key or clicks the btnSubmit after filling the input texts, then the taskFormEl is replaced with the button and it's added to the incompleted tasks. The counter for the incompleted tasks increases +1.
+const cleanInputValues = () => {
+  formTextEl.value = '';
+  formSelectEl.value = '';
+};
 
-// const addNewTask = () => {
-//   // To validate success and fail scenarios
-//   const validateTaskForm = e => {
-//     if (
-//       e.key === 'Enter' &&
-//       inputTextDesEl.value === '' &&
-//       inputTextCatEl.value === ''
-//     ) {
-//       e.preventDefault();
-//     } else if (e.key === 'Enter' && inputTextDesEl.value !== '') {
-//       e.preventDefault();
-//     } else if (e.key === 'Enter' && inputTextCatEl.value !== '') {
-//       e.preventDefault();
-//     } else if (inputTextDesEl.value !== '' && inputTextCatEl.value !== '') {
-//       dialogAddNewTaskEl.removeEventListener('keydown', validateEnterTask);
-//     }
-//   };
+const restartForm = () => {
+  cleanInputValues();
+  disableBtnSubmit();
+};
 
-//   btnOpenEl.addEventListener('click', () => {
-//     dialogAddNewTaskEl.showModal();
-//     // Doing a foreach because i want to clean both of the inputs before opening the dialog
-//     inputTextsEl.forEach(dialText => (dialText.value = ''));
-//     // I put this event handler here so the validation can start right away.
-//     dialogAddNewTaskEl.addEventListener('keydown', validateEnterTask);
-//   });
+const validateKeyTaskForm = e => {
+  if (e.key === 'Escape') {
+    // Checking if the user presses the Esc key in any time once the tasksForm is shown
+    showBtnRenderTaskForm(e);
+  }
+  if (
+    // If the form text is empty, then we stop the submit
+    e.key === 'Enter' &&
+    formTextEl.value === '' &&
+    formTextEl === document.activeElement
+  ) {
+    e.preventDefault();
+  }
+  if (
+    // If the user didn't choose any category, then we prevent the submit
+    e.key === 'Enter' &&
+    formSelectEl.value === '' &&
+    formSelectEl !== document.activeElement &&
+    btnCancelEl !== document.activeElement &&
+    btnRenderTaskFormEl !== document.activeElement
+  ) {
+    e.preventDefault();
+  }
+  if (
+    // If the text and select have been completed, then we add the new task to the incompleted list.
+    e.key === 'Enter' &&
+    formTextEl.value !== '' &&
+    formSelectEl.value !== '' &&
+    btnCancelEl !== document.activeElement
+  ) {
+    addNewTask(e);
+    btnRenderTaskFormEl.focus();
+  }
+};
 
-//   // All the ways to close the dialogs
-//   dialogsEl.forEach(dialog => {
-//     btnsCloseEl.forEach(btnClose =>
-//       btnClose.addEventListener('click', () => dialog.close())
-//     );
+const formatInputValue = formEl =>
+  formEl.value[0].toUpperCase() + formEl.value.slice(1).toLowerCase();
 
-//     dialog.addEventListener('click', e => {
-//       const dialogRect = dialog.getBoundingClientRect();
-//       const checkClickInsideDialog =
-//         e.clientY >= dialogRect.top &&
-//         e.clientY <= dialogRect.top + dialogRect.height &&
-//         e.clientX >= dialogRect.left &&
-//         e.clientX <= dialogRect.left + dialogRect.width;
-//       if (!checkClickInsideDialog) dialog.close();
-//     });
-//   });
+// To add a new task item to the incompleted tasks list
+const addNewTask = e => {
+  formEl.addEventListener('focusout', closeFormOnClick);
+  // Formatting the values and adding the randomid in the html
+  const randomID = Math.floor(Math.random() * 10000);
+  const markup = `
+    <fieldset class="tasks__item" data-status="incompleted" tabindex="0">
+      <input
+        class="tasks__checkbox"
+        type="checkbox"
+        aria-label="checkbox"
+        id="${randomID}"
+      />
+      <label class="tasks__label">
+        <span class="tasks__description">${formatInputValue(formTextEl)}</span>
+        <span class="tasks__category">${formSelectEl.value}</span>
+      </label>
+      <button
+        class="btn btn--delete"
+        aria-label="Remove task item"
+        title="Remove task item"
+      >
+        <svg class="btn__icon btn__icon--delete-task">
+          <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
+        </svg>
+      </button>
+    </fieldset>`;
 
-//   // 1.2 Render the new task to the incomplete task list each time the add-new-task button is clicked
-//   const renderNewTask = () => {
-//     // Function to format the value input to the first letter to be uppercase
-//     const randomID = Math.floor(Math.random() * 10000);
-//     const insertTask = () => {
-//       // Checks if the inputs are empty, if they are, then we return until the user fills the inputs.
-//       if (inputTextCatEl.value === '' || inputTextDesEl.value === '') return;
+  // When adding a new item, the score of the one belonging to the list increases.
+  counterTasksIncompleted++;
+  headerCounterIncompletedEl.textContent = counterTasksIncompleted;
+  // Inserting the html
+  tasksHeadingEl.insertAdjacentHTML('afterend', markup);
+  btnRenderTaskFormEl.focus();
+  showBtnRenderTaskForm(e);
+};
 
-//       // Formatting the values and adding the randomid in the html
-//       const markup = `
-//       <div class="tasks__item" data-status="incompleted">
-//         <input
-//           class="tasks__checkbox"
-//           type="checkbox"
-//           id="${randomID}"
-//         />
-//         <div class="tasks__description">
-//           <label class="tasks__label">
-//           ${
-//             inputTextDesEl.value[0].toUpperCase() +
-//             inputTextDesEl.value.slice(1).toLowerCase()
-//           }
-//           </label>
-//           <p class="tasks__category">${
-//             inputTextCatEl.value[0].toUpperCase() +
-//             inputTextCatEl.value.slice(1).toLowerCase()
-//           }</p>
-//           </div>
-//           <button
-//             class="btn btn--delete"
-//             aria-label="Remove task item"
-//             title="Remove task item"
-//             >
-//             <svg class="btn__icon btn__icon--delete">
-//             <use href="${icons}#icon-trashcan"></use>
-//             </svg>
-//             </button>
-//       </div>
-//     `;
+const activateBtnSubmit = () => {
+  formSelectEl.value === '' || formTextEl.value === ''
+    ? disableBtnSubmit()
+    : enableBtnSubmit();
+};
 
-//       // When adding a new item, the score of the one belonging to the list increases.
-//       counterTasksIncompleted++;
-//       headerStatusIncompletedEl.textContent = counterTasksIncompleted;
+const closeFormOnClick = function (e) {
+  if (e.relatedTarget !== null) return;
+  this.replaceWith(btnRenderTaskFormEl);
+  restartForm();
+};
 
-//       p.replaceWith(tasksIncompletedEl);
-
-//       // Inserting the html
-//       tasksIncompletedEl.insertAdjacentHTML('afterbegin', markup);
-//       // Closing the dialog after adding the task and open the success dialog
-//       dialogAddNewTaskEl.close();
-//       // Showing the dialog success
-//       dialogSuccessTaskAddedEl.showModal();
-//     };
-//     btnAddNewTaskEl.addEventListener('click', insertTask);
-//   };
-//   renderNewTask();
-// };
-// addNewTask();
+// ✅ ✨ Features:
+// ✅ 1. Be able to add new elements to a list
+// 1.1. After finishing load
+showBtnRenderTaskForm();
+// 1.2. Render task form
+btnRenderTaskFormEl.addEventListener('click', renderTaskForm);
+// 1.3 Validation and submit for keydown, only validating for the input event
+document.addEventListener('keydown', validateKeyTaskForm);
+formEl.addEventListener('input', activateBtnSubmit);
+// 1.4. Adding a new task
+btnSubmitEl.addEventListener('click', addNewTask);
+// Canceling the submit and replacing the form
+formEl.addEventListener('focusout', closeFormOnClick);
+btnCancelEl.addEventListener('click', showBtnRenderTaskForm);
 
 // // ✅ 2. Be able to remove existing elements from a list
 // // 2.1 Add event handler to the delete button to show the dialog of confirmation to delete the task.

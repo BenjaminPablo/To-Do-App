@@ -23,10 +23,10 @@
     <!-- Header -->
     <header class="header">
       <h1 class="heading-primary">July 11, 2022</h1>
-      <p class="header__description">
-        <span data-status="incompleted">5</span>
+      <p class="header__status">
+        <span class="header__incompleted">5</span>
         incompleted,
-        <span data-status="completed">5</span>
+        <span class="header__completed">5</span>
         completed
       </p>
     </header>
@@ -35,7 +35,7 @@
     <main class="main">
       <!-- Tasks -->
       <section class="section-tasks">
-        <article class="tasks">
+        <article class="tasks tasks--incompleted">
           <header class="tasks__heading">
             <h2 class="heading-secondary">Incompleted</h2>
             <!-- Btn to render the task form-->
@@ -45,7 +45,7 @@
               </svg>
               <span class="btn__text">Add a new task</span>
             </button>
-            <form class="form">
+            <form class="form" tabindex="0">
               <header class="form__heading">
                 <input
                   class="form__text"
@@ -61,15 +61,15 @@
                   aria-label="Category of the task"
                   required
                 >
-                  <option value="default">--Choose the category--</option>
-                  <option value="finance">💰 Finance</option>
-                  <option value="wedding">💞 Wedding</option>
-                  <option value="freelance">🖥️ Freelance</option>
+                  <option value="">--Choose the category--</option>
+                  <option value="💰 Finance">💰 Finance</option>
+                  <option value="💞 Wedding">💞 Wedding</option>
+                  <option value="🖥️ Freelance">🖥️ Freelance</option>
                 </select>
               </header>
               <footer class="form__footer">
                 <button class="btn btn--submit">Add new task</button>
-                <button class="btn btn--cancel">Cancel</button>
+                <button class="btn btn--cancel" type="cancel">Cancel</button>
               </footer>
             </form>
           </header>
@@ -295,9 +295,9 @@
     </footer>
 
     <!-- Dialog of confirmation -->
-    <dialog class="dialog dialog--confirmation">
-      <!-- Button to close the dialog -->
-      <button
+    <!-- <dialog class="dialog dialog--confirmation"> -->
+    <!-- Button to close the dialog -->
+    <!-- <button
         class="btn btn--close"
         title="Close dialog"
         aria-label="Button to close the dialog"
@@ -317,17 +317,6 @@
           Delete task
         </button>
       </form>
-    </dialog>
-
-    <!-- Dialog of success after deleting a task correctly -->
-    <dialog class="dialog dialog--success" data-value="task-deleted">
-      <form method="dialog" class="dialog__form dialog__form--success">
-        <svg class="dialog__icon">
-          <use href="src/img/svg/sprite.svg#icon-check-circle"></use>
-        </svg>
-        <p>Task deleted successfully!</p>
-        <button class="btn" data-value="close">Close</button>
-      </form>
-    </dialog>
+    </dialog> -->
   </body>
 </html>

@@ -2,15 +2,17 @@
 
 .form {
   display: flex;
+  justify-content: space-between;
   padding: var(--size-5);
   outline: var(--border-size-2) solid var(--gray-3);
   border-radius: var(--radius-3);
-  justify-content: space-between;
 
   &__heading {
     display: flex;
     flex-direction: column;
     gap: var(--size-3);
+    // We increase the width in order for the input text to have a bigger size than the select
+    width: var(--size-15);
   }
 
   &__text,
@@ -32,6 +34,11 @@
     &:focus-visible {
       outline: none;
     }
+  }
+
+  &__select {
+    // We set the select's width to fit content to only the text that is inside of it, not as large as the input text.
+    width: fit-content;
   }
 
   &__select:focus-visible {
