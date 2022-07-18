@@ -18,11 +18,64 @@ const formEl = document.querySelector('.form');
 const formTextEl = document.querySelector('.form__text');
 const formSelectEl = document.querySelector('.form__select');
 
-// Counters for header__status
-let counterTasksIncompleted = 5;
-let counterTasksCompleted = 5;
-// We set the text content to both header status children
-headerStatusChildrenEl.forEach(headerStatus => (headerStatus.textContent = 5));
+class App {
+  // We set the text content to both header status children
+  #counterTasksIncompleted = 5;
+  #counterTasksCompleted = 5;
+
+  constructor() {
+    // Counters for header__status
+    headerStatusChildrenEl.forEach(
+      headerStatus => (headerStatus.textContent = 5)
+    );
+
+    btnRenderTaskFormEl.addEventListener('click', this.#renderNewTaskForm);
+  }
+
+  #renderNewTaskForm() {
+    btnRenderTaskFormEl.replaceWith(formEl);
+    // formTextEl.focus();
+  }
+
+  #renderNewTask() {}
+
+  #showOptionsTask() {}
+
+  #deleteTask() {}
+
+  #confirmDelete() {}
+
+  #editTask() {}
+
+  #renderEditedTask() {}
+
+  #addNewTag() {}
+
+  #renderNewTag() {}
+
+  #addNewList() {}
+
+  #renderNewList() {}
+
+  #showOptionsList() {}
+
+  #selectMultipleTasks() {}
+}
+
+// ✅ ✨ Features:
+// ✅ 1. Be able to add new elements to a list
+// 1.1. After finishing load
+// showBtnRenderTaskForm();
+// 1.2. Render task form
+
+// 1.3 Validation and submit for keydown, only validating for the input event
+// document.addEventListener('keydown', validateKeyTaskForm);
+// formEl.addEventListener('input', activateBtnSubmit);
+// // 1.4. Adding a new task
+// btnSubmitEl.addEventListener('click', addNewTask);
+// // Canceling the submit and replacing the form
+// formEl.addEventListener('focusout', closeFormOnClick);
+// btnCancelEl.addEventListener('click', showBtnRenderTaskForm);
 
 // const p = document.createElement('p');
 // const pCompleted = document.createElement('p');
@@ -42,10 +95,7 @@ const enableBtnSubmit = () => {
   btnSubmitEl.classList.remove('u-opacity-0-5');
 };
 
-const renderTaskForm = () => {
-  btnRenderTaskFormEl.replaceWith(formEl);
-  formTextEl.focus();
-};
+const renderTaskForm = () => {};
 
 const showBtnRenderTaskForm = e => {
   btnRenderTaskFormEl.focus();
@@ -154,21 +204,6 @@ const closeFormOnClick = function (e) {
   this.replaceWith(btnRenderTaskFormEl);
   restartForm();
 };
-
-// ✅ ✨ Features:
-// ✅ 1. Be able to add new elements to a list
-// 1.1. After finishing load
-showBtnRenderTaskForm();
-// 1.2. Render task form
-btnRenderTaskFormEl.addEventListener('click', renderTaskForm);
-// 1.3 Validation and submit for keydown, only validating for the input event
-document.addEventListener('keydown', validateKeyTaskForm);
-formEl.addEventListener('input', activateBtnSubmit);
-// 1.4. Adding a new task
-btnSubmitEl.addEventListener('click', addNewTask);
-// Canceling the submit and replacing the form
-formEl.addEventListener('focusout', closeFormOnClick);
-btnCancelEl.addEventListener('click', showBtnRenderTaskForm);
 
 // // ✅ 2. Be able to remove existing elements from a list
 // // 2.1 Add event handler to the delete button to show the dialog of confirmation to delete the task.
@@ -293,3 +328,7 @@ btnCancelEl.addEventListener('click', showBtnRenderTaskForm);
 //   });
 // };
 // updateNumberTasks();
+
+document.addEventListener('keydown', () => {
+  console.log(document.activeElement);
+});

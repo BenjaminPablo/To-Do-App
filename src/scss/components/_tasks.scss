@@ -3,25 +3,17 @@
 .tasks {
   display: flex;
   flex-direction: column;
-  gap: var(--size-3);
+  gap: var(--size-5);
 
   &--completed {
     gap: var(--size-fluid-1);
   }
 
-  &__heading {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-4);
-    position: relative;
-    margin-bottom: var(--size-3);
-  }
-
   &__item {
     display: flex;
-    padding: var(--size-2);
+    padding: var(--size-1) var(--size-2);
     align-items: center;
-    border-radius: var(--radius-3);
+    border-radius: var(--radius-2);
     border: none;
     outline: var(--border-size-2) solid transparent;
     outline-offset: var(--size-1);

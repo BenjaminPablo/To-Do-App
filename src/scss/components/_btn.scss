@@ -18,14 +18,11 @@
   &--render-task-form {
     display: flex;
     align-items: center;
-    gap: var(--size-3);
+    gap: var(--size-2);
     font-size: var(--font-size-4);
-    opacity: 0.8;
-    width: fit-content;
-    transition: color 0.2s var(--ease-squish-1);
+    transition: all 0.1s var(--ease-5);
 
     &:hover {
-      opacity: 1;
       color: var(--violet-9);
       font-weight: var(--font-weight-5);
     }
@@ -91,5 +88,9 @@
     &--delete-task {
       fill: var(--gray-0);
     }
+  }
+
+  &__text {
+    font-size: var(--size-4);
   }
 }

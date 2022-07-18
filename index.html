@@ -36,8 +36,8 @@
       <!-- Tasks -->
       <section class="section-tasks">
         <article class="tasks tasks--incompleted">
-          <header class="tasks__heading">
-            <h2 class="heading-secondary">Incompleted</h2>
+          <header class="tasks__heading u-margin-bottom-small">
+            <h2 class="heading-secondary u-margin-bottom-md">Incompleted</h2>
             <!-- Btn to render the task form-->
             <button class="btn btn--render-task-form">
               <svg class="btn__icon">
@@ -45,7 +45,7 @@
               </svg>
               <span class="btn__text">Add a new task</span>
             </button>
-            <form class="form" tabindex="0">
+            <form class="form form--hidden" tabindex="0">
               <header class="form__heading">
                 <input
                   class="form__text"
@@ -176,7 +176,7 @@
         </article>
 
         <article class="tasks tasks--completed">
-          <h2 class="heading-secondary">Completed</h2>
+          <h2 class="heading-secondary u-margin-bottom-md">Completed</h2>
           <fieldset class="tasks__item" data-status="completed">
             <input
               class="tasks__checkbox"

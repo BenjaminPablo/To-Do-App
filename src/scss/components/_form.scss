@@ -2,10 +2,18 @@
 
 .form {
   display: flex;
-  justify-content: space-between;
   padding: var(--size-5);
+  justify-content: space-between;
   outline: var(--border-size-2) solid var(--gray-3);
   border-radius: var(--radius-3);
+
+  &--hidden {
+    transform: translateY(-30rem);
+    padding: 0;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
 
   &__heading {
     display: flex;
@@ -29,7 +37,7 @@
 
   &__text {
     // The visibility has to be visible so when the btn--render-task-form is active, then the visibility of the text, is still visible.
-    visibility: visible;
+    // visibility: visible;
 
     &:focus-visible {
       outline: none;
