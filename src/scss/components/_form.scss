@@ -6,10 +6,11 @@
   justify-content: space-between;
   outline: var(--border-size-2) solid var(--gray-3);
   border-radius: var(--radius-3);
+  transition: all 0.4s var(--ease-5), transform 1ms var(--ease-5);
 
-  &--hidden {
+  &.hidden {
     transform: translateY(-30rem);
-    padding: 0;
+    padding: 0 2.25rem;
     height: 0;
     opacity: 0;
     visibility: hidden;
@@ -35,13 +36,8 @@
     transition: border-bottom 0.3s var(--ease-2);
   }
 
-  &__text {
-    // The visibility has to be visible so when the btn--render-task-form is active, then the visibility of the text, is still visible.
-    // visibility: visible;
-
-    &:focus-visible {
-      outline: none;
-    }
+  &__text:focus-visible {
+    outline: none;
   }
 
   &__select {

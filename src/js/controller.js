@@ -33,8 +33,9 @@ class App {
   }
 
   #renderNewTaskForm() {
-    btnRenderTaskFormEl.replaceWith(formEl);
-    // formTextEl.focus();
+    formEl.classList.remove('hidden');
+    btnRenderTaskFormEl.classList.add('hidden');
+    formTextEl.focus();
   }
 
   #renderNewTask() {}
@@ -61,6 +62,8 @@ class App {
 
   #selectMultipleTasks() {}
 }
+
+const app = new App();
 
 // ✅ ✨ Features:
 // ✅ 1. Be able to add new elements to a list
@@ -328,7 +331,3 @@ const closeFormOnClick = function (e) {
 //   });
 // };
 // updateNumberTasks();
-
-document.addEventListener('keydown', () => {
-  console.log(document.activeElement);
-});
