@@ -6,14 +6,10 @@
   justify-content: space-between;
   outline: var(--border-size-2) solid var(--gray-3);
   border-radius: var(--radius-3);
-  transition: all 0.4s var(--ease-5), transform 1ms var(--ease-5);
+  transition: transform 0.2s, padding 0.2s var(--ease-in-2), opacity 0s;
 
   &.hidden {
-    transform: translateY(-30rem);
-    padding: 0 2.25rem;
-    height: 0;
-    opacity: 0;
-    visibility: hidden;
+    padding: 0 var(--size-4);
   }
 
   &__heading {

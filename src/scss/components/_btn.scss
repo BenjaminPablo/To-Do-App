@@ -7,17 +7,15 @@
   cursor: pointer;
   border: none;
   background-color: transparent;
-  transform: scale(1);
-  transition: all 0.1s var(--ease-2), transform 1ms var(--ease-2);
-
-  &.hidden {
-    height: 0;
-    opacity: 0;
-    visibility: hidden;
-  }
+  transition: transform 0.2s;
 
   &:active {
     transform: scale(0.97);
+  }
+
+  &:focus-within {
+    outline: var(--border-size-2) solid var(--violet-9);
+    outline-offset: var(--size-1);
   }
 
   // Modifiers (Types of buttons)
@@ -26,7 +24,6 @@
     align-items: center;
     gap: var(--size-2);
     font-size: var(--font-size-4);
-    transition: all 0.1s var(--ease-5);
 
     &:hover {
       color: var(--violet-9);
@@ -94,9 +91,5 @@
     &--delete-task {
       fill: var(--gray-0);
     }
-  }
-
-  &__text {
-    font-size: var(--size-4);
   }
 }
