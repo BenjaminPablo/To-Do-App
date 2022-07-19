@@ -7,7 +7,7 @@
   cursor: pointer;
   border: none;
   background-color: transparent;
-  transition: transform 0.2s;
+  transition: transform 0.1s;
 
   &:active {
     transform: scale(0.97);
@@ -19,7 +19,7 @@
   }
 
   // Modifiers (Types of buttons)
-  &--render-task-form {
+  &--task-form {
     display: flex;
     align-items: center;
     gap: var(--size-2);

@@ -7,7 +7,7 @@ const headerCounterIncompletedEl = document.querySelector(
 // Tasks Component
 const tasksHeadingEl = document.querySelector('.tasks__heading');
 // Buttons
-const btnRenderTaskFormEl = document.querySelector('.btn--render-task-form');
+const btnTaskFormEl = document.querySelector('.btn--task-form');
 const btnSubmitEl = document.querySelector('.btn--submit');
 const btnCancelEl = document.querySelector('.btn--cancel');
 // Form
@@ -23,26 +23,71 @@ class App {
   #markup;
 
   constructor() {
-    btnRenderTaskFormEl.addEventListener('click', this.#renderNewTaskForm);
-    btnSubmitEl.addEventListener('click', this.#renderNewTask.bind(this));
-    formEl.addEventListener('input', this.#valInputsTaskForm);
-    document.addEventListener('keydown', this.#valKeyTaskForm.bind(this));
-    formEl.addEventListener('focusout', this.#closeFormOnClick);
-    btnCancelEl.addEventListener('click', this.#showBtnRenderTaskForm);
+    btnTaskFormEl.addEventListener('click', this.#showTaskForm);
+    formEl.addEventListener('input', this.#enableBtnSubmit);
+    btnCancelEl.addEventListener('click', this.#hideTaskForm);
+    formEl.addEventListener('focusout', this.#hideTaskForm);
+    document.addEventListener('keydown', this.#hideTaskForm);
+    formEl.addEventListener('submit', this.#renderNewTask);
+    btnSubmitEl.addEventListener('click', this.#renderNewTask);
   }
 
-  #renderNewTaskForm() {
+  #showTaskForm = () => {
     formTextEl.value = formSelectEl.value = '';
-    btnSubmitEl.setAttribute('inert', '');
-    btnSubmitEl.classList.add('u-opacity-0-5');
+    this.#btnInert(btnSubmitEl);
     formEl.classList.remove('hidden');
-    formEl.classList.remove('u-visibility-hidden');
-    this.classList.add('hidden');
+    btnTaskFormEl.classList.add('hidden');
     formTextEl.focus();
+  };
+
+  #enableBtnSubmit = () =>
+    formSelectEl.value === '' || formTextEl.value === ''
+      ? this.#btnInert(btnSubmitEl)
+      : this.#btnNoInert(btnSubmitEl);
+
+  #btnInert(btn) {
+    btn.setAttribute('inert', '');
+    btn.classList.add('u-opacity-0-5');
   }
 
-  #renderNewTask(e) {
-    e.preventDefault();
+  #btnNoInert(btn) {
+    btn.removeAttribute('inert', '');
+    btn.classList.remove('u-opacity-0-5');
+  }
+
+  #hideTaskForm = e => {
+    // if the event type is click, only then we prevent default
+    if (e.type === 'click' || e.type === 'submit') {
+      e.preventDefault();
+    }
+    if (e.relatedTarget === null || e.key === 'Escape') {
+      formEl.classList.add('hidden');
+      btnTaskFormEl.classList.remove('hidden');
+      btnTaskFormEl.focus();
+    }
+  };
+
+  #valKeyTaskForm = e => {
+    if (
+      // If the form text is empty, then we stop the submit
+      formTextEl.value === '' &&
+      formTextEl === document.activeElement
+    ) {
+      e.preventDefault();
+    }
+    if (
+      // If the user didn't choose any category, then we prevent the submit
+      formSelectEl.value === '' &&
+      formSelectEl !== document.activeElement &&
+      btnCancelEl !== document.activeElement &&
+      btnTaskFormEl !== document.activeElement
+    ) {
+      e.preventDefault();
+    }
+  };
+
+  #renderNewTask = e => {
+    this.#valKeyTaskForm(e);
     // Formatting the values and adding the randomid in the html
     this.#markup = `
     <fieldset class="tasks__item" data-status="incompleted" tabindex="0">
@@ -73,13 +118,11 @@ class App {
     // When adding a new item, the score of the one belonging to the list increases.
     this.#counterTasksIncompleted++;
     headerCounterIncompletedEl.textContent = this.#counterTasksIncompleted;
+
     // Inserting the html
     tasksHeadingEl.insertAdjacentHTML('afterend', this.#markup);
-    formEl.classList.add('hidden');
-    formEl.classList.add('u-visibility-hidden');
-    btnRenderTaskFormEl.classList.remove('hidden');
-    btnRenderTaskFormEl.focus();
-  }
+    this.#hideTaskForm(e);
+  };
 
   #showOptionsTask() {}
 
@@ -102,73 +145,6 @@ class App {
   #showOptionsList() {}
 
   #selectMultipleTasks() {}
-
-  // Methods that serve to the main events
-  // Task 1
-  #valInputsTaskForm() {
-    if (formSelectEl.value === '' || formTextEl.value === '') {
-      btnSubmitEl.setAttribute('inert', '');
-      btnSubmitEl.classList.add('u-opacity-0-5');
-    } else {
-      btnSubmitEl.removeAttribute('inert', '');
-      btnSubmitEl.classList.remove('u-opacity-0-5');
-    }
-  }
-
-  #valKeyTaskForm(e) {
-    if (e.key === 'Escape') {
-      // Checking if the user presses the Esc key in any time once the tasksForm is shown
-      formEl.classList.add('hidden');
-      formEl.classList.add('u-visibility-hidden');
-      btnRenderTaskFormEl.classList.remove('hidden');
-      btnRenderTaskFormEl.focus();
-    }
-    if (
-      // If the form text is empty, then we stop the submit
-      e.key === 'Enter' &&
-      formTextEl.value === '' &&
-      formTextEl === document.activeElement
-    ) {
-      e.preventDefault();
-    }
-    if (
-      // If the user didn't choose any category, then we prevent the submit
-      e.key === 'Enter' &&
-      formSelectEl.value === '' &&
-      formSelectEl !== document.activeElement &&
-      btnCancelEl !== document.activeElement &&
-      btnRenderTaskFormEl !== document.activeElement
-    ) {
-      e.preventDefault();
-    }
-    if (
-      // If the text and select have been completed, then we add the new task to the incompleted list.
-      e.key === 'Enter' &&
-      formTextEl.value !== '' &&
-      formSelectEl.value !== '' &&
-      btnCancelEl !== document.activeElement &&
-      btnRenderTaskFormEl !== document.activeElement
-    ) {
-      this.#renderNewTask(e);
-      btnRenderTaskFormEl.focus();
-    }
-  }
-
-  #closeFormOnClick(e) {
-    if (e.relatedTarget !== null) return;
-    formEl.classList.add('hidden');
-    formEl.classList.add('u-visibility-hidden');
-    btnRenderTaskFormEl.classList.remove('hidden');
-    btnRenderTaskFormEl.focus();
-  }
-
-  #showBtnRenderTaskForm(e) {
-    e.preventDefault();
-    formEl.classList.add('u-visibility-hidden');
-    formEl.classList.add('hidden');
-    btnRenderTaskFormEl.classList.remove('hidden');
-    btnRenderTaskFormEl.focus();
-  }
 }
 
 const app = new App();
