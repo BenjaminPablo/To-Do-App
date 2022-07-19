@@ -19,13 +19,10 @@ class App {
   // We set the text content to both header status children
   #counterTasksIncompleted = 5;
   // #counterTasksCompleted = 5;
-  #randomID;
+  #randomID = Math.floor(Math.random() * 10000);
   #markup;
 
   constructor() {
-    // ✅ ✨ Features:
-    // ✅ 1. Be able to add new elements to a list
-    this.#randomID = Math.floor(Math.random() * 10000);
     btnRenderTaskFormEl.addEventListener('click', this.#renderNewTaskForm);
     btnSubmitEl.addEventListener('click', this.#renderNewTask.bind(this));
     formEl.addEventListener('input', this.#valInputsTaskForm);
