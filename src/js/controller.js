@@ -1,9 +1,21 @@
 import icons from '../img/svg/sprite.svg';
 
+class Task {
+  date = new Date();
+  id = (Date.now() + '').slice(-10);
+  list = 'incompleted';
+
+  constructor(description, category) {
+    this.description = description;
+    this.category = category;
+  }
+}
+
+////////////////////////////////////////////////////////////
+// APPLICATION ARCHITECTURE
+
 // Header component
-const headerCounterIncompletedEl = document.querySelector(
-  '.header__incompleted'
-);
+const counterIncompletedEl = document.querySelector('.header__incompleted');
 // Tasks Component
 const tasksHeadingEl = document.querySelector('.tasks__heading');
 // Buttons
@@ -18,32 +30,32 @@ const formSelectEl = document.querySelector('.form__select');
 class App {
   // We set the text content to both header status children
   #counterTasksIncompleted = 5;
-  // #counterTasksCompleted = 5;
-  #randomID = Math.floor(Math.random() * 10000);
-  #markup;
+  #counterTasksCompleted = 5;
+  #tasks = [];
 
   constructor() {
-    btnTaskFormEl.addEventListener('click', this.#showTaskForm);
-    formEl.addEventListener('input', this.#enableBtnSubmit);
+    btnTaskFormEl.addEventListener('click', this.#showTaskForm.bind(this));
+    formEl.addEventListener('input', this.#enableBtnSubmit.bind(this));
     btnCancelEl.addEventListener('click', this.#hideTaskForm);
     formEl.addEventListener('focusout', this.#hideTaskForm);
     document.addEventListener('keydown', this.#hideTaskForm);
-    formEl.addEventListener('submit', this.#renderNewTask);
-    btnSubmitEl.addEventListener('click', this.#renderNewTask);
+    formEl.addEventListener('submit', this.#newTask.bind(this));
+    btnSubmitEl.addEventListener('click', this.#newTask.bind(this));
   }
 
-  #showTaskForm = () => {
+  #showTaskForm() {
     formTextEl.value = formSelectEl.value = '';
     this.#btnInert(btnSubmitEl);
     formEl.classList.remove('hidden');
     btnTaskFormEl.classList.add('hidden');
     formTextEl.focus();
-  };
+  }
 
-  #enableBtnSubmit = () =>
-    formSelectEl.value === '' || formTextEl.value === ''
-      ? this.#btnInert(btnSubmitEl)
-      : this.#btnNoInert(btnSubmitEl);
+  #enableBtnSubmit() {
+    formTextEl.value !== '' && formSelectEl.value !== ''
+      ? this.#btnNoInert(btnSubmitEl)
+      : this.#btnInert(btnSubmitEl);
+  }
 
   #btnInert(btn) {
     btn.setAttribute('inert', '');
@@ -55,54 +67,54 @@ class App {
     btn.classList.remove('u-opacity-0-5');
   }
 
-  #hideTaskForm = e => {
-    // if the event type is click, only then we prevent default
-    if (e.type === 'click' || e.type === 'submit') {
-      e.preventDefault();
-    }
+  #hideTaskForm(e) {
+    if (e.type === 'click') e.preventDefault();
     if (e.relatedTarget === null || e.key === 'Escape') {
-      formEl.classList.add('hidden');
       btnTaskFormEl.classList.remove('hidden');
       btnTaskFormEl.focus();
+      formEl.classList.add('hidden');
     }
-  };
+  }
 
-  #valKeyTaskForm = e => {
-    if (
-      // If the form text is empty, then we stop the submit
-      formTextEl.value === '' &&
-      formTextEl === document.activeElement
-    ) {
-      e.preventDefault();
-    }
-    if (
-      // If the user didn't choose any category, then we prevent the submit
-      formSelectEl.value === '' &&
-      formSelectEl !== document.activeElement &&
-      btnCancelEl !== document.activeElement &&
-      btnTaskFormEl !== document.activeElement
-    ) {
-      e.preventDefault();
-    }
-  };
+  #newTask(e) {
+    const validInputs = (...inputs) => inputs.every(inp => inp !== '');
+    e.preventDefault();
 
-  #renderNewTask = e => {
-    this.#valKeyTaskForm(e);
-    // Formatting the values and adding the randomid in the html
-    this.#markup = `
-    <fieldset class="tasks__item" data-status="incompleted" tabindex="0">
+    const description = formTextEl.value;
+    const category = formSelectEl.value;
+
+    if (!validInputs(description, category))
+      return console.log('Inputs cannot be empty!');
+
+    const task = new Task(description, category);
+    this.#tasks.push(task);
+    console.log(task);
+    console.log(this.#tasks);
+
+    this.#renderTask(task);
+
+    // When adding a new item, the score of the one belonging to the list increases.
+    this.#counterTasksIncompleted++;
+    counterIncompletedEl.textContent = this.#counterTasksIncompleted;
+
+    this.#hideTaskForm(e);
+  }
+
+  #renderTask(task) {
+    const html = `
+    <fieldset class="tasks__item" data-status="incompleted" tabindex="0" data-id="${
+      task.id
+    }">
       <input
         class="tasks__checkbox"
         type="checkbox"
         aria-label="checkbox"
-        id="${this.#randomID}"
       />
       <label class="tasks__label">
         <span class="tasks__description">${
-          formTextEl.value[0].toUpperCase() +
-          formTextEl.value.slice(1).toLowerCase()
+          task.description[0].toUpperCase() + task.description.slice(1)
         }</span>
-        <span class="tasks__category">${formSelectEl.value}</span>
+        <span class="tasks__category">${task.category}</span>
       </label>
       <button
         class="btn btn--delete"
@@ -115,14 +127,8 @@ class App {
       </button>
     </fieldset>`;
 
-    // When adding a new item, the score of the one belonging to the list increases.
-    this.#counterTasksIncompleted++;
-    headerCounterIncompletedEl.textContent = this.#counterTasksIncompleted;
-
-    // Inserting the html
-    tasksHeadingEl.insertAdjacentHTML('afterend', this.#markup);
-    this.#hideTaskForm(e);
-  };
+    tasksHeadingEl.insertAdjacentHTML('afterend', html);
+  }
 
   #showOptionsTask() {}
 
@@ -148,6 +154,7 @@ class App {
 }
 
 const app = new App();
+// console.log(app);
 
 // document.addEventListener('keydown', () => {
 //   console.log(document.activeElement);
