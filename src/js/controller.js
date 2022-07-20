@@ -70,15 +70,14 @@ class App {
   #hideTaskForm(e) {
     if (e.type === 'click') e.preventDefault();
     if (e.relatedTarget === null || e.key === 'Escape') {
+      formEl.classList.add('hidden');
       btnTaskFormEl.classList.remove('hidden');
       btnTaskFormEl.focus();
-      formEl.classList.add('hidden');
     }
   }
 
   #newTask(e) {
     const validInputs = (...inputs) => inputs.every(inp => inp !== '');
-    e.preventDefault();
 
     const description = formTextEl.value;
     const category = formSelectEl.value;
@@ -88,8 +87,6 @@ class App {
 
     const task = new Task(description, category);
     this.#tasks.push(task);
-    console.log(task);
-    console.log(this.#tasks);
 
     this.#renderTask(task);
 
@@ -156,9 +153,9 @@ class App {
 const app = new App();
 // console.log(app);
 
-// document.addEventListener('keydown', () => {
-//   console.log(document.activeElement);
-// });
+document.addEventListener('keydown', () => {
+  console.log(document.activeElement);
+});
 
 // const p = document.createElement('p');
 // const pCompleted = document.createElement('p');
