@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",
-    "core-js": "^3.23.4",
+    "core-js": "^3.24.0",
     "cssnano": "^5.1.12",
     "open-props": "^1.4.2",
     "postcss": "^8.4.14",

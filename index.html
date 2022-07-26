@@ -13,16 +13,16 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/src/scss/main.scss" />
+    <link rel="stylesheet" href="src/scss/main.scss" />
 
-    <script type="module" src="/src/js/controller.js"></script>
+    <script type="module" src="src/js/controller.js"></script>
 
     <title>To-Do App - Benjamin Pablo</title>
   </head>
   <body class="container">
     <!-- Header -->
     <header class="header">
-      <h1 class="heading-primary">July 19, 2022</h1>
+      <h1 class="heading-primary header__date">July 19, 2022</h1>
       <p class="header__status">
         <span class="header__incompleted">5</span>
         incompleted,
@@ -46,12 +46,12 @@
               <span class="btn__text">Add a new task</span>
             </button>
             <form class="form hidden" tabindex="0">
-              <header class="form__heading">
+              <div class="form__group">
                 <input
                   class="form__text"
                   type="text"
                   name="description"
-                  placeholder="e.g Coding time"
+                  placeholder="e.g. Study w/ coffee"
                   required
                   aria-label="Description of the task"
                 />
@@ -66,11 +66,10 @@
                   <option value="💞 Wedding">💞 Wedding</option>
                   <option value="🖥️ Freelance">🖥️ Freelance</option>
                 </select>
-              </header>
-              <footer class="form__footer">
-                <button class="btn btn--submit">Add new task</button>
-                <button class="btn btn--cancel">Cancel</button>
-              </footer>
+              </div>
+              <button class="btn btn--submit u-opacity-0-5" inert>
+                Add new task
+              </button>
             </form>
           </header>
           <fieldset class="tasks__item" data-status="incompleted" tabindex="0">
@@ -81,86 +80,6 @@
             />
             <label class="tasks__label">
               <span class="tasks__description">Upload 1099-R to TurboTax </span>
-              <span class="tasks__category">💰 Finance</span>
-            </label>
-            <button
-              class="btn btn--delete"
-              aria-label="Remove task item"
-              title="Remove task item"
-            >
-              <svg class="btn__icon btn__icon--delete-task">
-                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-              </svg>
-            </button>
-          </fieldset>
-          <fieldset class="tasks__item" data-status="incompleted" tabindex="0">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-            />
-            <label class="tasks__label">
-              <span class="tasks__description">Submit 2019 tax return</span>
-              <span class="tasks__category">💰 Finance</span>
-            </label>
-            <button
-              class="btn btn--delete"
-              aria-label="Remove task item"
-              title="Remove task item"
-            >
-              <svg class="btn__icon btn__icon--delete-task">
-                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-              </svg>
-            </button>
-          </fieldset>
-          <fieldset class="tasks__item" data-status="incompleted" tabindex="0">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-            />
-            <label class="tasks__label">
-              <span class="tasks__description">Print parking passes</span>
-              <span class="tasks__category">💞 Wedding</span>
-            </label>
-            <button
-              class="btn btn--delete"
-              aria-label="Remove task item"
-              title="Remove task item"
-            >
-              <svg class="btn__icon btn__icon--delete-task">
-                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-              </svg>
-            </button>
-          </fieldset>
-          <fieldset class="tasks__item" data-status="incompleted" tabindex="0">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-            />
-            <label class="tasks__label">
-              <span class="tasks__description">Sign contract, send back</span>
-              <span class="tasks__category">🖥️ Freelance</span>
-            </label>
-            <button
-              class="btn btn--delete"
-              aria-label="Remove task item"
-              title="Remove task item"
-            >
-              <svg class="btn__icon btn__icon--delete-task">
-                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-              </svg>
-            </button>
-          </fieldset>
-          <fieldset class="tasks__item" data-status="incompleted" tabindex="0">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-            />
-            <label class="tasks__label">
-              <span class="tasks__description">Submit 2019 tax return</span>
               <span class="tasks__category">💰 Finance</span>
             </label>
             <button
@@ -186,88 +105,6 @@
               disabled
             />
             <label class="tasks__description">Check on FedEx Order</label>
-            <button
-              class="btn btn--delete"
-              aria-label="Remove task item"
-              title="Remove task item"
-            >
-              <svg class="btn__icon btn__icon--delete-task">
-                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-              </svg>
-            </button>
-          </fieldset>
-          <fieldset class="tasks__item" data-status="completed">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-              checked
-              disabled
-            />
-            <label class="tasks__description">Look at new plugins</label>
-            <button
-              class="btn btn--delete"
-              aria-label="Remove task item"
-              title="Remove task item"
-            >
-              <svg class="btn__icon btn__icon--delete-task">
-                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-              </svg>
-            </button>
-          </fieldset>
-          <fieldset class="tasks__item" data-status="completed">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-              checked
-              disabled
-            />
-            <label class="tasks__description">
-              Respond to catering company
-            </label>
-            <button
-              class="btn btn--delete"
-              aria-label="Remove task item"
-              title="Remove task item"
-            >
-              <svg class="btn__icon btn__icon--delete-task">
-                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-              </svg>
-            </button>
-          </fieldset>
-          <fieldset class="tasks__item" data-status="completed">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-              checked
-              disabled
-            />
-            <label class="tasks__description">
-              Reschedule morning coffee
-            </label>
-            <button
-              class="btn btn--delete"
-              aria-label="Remove task item"
-              title="Remove task item"
-            >
-              <svg class="btn__icon btn__icon--delete-task">
-                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-              </svg>
-            </button>
-          </fieldset>
-          <fieldset class="tasks__item" data-status="completed">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-              checked
-              disabled
-            />
-            <label class="tasks__description">
-              Check the latest on Community
-            </label>
             <button
               class="btn btn--delete"
               aria-label="Remove task item"

@@ -1,0 +1,12 @@
+@use '../base/' as *;
+
+.spinner {
+  text-align: center;
+
+  svg {
+    height: var(--size-9);
+    width: var(--size-9);
+    fill: var(--violet-7);
+    animation: rotate 2s infinite linear;
+  }
+}

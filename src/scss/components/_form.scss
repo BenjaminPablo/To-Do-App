@@ -7,19 +7,33 @@
   outline: var(--border-size-2) solid var(--gray-3);
   outline-offset: var(--size-1);
   border-radius: var(--radius-3);
-  transition: transform 0.4s, padding 0.2s var(--ease-1),
-    opacity 0.5s var(--ease-4);
+  transition: transform 0.4s, opacity 0.5s var(--ease-4);
+  align-items: flex-end;
+
+  @include respond(sm) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--size-7);
+  }
 
   &.hidden {
     padding: 0 var(--size-4);
   }
 
-  &__heading {
+  &__group {
     display: flex;
     flex-direction: column;
     gap: var(--size-3);
     // We increase the width in order for the input text to have a bigger size than the select
     width: var(--size-15);
+
+    @include respond(md) {
+      width: fit-content;
+    }
+
+    @include respond(sm) {
+      width: 100%;
+    }
   }
 
   &__text,
@@ -45,11 +59,5 @@
 
   &__select:focus-visible {
     outline-offset: 0;
-  }
-
-  &__footer {
-    align-self: end;
-    display: flex;
-    gap: var(--size-5);
   }
 }
