@@ -35,7 +35,7 @@
     <main class="main">
       <!-- Tasks -->
       <section class="section-tasks">
-        <article class="tasks tasks--incompleted">
+        <ul class="tasks tasks--incompleted">
           <header class="tasks__heading u-margin-bottom-small">
             <h2 class="heading-secondary u-margin-bottom-md">Incompleted</h2>
             <!-- Btn to render the task form-->
@@ -72,31 +72,11 @@
               </button>
             </form>
           </header>
-          <fieldset class="tasks__item" data-status="incompleted" tabindex="0">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-            />
-            <label class="tasks__label">
-              <span class="tasks__description">Upload 1099-R to TurboTax </span>
-              <span class="tasks__category">💰 Finance</span>
-            </label>
-            <button
-              class="btn btn--delete"
-              aria-label="Remove task item"
-              title="Remove task item"
-            >
-              <svg class="btn__icon btn__icon--delete-task">
-                <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
-              </svg>
-            </button>
-          </fieldset>
-        </article>
+        </ul>
 
-        <article class="tasks tasks--completed">
+        <ul class="tasks tasks--completed">
           <h2 class="heading-secondary u-margin-bottom-md">Completed</h2>
-          <fieldset class="tasks__item" data-status="completed">
+          <li class="tasks__item" data-status="completed">
             <input
               class="tasks__checkbox"
               type="checkbox"
@@ -114,8 +94,8 @@
                 <use href="src/img/svg/sprite.svg#icon-trashcan"></use>
               </svg>
             </button>
-          </fieldset>
-        </article>
+          </li>
+        </ul>
       </section>
     </main>
 

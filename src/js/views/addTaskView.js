@@ -3,7 +3,7 @@ import View from './View.js';
 
 class AddTaskView extends View {
   _parentEl = document.querySelector('.tasks__heading');
-  _message = '';
+  _message = `You've completed your daily tasks! You can take a break!`;
   _formEl = document.querySelector('.form');
   _formTextEl = document.querySelector('.form__text');
   _formSelectEl = document.querySelector('.form__select');
@@ -15,8 +15,23 @@ class AddTaskView extends View {
     super();
     this._btnOpenEl.addEventListener('click', this._showForm.bind(this));
     this._formEl.addEventListener('input', this._enableBtnSubmit.bind(this));
-    this._formEl.addEventListener('focusout', this.hideForm.bind(this));
-    document.addEventListener('keydown', this.hideForm.bind(this));
+    this._formEl.addEventListener('focusout', this._hideForm.bind(this));
+    document.addEventListener('keydown', this._hideForm.bind(this));
+  }
+
+  addHandlerRender(handler) {
+    window.addEventListener('load', handler);
+  }
+
+  addHandlerNewTask(handler) {
+    const self = this;
+    this._formEl.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const dataArr = [...new FormData(this)];
+      const data = Object.fromEntries(dataArr);
+      handler(data);
+      self._hideForm(e);
+    });
   }
 
   _showForm() {
@@ -28,7 +43,7 @@ class AddTaskView extends View {
     this._formTextEl.focus();
   }
 
-  hideForm(e) {
+  _hideForm(e) {
     if (
       e.relatedTarget === null ||
       e.type === 'submit' ||
@@ -50,33 +65,21 @@ class AddTaskView extends View {
     }
   }
 
-  addHandlerNewTask(handler) {
-    const self = this;
-    this._formEl.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const dataArr = [...new FormData(this)];
-      const data = Object.fromEntries(dataArr);
-      handler(data);
-      self.hideForm(e);
-    });
+  _generateMarkup() {
+    // return this._data.map(this._generateMarkupTask.bind(this)).join('');
   }
 
-  _generateMarkup() {
+  _generateMarkupTask(task) {
     return `
-      <fieldset class="tasks__item" data-status="incompleted" tabindex="0"  data-id="${
-        this._data.id
-      }">
+      <fieldset class="tasks__item" tabindex="0">
         <input
         class="tasks__checkbox"
           type="checkbox"
           aria-label="checkbox"
         />
         <label class="tasks__label">
-          <span class="tasks__description">${
-            this._data.description[0].toUpperCase() +
-            this._data.description.slice(1)
-          }</span>
-          <span class="tasks__category">${this._data.category}</span>
+          <span class="tasks__description">${task.description}</span>
+          <span class="tasks__category">${task.category}</span>
         </label>
         <button
           class="btn btn--delete"

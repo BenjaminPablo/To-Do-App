@@ -1,21 +1,19 @@
 import * as model from './model';
+import incompleteTaskView from './views/incompleteTaskView';
+import completeTaskView from './views/completeTaskView';
 import addTaskView from './views/addTaskView';
+
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { async } from 'regenerator-runtime';
 
-const controlAddTask = function (newTask) {
-  // Add the new task to the state
-  model.addTask(newTask);
-  // Render task
-  // addTaskView.render(model.state.task);
-  // Success message
-  addTaskView.renderMessage();
+const controlLoadTask = function () {
+  // Loading existing tasks
+  incompleteTaskView.render(model.state.task.incompleted);
+  completeTaskView.render(model.state.task.completed);
 };
 
-const controlLoadTasks = function () {};
-
 const init = function () {
-  addTaskView.addHandlerNewTask(controlAddTask);
+  addTaskView.addHandlerRender(controlLoadTask);
 };
 init();

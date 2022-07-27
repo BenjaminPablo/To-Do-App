@@ -1,9 +1,12 @@
+import icons from '../../img/svg/sprite.svg';
+
 export default class View {
   _data;
 
   render(data) {
     this._data = data;
     const markup = this._generateMarkup();
+    console.log(markup);
     this._parentEl.insertAdjacentHTML('afterend', markup);
   }
 
