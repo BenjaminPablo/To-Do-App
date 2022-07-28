@@ -2,7 +2,7 @@ import View from './View.js';
 import icons from '../../img/svg/sprite.svg';
 
 class IncompleteTaskView extends View {
-  _parentEl = document.querySelector('.tasks__heading');
+  _parentEl = document.querySelector('.tasks--incompleted');
   _message = `You've completed your daily tasks! You can take a break!`;
 
   _generateMarkup() {

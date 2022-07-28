@@ -8,9 +8,9 @@ import 'regenerator-runtime/runtime';
 import { async } from 'regenerator-runtime';
 
 const controlLoadTask = function () {
-  // Loading existing tasks
-  incompleteTaskView.render(model.state.task.incompleted);
-  completeTaskView.render(model.state.task.completed);
+  // Load sorted tasks
+  const sortedTask = model.sortTaskArr();
+  addTaskView.render(sortedTask);
 };
 
 const init = function () {

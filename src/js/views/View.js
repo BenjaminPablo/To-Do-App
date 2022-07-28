@@ -1,3 +1,4 @@
+import { mark } from 'regenerator-runtime';
 import icons from '../../img/svg/sprite.svg';
 
 export default class View {
@@ -6,8 +7,7 @@ export default class View {
   render(data) {
     this._data = data;
     const markup = this._generateMarkup();
-    console.log(markup);
-    this._parentEl.insertAdjacentHTML('afterend', markup);
+    // this._parentEl.insertAdjacentHTML('beforeend', markup);
   }
 
   renderSpinner() {

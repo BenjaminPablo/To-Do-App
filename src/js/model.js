@@ -56,3 +56,13 @@ export const state = {
     list: [],
   },
 };
+
+export const sortTaskArr = function () {
+  return Object.values(state.task)
+    .filter(task => task.length !== 0)
+    .map(task => task.sort((a, b) => (a.description > b.description ? 1 : -1)));
+};
+
+// const init = function () {
+// };
+// init();

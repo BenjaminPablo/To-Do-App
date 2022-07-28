@@ -2,7 +2,7 @@ import icons from '../../img/svg/sprite.svg';
 import View from './View.js';
 
 class AddTaskView extends View {
-  _parentEl = document.querySelector('.tasks__heading');
+  _parentEl = document.querySelector('.tasks--incompleted');
   _message = `You've completed your daily tasks! You can take a break!`;
   _formEl = document.querySelector('.form');
   _formTextEl = document.querySelector('.form__text');
@@ -66,21 +66,37 @@ class AddTaskView extends View {
   }
 
   _generateMarkup() {
-    // return this._data.map(this._generateMarkupTask.bind(this)).join('');
+    let taskObj;
+    return this._data
+      .map(task => {
+        taskObj = task;
+        task.map(this._generateMarkupTask).join('');
+      })
+      .forEach(taskItem => {
+        console.log(taskObj);
+        this._parentEl.insertAdjacentHTML('beforeend', taskItem);
+      });
   }
 
-  _generateMarkupTask(task) {
+  _generateMarkupTask(t) {
     return `
       <fieldset class="tasks__item" tabindex="0">
         <input
         class="tasks__checkbox"
           type="checkbox"
           aria-label="checkbox"
+          ${!t.category ? 'checked disabled' : ''}
         />
-        <label class="tasks__label">
-          <span class="tasks__description">${task.description}</span>
-          <span class="tasks__category">${task.category}</span>
-        </label>
+        ${
+          !t.category
+            ? `<label class="tasks__description">
+          ${t.description}
+        </label>`
+            : `<label class="tasks__label">
+          <span class="tasks__description">${t.description}</span>
+          <span class="tasks__category">${t.category}</span>
+        </label>`
+        }
         <button
           class="btn btn--delete"
           aria-label="Remove task item"
