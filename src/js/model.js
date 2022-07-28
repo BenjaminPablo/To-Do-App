@@ -63,6 +63,18 @@ export const sortTaskArr = function () {
     .map(task => task.sort((a, b) => (a.description > b.description ? 1 : -1)));
 };
 
-// const init = function () {
-// };
-// init();
+export const addNewTask = function (newTask) {
+  if (!newTask) return;
+  const task = {
+    id: +(Date.now() + '').slice(-10),
+    ...newTask,
+  };
+  state.task.incompleted.push(task);
+  console.log(state.task.incompleted);
+  sortTaskArr();
+
+  return newTask;
+};
+
+const init = function () {};
+init();

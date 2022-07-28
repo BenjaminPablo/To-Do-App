@@ -1,6 +1,4 @@
 import * as model from './model';
-import incompleteTaskView from './views/incompleteTaskView';
-import completeTaskView from './views/completeTaskView';
 import addTaskView from './views/addTaskView';
 
 import 'core-js/stable';
@@ -9,11 +7,16 @@ import { async } from 'regenerator-runtime';
 
 const controlLoadTask = function () {
   // Load sorted tasks
-  const sortedTask = model.sortTaskArr();
-  addTaskView.render(sortedTask);
+  addTaskView.renderTaskOnLoad(model.sortTaskArr());
+};
+
+const controlAddTask = function (newTask) {
+  // Get new task
+  addTaskView.render(model.addNewTask(newTask));
 };
 
 const init = function () {
   addTaskView.addHandlerRender(controlLoadTask);
+  addTaskView.addHandlerNewTask(controlAddTask);
 };
 init();

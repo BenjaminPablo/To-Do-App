@@ -8,7 +8,6 @@ class AddTaskView extends View {
   _formTextEl = document.querySelector('.form__text');
   _formSelectEl = document.querySelector('.form__select');
   _btnOpenEl = document.querySelector('.btn--task-form');
-
   _btnSubmitEl = document.querySelector('.btn--submit');
 
   constructor() {
@@ -29,6 +28,7 @@ class AddTaskView extends View {
       e.preventDefault();
       const dataArr = [...new FormData(this)];
       const data = Object.fromEntries(dataArr);
+
       handler(data);
       self._hideForm(e);
     });
@@ -65,22 +65,18 @@ class AddTaskView extends View {
     }
   }
 
-  _generateMarkup() {
-    let taskObj;
-    return this._data
-      .map(task => {
-        taskObj = task;
-        task.map(this._generateMarkupTask).join('');
-      })
-      .forEach(taskItem => {
-        console.log(taskObj);
-        this._parentEl.insertAdjacentHTML('beforeend', taskItem);
-      });
+  renderTaskOnLoad(data) {
+    data.map(task => {
+      task.map(this._generateMarkupTask);
+    });
   }
 
   _generateMarkupTask(t) {
-    return `
-      <fieldset class="tasks__item" tabindex="0">
+    const curParentEl = document.querySelector(
+      `.tasks--${!t.category ? 'completed' : 'incompleted'}`
+    );
+    const markup = `
+      <li class="tasks__item" tabindex="0">
         <input
         class="tasks__checkbox"
           type="checkbox"
@@ -98,15 +94,40 @@ class AddTaskView extends View {
         </label>`
         }
         <button
-          class="btn btn--delete"
-          aria-label="Remove task item"
-          title="Remove task item"
+        class="btn btn--delete"
+        aria-label="Remove task item"
+        title="Remove task item"
         >
-          <svg class="btn__icon btn__icon--delete-task">
-            <use href="${icons}#icon-trashcan"></use>
-          </svg>
+        <svg class="btn__icon btn__icon--delete-task">
+          <use href="${icons}#icon-trashcan"></use>
+        </svg>
         </button>
-      </fieldset>`;
+      </li>`;
+    curParentEl.insertAdjacentHTML('beforeend', markup);
+  }
+
+  _generateMarkup() {
+    return `
+      <li class="tasks__item" tabindex="0">
+        <input
+        class="tasks__checkbox"
+          type="checkbox"
+          aria-label="checkbox"
+        />
+        <label class="tasks__label">
+          <span class="tasks__description">${this._data.description}</span>
+          <span class="tasks__category">${this._data.category}</span>
+        </label>
+        <button
+        class="btn btn--delete"
+        aria-label="Remove task item"
+        title="Remove task item"
+        >
+        <svg class="btn__icon btn__icon--delete-task">
+          <use href="${icons}#icon-trashcan"></use>
+        </svg>
+        </button>
+      </li>`;
   }
 }
 
