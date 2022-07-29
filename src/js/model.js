@@ -1,8 +1,4 @@
-import { COUNTER_START, DATE_TODAY } from './config';
-
 export const state = {
-  counter: COUNTER_START,
-  date: DATE_TODAY,
   task: {
     incompleted: [
       {
@@ -42,7 +38,7 @@ export const state = {
       },
       {
         id: 'clt003',
-        description: 'Respond to catering company',
+        description: 'respond to catering company',
       },
       {
         id: 'clt004',
@@ -57,24 +53,42 @@ export const state = {
   },
 };
 
-export const sortTaskArr = function () {
+export const sortTaskArr = function (statusTask) {
+  return statusTask.sort((a, b) => {
+    const desA = a.description.toUpperCase();
+    const desB = b.description.toUpperCase();
+    return desA > desB ? 1 : -1;
+  });
+};
+
+export const sortDefaultTasks = function () {
   return Object.values(state.task)
     .filter(task => task.length !== 0)
     .map(task => task.sort((a, b) => (a.description > b.description ? 1 : -1)));
 };
 
 export const addNewTask = function (newTask) {
-  if (!newTask) return;
   const task = {
     id: +(Date.now() + '').slice(-10),
     ...newTask,
   };
   state.task.incompleted.push(task);
-  console.log(state.task.incompleted);
-  sortTaskArr();
-
-  return newTask;
+  // To sort again the state.task.incompleted but this time with the newTask added.
+  sortTaskArr(state.task.incompleted);
+  // Then we set the localstorage with all the tasks including the new Task
+  setLocalStorage(state.task.incompleted);
+  return state.task.incompleted;
 };
 
-const init = function () {};
-init();
+const setLocalStorage = function (tasks) {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+};
+
+export const deleteTask = function (task) {
+  // const deletedTask = task;
+};
+
+const init = function () {
+  // addNewTask();
+};
+// init();

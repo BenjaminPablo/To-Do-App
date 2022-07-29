@@ -48,10 +48,8 @@
     opacity: 0.5;
   }
 
-  &--delete {
-    background-color: var(--red-7);
+  &--options {
     padding: var(--size-2);
-    opacity: 0;
     border-radius: var(--radius-2);
     margin-left: auto;
     transition: opacity 0.2s var(--ease-elastic-3), transform 0.2s var(--ease-4);
@@ -73,10 +71,6 @@
     display: block;
     width: var(--size-7);
     height: var(--size-7);
-    fill: currentColor;
-
-    &--delete-task {
-      fill: var(--gray-0);
-    }
+    fill: var(--violet-9);
   }
 }

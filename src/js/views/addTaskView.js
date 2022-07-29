@@ -28,7 +28,6 @@ class AddTaskView extends View {
       e.preventDefault();
       const dataArr = [...new FormData(this)];
       const data = Object.fromEntries(dataArr);
-
       handler(data);
       self._hideForm(e);
     });
@@ -94,12 +93,12 @@ class AddTaskView extends View {
         </label>`
         }
         <button
-        class="btn btn--delete"
-        aria-label="Remove task item"
-        title="Remove task item"
+        class="btn btn--options"
+        aria-label="Button to open a set of options"
+        title="Button options"
         >
-        <svg class="btn__icon btn__icon--delete-task">
-          <use href="${icons}#icon-trashcan"></use>
+        <svg class="btn__icon btn__icon--options-task">
+          <use href="${icons}#icon-dots-three-horizontal"></use>
         </svg>
         </button>
       </li>`;
@@ -107,7 +106,14 @@ class AddTaskView extends View {
   }
 
   _generateMarkup() {
-    return `
+    // To remove the elements that are already in the tasks--incompleted list that were loaded by default and replacing them with the new list.
+    document
+      .querySelectorAll('.tasks--incompleted .tasks__item')
+      .forEach(el => el.remove());
+    counterTaskView.updateCounter();
+    return this._data
+      .map(
+        task => `
       <li class="tasks__item" tabindex="0">
         <input
         class="tasks__checkbox"
@@ -115,19 +121,21 @@ class AddTaskView extends View {
           aria-label="checkbox"
         />
         <label class="tasks__label">
-          <span class="tasks__description">${this._data.description}</span>
-          <span class="tasks__category">${this._data.category}</span>
+          <span class="tasks__description">${task.description}</span>
+          <span class="tasks__category">${task.category}</span>
         </label>
         <button
-        class="btn btn--delete"
-        aria-label="Remove task item"
-        title="Remove task item"
+        class="btn btn--options"
+        aria-label="Button to open a set of options"
+        title="Button options"
         >
-        <svg class="btn__icon btn__icon--delete-task">
-          <use href="${icons}#icon-trashcan"></use>
+        <svg class="btn__icon btn__icon--options-task">
+          <use href="${icons}#icon-dots-three-horizontal"></use>
         </svg>
         </button>
-      </li>`;
+      </li>`
+      )
+      .join('');
   }
 }
 
