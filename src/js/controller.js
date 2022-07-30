@@ -1,17 +1,11 @@
 import * as model from './model';
 import addTaskView from './views/addTaskView';
 import deleteTaskView from './views/deleteTaskView';
+import taskView from './views/taskView';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { async } from 'regenerator-runtime';
-
-const controlLoadTask = function () {
-  // Load sorted tasks
-  addTaskView.renderTaskOnLoad(model.sortDefaultTasks());
-
-  addTaskView.renderMessage();
-};
 
 const controlAddTask = function (newTask) {
   // Get new task
@@ -21,12 +15,14 @@ const controlAddTask = function (newTask) {
   addTaskView.render(task);
 };
 
+const controlSortTasks = function (tasks) {};
+
 const controlDeleteTask = function (task) {
   // deleteTaskView.render(task);
 };
 
 const init = function () {
-  addTaskView.addHandlerRender(controlLoadTask);
   addTaskView.addHandlerNewTask(controlAddTask);
+  taskView.addHandlerSortTasks(controlSortTasks);
 };
 init();

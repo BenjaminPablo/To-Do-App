@@ -1,0 +1,15 @@
+.options {
+  margin-left: auto;
+  position: relative;
+
+  &__list {
+    font-size: var(--font-size-4);
+    position: absolute;
+    left: 0;
+    top: calc(100% + 0.25rem);
+    background-color: var(--gray-0);
+    padding: var(--size-3);
+    border-radius: var(--radius-2);
+    box-shadow: var(--shadow-3);
+  }
+}

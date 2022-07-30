@@ -1,4 +1,5 @@
 import icons from '../../img/svg/sprite.svg';
+import counterTaskView from './counterTaskView';
 import View from './View.js';
 
 class AddTaskView extends View {
@@ -16,10 +17,6 @@ class AddTaskView extends View {
     this._formEl.addEventListener('input', this._enableBtnSubmit.bind(this));
     this._formEl.addEventListener('focusout', this._hideForm.bind(this));
     document.addEventListener('keydown', this._hideForm.bind(this));
-  }
-
-  addHandlerRender(handler) {
-    window.addEventListener('load', handler);
   }
 
   addHandlerNewTask(handler) {
@@ -64,52 +61,7 @@ class AddTaskView extends View {
     }
   }
 
-  renderTaskOnLoad(data) {
-    data.map(task => {
-      task.map(this._generateMarkupTask);
-    });
-  }
-
-  _generateMarkupTask(t) {
-    const curParentEl = document.querySelector(
-      `.tasks--${!t.category ? 'completed' : 'incompleted'}`
-    );
-    const markup = `
-      <li class="tasks__item" tabindex="0">
-        <input
-        class="tasks__checkbox"
-          type="checkbox"
-          aria-label="checkbox"
-          ${!t.category ? 'checked disabled' : ''}
-        />
-        ${
-          !t.category
-            ? `<label class="tasks__description">
-          ${t.description}
-        </label>`
-            : `<label class="tasks__label">
-          <span class="tasks__description">${t.description}</span>
-          <span class="tasks__category">${t.category}</span>
-        </label>`
-        }
-        <button
-        class="btn btn--options"
-        aria-label="Button to open a set of options"
-        title="Button options"
-        >
-        <svg class="btn__icon btn__icon--options-task">
-          <use href="${icons}#icon-dots-three-horizontal"></use>
-        </svg>
-        </button>
-      </li>`;
-    curParentEl.insertAdjacentHTML('beforeend', markup);
-  }
-
   _generateMarkup() {
-    // To remove the elements that are already in the tasks--incompleted list that were loaded by default and replacing them with the new list.
-    document
-      .querySelectorAll('.tasks--incompleted .tasks__item')
-      .forEach(el => el.remove());
     counterTaskView.updateCounter();
     return this._data
       .map(

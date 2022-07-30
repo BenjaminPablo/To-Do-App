@@ -1,3 +1,4 @@
+import showOptionsView from './showOptionsView';
 import View from './View';
 
 class DeleteTaskView extends View {
@@ -5,6 +6,8 @@ class DeleteTaskView extends View {
 
   constructor() {
     super();
+    showOptionsView.renderOptions();
+    showOptionsView.hideOptions();
   }
 
   deleteTask() {}
