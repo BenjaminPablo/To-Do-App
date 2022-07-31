@@ -6,8 +6,7 @@ class DeleteTaskView extends View {
 
   constructor() {
     super();
-    showOptionsView.renderOptions();
-    showOptionsView.hideOptions();
+    showOptionsView.showOptions();
   }
 
   deleteTask() {}

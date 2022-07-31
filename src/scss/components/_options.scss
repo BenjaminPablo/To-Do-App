@@ -6,10 +6,11 @@
     font-size: var(--font-size-4);
     position: absolute;
     left: 0;
-    top: calc(100% + 0.25rem);
+    top: 100%;
     background-color: var(--gray-0);
     padding: var(--size-3);
     border-radius: var(--radius-2);
     box-shadow: var(--shadow-3);
+    transition: transform 0.4s, opacity 150ms var(--ease-4);
   }
 }

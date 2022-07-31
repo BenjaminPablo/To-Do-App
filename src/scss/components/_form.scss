@@ -7,7 +7,7 @@
   outline: var(--border-size-2) solid var(--gray-3);
   outline-offset: var(--size-1);
   border-radius: var(--radius-3);
-  transition: transform 0.4s, opacity 0.5s var(--ease-4);
+  transition: transform 0.4s, opacity 150ms var(--ease-4);
   align-items: flex-end;
 
   @include respond(sm) {

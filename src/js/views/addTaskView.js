@@ -62,31 +62,32 @@ class AddTaskView extends View {
   }
 
   _generateMarkup() {
+    document
+      .querySelectorAll('.tasks--incompleted .tasks__item')
+      .forEach(el => el.remove());
     counterTaskView.updateCounter();
     return this._data
-      .map(
-        task => `
-      <li class="tasks__item" tabindex="0">
-        <input
-        class="tasks__checkbox"
-          type="checkbox"
-          aria-label="checkbox"
-        />
-        <label class="tasks__label">
-          <span class="tasks__description">${task.description}</span>
-          <span class="tasks__category">${task.category}</span>
-        </label>
-        <button
-        class="btn btn--options"
-        aria-label="Button to open a set of options"
-        title="Button options"
-        >
-        <svg class="btn__icon btn__icon--options-task">
-          <use href="${icons}#icon-dots-three-horizontal"></use>
-        </svg>
-        </button>
-      </li>`
-      )
+      .map(task => {
+        const id = (Date.now() + '').slice(-10);
+        return `
+        <li class="tasks__item" tabindex="0">
+          <input
+          class="tasks__checkbox"
+            type="checkbox"
+            aria-label="checkbox"
+          />
+          <label class="tasks__label">
+            <span class="tasks__description">${task.description}</span>
+            <span class="tasks__category">${task.category}</span>
+          </label>
+          <button class="btn btn--options" aria-label="Button to open a set of options" title="Button options" data-id="opt${id}"
+          >
+          <svg class="btn__icon btn__icon--options-task">
+            <use href="${icons}#icon-dots-three-horizontal"></use>
+          </svg>
+          </button>
+        </li>`;
+      })
       .join('');
   }
 }

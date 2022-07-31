@@ -17,8 +17,6 @@ export const pushTasksOnLoad = function (task) {
   );
 };
 
-console.log(state.task.incompleted);
-
 export const sortTasksOnLoad = function (task) {
   return task.map(task => {
     const sort = sortArr(task);
@@ -34,11 +32,6 @@ const sortArr = function (task) {
   });
 };
 
-export const sortTaskArr = function (statusTask) {
-  const sortTasks = sortArr(statusTask);
-  return sortTasks;
-};
-
 export const addNewTask = function (newTask) {
   const taskArr = Object.values(newTask)[0];
   const description = taskArr[0].toUpperCase() + taskArr.slice(1);
@@ -50,7 +43,7 @@ export const addNewTask = function (newTask) {
   };
   state.task.incompleted.push(task);
   // To sort again the state.task.incompleted but this time with the newTask added.
-  sortTaskArr(state.task.incompleted);
+  sortArr(state.task.incompleted);
   // Then we set the localstorage with all the tasks including the new Task
   setLocalStorage(state.task.incompleted);
   return state.task.incompleted;

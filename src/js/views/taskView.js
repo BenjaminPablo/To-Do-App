@@ -35,8 +35,10 @@ class TaskView extends View {
 
   renderTask(data) {
     this._tasksItemEl.forEach(task => task.remove());
+
     data.map(task =>
       task.forEach(t => {
+        const id = (Date.now() + '').slice(-10);
         const parentEl = document.querySelector(
           `.tasks--${!t.category ? 'completed' : 'incompleted'}`
         );
@@ -64,6 +66,7 @@ class TaskView extends View {
               class="btn btn--options"
               aria-label="Button to open a set of options"
               title="Button options"
+              data-id="opt${id}"
             >
               <svg class="btn__icon btn__icon--options-task">
                 <use

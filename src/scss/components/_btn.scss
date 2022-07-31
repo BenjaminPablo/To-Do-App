@@ -52,6 +52,7 @@
     padding: var(--size-2);
     border-radius: var(--radius-2);
     transition: opacity 0.2s var(--ease-elastic-3), transform 0.2s var(--ease-4);
+    margin-left: auto;
 
     &:hover {
       transform: scale(1.1);

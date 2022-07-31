@@ -10,8 +10,7 @@ import { async } from 'regenerator-runtime';
 const controlAddTask = function (newTask) {
   // Get new task
   const task = model.addNewTask(newTask);
-
-  // addTaskView.render(task);
+  addTaskView.render(task);
 };
 
 const controlSortTasks = function (tasks) {
