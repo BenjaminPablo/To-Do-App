@@ -1,33 +1,12 @@
 import View from './View';
+import icons from '../../img/svg/sprite.svg';
 
 class TaskView extends View {
-  // _tasksIncompletedEl = Array.from(document.querySelectorAll('.tasks__label'));
-  // _tasksCompletedEl = Array.from(
-  //   document.querySelectorAll('.tasks--completed .tasks__description')
-  // );
-
-  // addHandlerSortTasks(handler) {
-  //   const tasks = this.getTaskValues();
-  //   window.addEventListener('load', function () {
-  //     handler(tasks);
-  //   });
-  // }
-
-  // getTaskValues() {
-  //   let description, category;
-  //   const taskInVal = this._tasksIncompletedEl.map(task => {
-  //     Array.from(task.children).forEach(task =>
-  //       task.className === 'tasks__description'
-  //         ? (description = task.textContent)
-  //         : (category = task.textContent)
-  //     );
-
-  //     return { description, category };
-  //   });
-  //   return taskInVal;
-  // }
-
-  _tasksItemEl = Array.from(document.querySelectorAll('.tasks__item'));
+  _tasksIncompletedEl = Array.from(document.querySelectorAll('.tasks__label'));
+  _tasksCompletedEl = Array.from(
+    document.querySelectorAll('.tasks--completed .tasks__description')
+  );
+  _tasksItemEl = document.querySelectorAll('.tasks__item');
 
   addHandlerSortTasks(handler) {
     const tasks = this._getTaskValues();
@@ -37,30 +16,69 @@ class TaskView extends View {
   }
 
   _getTaskValues() {
-    let description, category;
-    const arrObj = this._tasksItemEl.map(task => {
-      return Array.from(task.children)
-        .filter(
-          task =>
-            task.className.startsWith('tasks') &&
-            !task.className.includes('checkbox')
-        )
-        .reduce((_acc, task) => {
-          if (task.className === 'tasks__description') {
-            console.log(task);
-            description = task.textContent;
-            return { acc: description };
-          }
-          return { description };
-          // const test = Array.from(task.children).map(task => {
-          //   task.className === 'tasks__description'
-          //     ? (description = task.textContent)
-          //     : (category = task.textContent);
-          // });
-        });
+    const inTask = this._tasksIncompletedEl.map(task => {
+      let description, category;
+      Array.from(task.children).forEach(task =>
+        task.className === 'tasks__description'
+          ? (description = task.textContent)
+          : (category = task.textContent)
+      );
+
+      return { description, category };
     });
-    console.log(arrObj);
-    return arrObj;
+    const coTask = this._tasksCompletedEl.map(task => {
+      const description = task.textContent;
+      return { description };
+    });
+    return [inTask, coTask];
+  }
+
+  renderTask(data) {
+    this._tasksItemEl.forEach(task => task.remove());
+    data.map(task =>
+      task.forEach(t => {
+        const parentEl = document.querySelector(
+          `.tasks--${!t.category ? 'completed' : 'incompleted'}`
+        );
+        const markup = `
+        <li class="tasks__item" tabindex="0">
+          <input
+            class="tasks__checkbox"
+            type="checkbox"
+            aria-label="checkbox"
+            ${!t.category ? 'checked disabled' : ''}
+          />
+          ${
+            !t.category
+              ? `<span class="tasks__description">${t.description}</span>`
+              : `<label class="tasks__label">
+                <span class="tasks__description">
+                  ${t.description}
+                </span>
+                <span class="tasks__category">${t.category}</span>
+              </label>`
+          }
+
+          <div class="options">
+            <button
+              class="btn btn--options"
+              aria-label="Button to open a set of options"
+              title="Button options"
+            >
+              <svg class="btn__icon btn__icon--options-task">
+                <use
+                href="${icons}#icon-dots-three-horizontal"
+              ></use>
+              </svg>
+            </button>
+            <div class="options__list hidden">
+              <button class="btn btn--delete">Delete task</button>
+            </div>
+          </div>
+        </li>`;
+        parentEl.insertAdjacentHTML('beforeend', markup);
+      })
+    );
   }
 }
 

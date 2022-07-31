@@ -11,11 +11,15 @@ const controlAddTask = function (newTask) {
   // Get new task
   const task = model.addNewTask(newTask);
 
-  // Render the new list the the new task ... Very bad performance but until I learned ReactJS
-  addTaskView.render(task);
+  // addTaskView.render(task);
 };
 
-const controlSortTasks = function (tasks) {};
+const controlSortTasks = function (tasks) {
+  model.pushTasksOnLoad(tasks);
+  const tasksSorted = model.sortTasksOnLoad(tasks);
+
+  taskView.renderTask(tasksSorted);
+};
 
 const controlDeleteTask = function (task) {
   // deleteTaskView.render(task);
