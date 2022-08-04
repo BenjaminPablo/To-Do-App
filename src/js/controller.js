@@ -7,25 +7,25 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { async } from 'regenerator-runtime';
 
+const controlTasksOnLoad = function (tasks) {
+  const newData = model.sendDataOnLoad(tasks);
+  taskView.render(newData);
+};
+
 const controlAddTask = function (newTask) {
   // Get new task
   const task = model.addNewTask(newTask);
   addTaskView.render(task);
 };
 
-const controlSortTasks = function (tasks) {
-  model.pushTasksOnLoad(tasks);
-  const tasksSorted = model.sortTasksOnLoad(tasks);
-
-  taskView.renderTask(tasksSorted);
-};
-
 const controlDeleteTask = function (task) {
-  // deleteTaskView.render(task);
+  model.deleteTask(task);
+  console.log(task);
 };
 
 const init = function () {
+  taskView.addHandlerOnLoad(controlTasksOnLoad);
   addTaskView.addHandlerNewTask(controlAddTask);
-  taskView.addHandlerSortTasks(controlSortTasks);
+  deleteTaskView.addHandlerDelete(controlDeleteTask);
 };
 init();

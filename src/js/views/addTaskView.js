@@ -62,14 +62,14 @@ class AddTaskView extends View {
   }
 
   _generateMarkup() {
-    document
-      .querySelectorAll('.tasks--incompleted .tasks__item')
-      .forEach(el => el.remove());
-    counterTaskView.updateCounter();
-    return this._data
-      .map(task => {
-        const id = (Date.now() + '').slice(-10);
-        return `
+    const tasksIncompleted = document.querySelectorAll(
+      '.tasks--incompleted .tasks__item'
+    );
+    tasksIncompleted.forEach(el => el.remove());
+    const markup = this._data
+      .map(
+        task =>
+          `
         <li class="tasks__item" tabindex="0">
           <input
           class="tasks__checkbox"
@@ -80,15 +80,27 @@ class AddTaskView extends View {
             <span class="tasks__description">${task.description}</span>
             <span class="tasks__category">${task.category}</span>
           </label>
-          <button class="btn btn--options" aria-label="Button to open a set of options" title="Button options" data-id="opt${id}"
-          >
-          <svg class="btn__icon btn__icon--options-task">
-            <use href="${icons}#icon-dots-three-horizontal"></use>
-          </svg>
-          </button>
-        </li>`;
-      })
+          <div class="options">
+            <button
+            class="btn btn--options"
+            aria-label="Button to open a set of options"
+            title="Button options"
+
+            >
+            <svg class="btn__icon btn__icon--options-task">
+            <use
+                href="${icons}#icon-dots-three-horizontal"
+              ></use>
+              </svg>
+            </button>
+            <div class="options__list hidden">
+              <button class="btn btn--delete">Delete task</button>
+            </div>
+          </div>
+        </li>`
+      )
       .join('');
+    return markup;
   }
 }
 
@@ -97,51 +109,6 @@ export default new AddTaskView();
 // document.addEventListener('keydown', () => {
 //   console.log(document.activeElement);
 // });
-
-// const p = document.createElement('p');
-// const pCompleted = document.createElement('p');
-// p.textContent = `You don't have any tasks for the moment to complete! 🎉`;
-// pCompleted.textContent = `Your completed tasks are empty! 🎉`;
-
-// ✅ 2. Be able to remove existing elements from a list
-// 2.1 Add event handler to the delete button to show the dialog of confirmation to delete the task.
-// const deleteTask = () => {
-//   sectionTasksEl.addEventListener('click', e => {
-//     const btnDelete = e.target.closest('.btn--delete');
-//     if (!btnDelete) return;
-//     const taskItem = btnDelete.parentElement;
-
-//     dialogConfirmationEl.showModal();
-
-//     btnDeleteEl.addEventListener('click', () => {
-//       // 2.2 Delete the task
-//       taskItem.remove();
-
-//       if (counterTasksIncompleted < 1 && counterTasksCompleted < 1) {
-//         tasksIncompletedEl.replaceWith(p);
-//         tasksCompletedEl.replaceWith(pCompleted);
-//       }
-//       if (counterTasksIncompleted < 1) {
-//         tasksIncompletedEl.replaceWith(p);
-//       }
-//       if (counterTasksCompleted < 1) tasksCompletedEl.replaceWith(pCompleted);
-
-//       // Then we close the confirmation dialog
-//       dialogConfirmationEl.close();
-//       // Check if this dialog is already open, if it's not, then we show it.
-//       if (!dialogSuccessTaskDeletedEl.hasAttribute('open'))
-//         dialogSuccessTaskDeletedEl.showModal();
-//     });
-
-//     // When deleting an item, it decreases the counter of the item belonging to the list.
-//     if (taskItem.dataset.status === 'incompleted') counterTasksIncompleted--;
-//     else if (taskItem.dataset.status === 'completed') counterTasksCompleted--;
-
-//     headerStatusIncompletedEl.textContent = counterTasksIncompleted;
-//     headerStatusCompletedEl.textContent = counterTasksCompleted;
-//   });
-// };
-// deleteTask();
 
 // ✅ 3. Be able to rename existing elements in a list
 // const renameTask = () => {

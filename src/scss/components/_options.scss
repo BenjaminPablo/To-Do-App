@@ -1,3 +1,5 @@
+@use '../abstracts/' as *;
+
 .options {
   margin-left: auto;
   position: relative;
@@ -5,12 +7,18 @@
   &__list {
     font-size: var(--font-size-4);
     position: absolute;
+    z-index: var(--layer-3);
     left: 0;
     top: 100%;
     background-color: var(--gray-0);
-    padding: var(--size-3);
+    padding: var(--size-3) var(--size-5);
     border-radius: var(--radius-2);
     box-shadow: var(--shadow-3);
     transition: transform 0.4s, opacity 150ms var(--ease-4);
+    width: max-content;
+
+    @include respond(md) {
+      left: -200%;
+    }
   }
 }

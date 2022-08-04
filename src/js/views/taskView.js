@@ -2,13 +2,10 @@ import View from './View';
 import icons from '../../img/svg/sprite.svg';
 
 class TaskView extends View {
-  _tasksIncompletedEl = Array.from(document.querySelectorAll('.tasks__label'));
-  _tasksCompletedEl = Array.from(
-    document.querySelectorAll('.tasks--completed .tasks__description')
-  );
-  _tasksItemEl = document.querySelectorAll('.tasks__item');
+  _parentEl = document.querySelector('.tasks--incompleted');
+  _tasksItemEl = Array.from(document.querySelectorAll('.tasks__item'));
 
-  addHandlerSortTasks(handler) {
+  addHandlerOnLoad(handler) {
     const tasks = this._getTaskValues();
     window.addEventListener('load', function () {
       handler(tasks);
@@ -16,72 +13,83 @@ class TaskView extends View {
   }
 
   _getTaskValues() {
-    const inTask = this._tasksIncompletedEl.map(task => {
-      let description, category;
-      Array.from(task.children).forEach(task =>
-        task.className === 'tasks__description'
-          ? (description = task.textContent)
-          : (category = task.textContent)
-      );
-
-      return { description, category };
-    });
-    const coTask = this._tasksCompletedEl.map(task => {
-      const description = task.textContent;
-      return { description };
-    });
-    return [inTask, coTask];
+    let inTasks = [],
+      coTasks = [];
+    this._tasksItemEl.map(task =>
+      task.dataset.status === 'incompleted'
+        ? inTasks.push({
+            description: task.querySelector('.tasks__description').textContent,
+            category: task.querySelector('.tasks__category').textContent,
+            status: task.dataset.status,
+          })
+        : coTasks.push({
+            description: task.querySelector('.tasks__description').textContent,
+            status: task.dataset.status,
+          })
+    );
+    return [inTasks, coTasks];
   }
 
-  renderTask(data) {
+  _generateMarkup() {
+    // Cleaning the html before inserting the new data
     this._tasksItemEl.forEach(task => task.remove());
+    const test = this._data.map(task => {
+      const test1 = task.map(this._generateMarkupTaskOnLoad).map(task => {
+        if (task[1].classList[1].endsWith('incompleted')) {
+          console.log(task);
+        }
+      });
+      // console.log(test1);
+    });
 
-    data.map(task =>
-      task.forEach(t => {
-        const id = (Date.now() + '').slice(-10);
-        const parentEl = document.querySelector(
-          `.tasks--${!t.category ? 'completed' : 'incompleted'}`
-        );
-        const markup = `
-        <li class="tasks__item" tabindex="0">
-          <input
-            class="tasks__checkbox"
-            type="checkbox"
-            aria-label="checkbox"
-            ${!t.category ? 'checked disabled' : ''}
-          />
-          ${
-            !t.category
-              ? `<span class="tasks__description">${t.description}</span>`
-              : `<label class="tasks__label">
-                <span class="tasks__description">
-                  ${t.description}
-                </span>
-                <span class="tasks__category">${t.category}</span>
-              </label>`
-          }
+    // console.log(test);
+  }
 
-          <div class="options">
-            <button
-              class="btn btn--options"
-              aria-label="Button to open a set of options"
-              title="Button options"
-              data-id="opt${id}"
-            >
-              <svg class="btn__icon btn__icon--options-task">
-                <use
-                href="${icons}#icon-dots-three-horizontal"
-              ></use>
-              </svg>
-            </button>
-            <div class="options__list hidden">
-              <button class="btn btn--delete">Delete task</button>
-            </div>
-          </div>
-        </li>`;
-        parentEl.insertAdjacentHTML('beforeend', markup);
-      })
+  _generateMarkupTaskOnLoad(t) {
+    const status = t.status === 'incompleted';
+    const parentEl = document.querySelector(
+      `.tasks--${status ? 'incompleted' : 'completed'}`
     );
+    const markup = `
+      <li class="tasks__item" tabindex="0" data-status="${
+        status ? 'incompleted' : 'completed'
+      }">
+        <input
+          class="tasks__checkbox"
+          type="checkbox"
+          aria-label="checkbox"
+          ${!status ? 'checked disabled' : ''}
+        />
+        ${
+          !status
+            ? `<span class="tasks__description">${t.description}</span>`
+            : `<label class="tasks__label">
+              <span class="tasks__description">
+                ${t.description}
+              </span>
+              <span class="tasks__category">${t.category}</span>
+            </label>`
+        }
+
+        <div class="options">
+          <button
+            class="btn btn--options"
+            aria-label="Button to open a set of options"
+            title="Button options"
+
+          >
+            <svg class="btn__icon btn__icon--options-task">
+              <use
+              href="${icons}#icon-dots-three-horizontal"
+            ></use>
+            </svg>
+          </button>
+          <div class="options__list hidden">
+            <button class="btn btn--delete">Delete task</button>
+          </div>
+        </div>
+      </li>`;
+    return [markup, parentEl];
   }
 }
 

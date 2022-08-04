@@ -10,11 +10,10 @@ class ShowOptionsView extends View {
   }
 
   _handleOptions(e) {
-    const btnOptionsEl = e.target.closest('.btn--options');
-    if (!btnOptionsEl) return;
+    const btnOptionEl = e.target.closest('.btn--options');
+    if (!btnOptionEl) return;
 
-    console.dir(e.target);
-    const optionListEl = btnOptionsEl.nextElementSibling;
+    const optionListEl = btnOptionEl.nextElementSibling;
     const btnDeleteEl = optionListEl.firstElementChild;
 
     if (e.type === 'click') {
