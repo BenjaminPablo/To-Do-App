@@ -1,4 +1,4 @@
-import counterTaskView from './counterTaskView';
+import counterView from './counterView';
 import showOptionsView from './showOptionsView';
 import View from './View';
 

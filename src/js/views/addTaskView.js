@@ -1,5 +1,5 @@
 import icons from '../../img/svg/sprite.svg';
-import counterTaskView from './counterTaskView';
+import counterView from './counterView.js';
 import View from './View.js';
 
 class AddTaskView extends View {

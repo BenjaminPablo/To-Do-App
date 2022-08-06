@@ -2,8 +2,7 @@ import View from './View';
 import icons from '../../img/svg/sprite.svg';
 
 class TaskView extends View {
-  _parentEl = document.querySelector('.tasks--incompleted');
-  _tasksItemEl = Array.from(document.querySelectorAll('.tasks__item'));
+  _parentEl = Array.from(document.querySelectorAll('.tasks__item'));
 
   addHandlerOnLoad(handler) {
     const tasks = this._getTaskValues();
@@ -15,7 +14,7 @@ class TaskView extends View {
   _getTaskValues() {
     let inTasks = [],
       coTasks = [];
-    this._tasksItemEl.map(task =>
+    this._parentEl.map(task =>
       task.dataset.status === 'incompleted'
         ? inTasks.push({
             description: task.querySelector('.tasks__description').textContent,
@@ -32,12 +31,13 @@ class TaskView extends View {
 
   _generateMarkup() {
     // Cleaning the html before inserting the new data
-    this._tasksItemEl.forEach(task => task.remove());
+    this._parentEl.forEach(task => task.remove());
     const test = this._data.map(task => {
       const test1 = task.map(this._generateMarkupTaskOnLoad).map(task => {
-        if (task[1].classList[1].endsWith('incompleted')) {
-          console.log(task);
-        }
+        console.log(task);
+        task.reduce((acc, cur) => {
+          console.log(cur);
+        }, {});
       });
       // console.log(test1);
     });

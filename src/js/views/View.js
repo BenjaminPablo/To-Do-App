@@ -1,15 +1,15 @@
 import { mark } from 'regenerator-runtime';
 import icons from '../../img/svg/sprite.svg';
-import counterTaskView from './counterTaskView';
+import counterView from './counterView';
 
 export default class View {
   _data;
 
-  render(data) {
+  render(data, parentEl) {
     this._data = data;
     const markup = this._generateMarkup();
 
-    // this._parentEl.insertAdjacentHTML('beforeend', markup);
+    // parentEl.insertAdjacentHTML('beforeend', markup);
   }
 
   renderSpinner() {

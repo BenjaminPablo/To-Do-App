@@ -1,17 +1,15 @@
 import View from './View';
 
-class CounterTaskView extends View {
+import { COUNTER_TASKS, CURRENT_DATE } from '../config.js';
+
+class CounterView extends View {
   _parentEl = document.querySelector('.header');
   _counterInEl = document.querySelector('.header__incompleted');
   _counterComEl = document.querySelector('.header__completed');
   _dateEl = document.querySelector('.header__date');
 
-  _counter = 5;
-  _date = new Date().toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  _counter = COUNTER_TASKS;
+  _date = CURRENT_DATE;
 
   constructor() {
     super();
@@ -20,7 +18,6 @@ class CounterTaskView extends View {
   }
 
   increaseCounter(task, parentTask) {
-    console.log(task, parentTask);
     this._counter++;
     if (task.category) {
       this._counterInEl.textContent = this._counter;
@@ -35,4 +32,4 @@ class CounterTaskView extends View {
   }
 }
 
-export default new CounterTaskView();
+export default new CounterView();

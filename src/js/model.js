@@ -53,7 +53,6 @@ export const addNewTask = function (newTask) {
 };
 
 const setLocalStorage = function (tasks) {
-  console.log(tasks);
   localStorage.setItem('tasks', JSON.stringify(tasks));
 };
 
