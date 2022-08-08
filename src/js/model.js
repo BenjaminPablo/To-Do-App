@@ -1,38 +1,22 @@
+import cloneDeep from 'lodash-es';
+
 export const state = {
   task: {
     incompleted: [],
     completed: [],
-    list: [],
   },
 };
 
-export const sendDataOnLoad = function (tasks) {
-  let tasksState = Object.values(state.task).filter((_, i) => i !== 2),
-    taskObj;
-  tasksState = tasks.map(task => {
-    // Sorting tasks
-    sortArr(task);
-    // Pushing tasks to state
-    return task.map(task => {
-      taskObj = {
-        id: Math.floor(Math.random() * 10000),
-        ...task,
-      };
-      task.status === 'incompleted'
-        ? state.task.incompleted.push(taskObj)
-        : state.task.completed.push(taskObj);
-      return taskObj;
-    });
-  });
-  return tasksState;
+export const sendData = function (tasks) {
+  state.task = tasks;
+  Object.values(state.task).forEach(sortArr);
+  return tasks;
 };
 
 const sortArr = function (task) {
-  task.sort((a, b) => {
-    const desA = a.description.toUpperCase();
-    const desB = b.description.toUpperCase();
-    return desA > desB ? 1 : -1;
-  });
+  task.sort((a, b) =>
+    a.description.toUpperCase() > b.description.toUpperCase() ? 1 : -1
+  );
 };
 
 export const addNewTask = function (newTask) {

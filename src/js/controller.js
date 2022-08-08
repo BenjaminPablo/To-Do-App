@@ -8,8 +8,7 @@ import 'regenerator-runtime/runtime';
 import { async } from 'regenerator-runtime';
 
 const controlTasksOnLoad = function (tasks) {
-  const newData = model.sendDataOnLoad(tasks);
-  taskView.render(newData);
+  taskView.render(model.sendData(tasks));
 };
 
 const controlAddTask = function (newTask) {
@@ -20,7 +19,6 @@ const controlAddTask = function (newTask) {
 
 const controlDeleteTask = function (task) {
   model.deleteTask(task);
-  console.log(task);
 };
 
 const init = function () {
