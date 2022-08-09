@@ -1,16 +1,8 @@
-import cloneDeep from 'lodash-es';
-
 export const state = {
   task: {
     incompleted: [],
     completed: [],
   },
-};
-
-export const sendData = function (tasks) {
-  state.task = tasks;
-  Object.values(state.task).forEach(sortArr);
-  return tasks;
 };
 
 const sortArr = function (task) {
@@ -20,24 +12,18 @@ const sortArr = function (task) {
 };
 
 export const addNewTask = function (newTask) {
-  const taskArr = Object.values(newTask)[0];
-  const description = taskArr[0].toUpperCase() + taskArr.slice(1);
-  const category = newTask.category;
-  const task = {
-    id: +(Date.now() + '').slice(-10),
-    description,
-    category,
-  };
-  state.task.incompleted.push(task);
-  // To sort again the state.task.incompleted but this time with the newTask added.
-  sortArr(state.task.incompleted);
-  // Then we set the localstorage with all the tasks including the new Task
-  setLocalStorage(state.task.incompleted);
-  return state.task.incompleted;
+  state.task.incompleted.push({
+    description:
+      newTask.description[0].toUpperCase() + newTask.description.slice(1),
+    category: newTask.category,
+    status: 'incompleted',
+  });
+  setLocalStorage();
 };
 
-const setLocalStorage = function (tasks) {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+const setLocalStorage = function () {
+  localStorage.setItem('tasks', JSON.stringify(state.task.incompleted));
+  localStorage.getItem('tasks', JSON.stringify(state.task.incompleted));
 };
 
 export const deleteTask = function (task) {
@@ -45,7 +31,6 @@ export const deleteTask = function (task) {
     t.description.startsWith(task.description)
   );
   state.task.incompleted.splice(indexTask, 1);
-  setLocalStorage(state.task.incompleted);
 };
 
 const init = function () {

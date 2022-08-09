@@ -49,6 +49,10 @@
     cursor: default;
   }
 
+  &__list {
+    list-style: none;
+  }
+
   &__label {
     display: flex;
     flex-direction: column;

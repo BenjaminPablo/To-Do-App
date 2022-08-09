@@ -1,5 +1,11 @@
 @use '../abstracts/' as *;
 
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-fluid-2);
+}
+
 .section-tasks {
   display: flex;
   flex-direction: column;

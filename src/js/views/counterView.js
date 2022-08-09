@@ -14,7 +14,8 @@ class CounterView extends View {
   constructor() {
     super();
     this._dateEl.textContent = this._date;
-    this._counterInEl.textContent = this._counterComEl = this._counter;
+    this._counterInEl.textContent = this._counterComEl.textContent =
+      this._counter;
   }
 
   increaseCounter(task, parentTask) {

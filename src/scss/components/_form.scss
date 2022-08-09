@@ -16,10 +16,6 @@
     gap: var(--size-7);
   }
 
-  &.hidden {
-    padding: 0 var(--size-4);
-  }
-
   &__group {
     display: flex;
     flex-direction: column;

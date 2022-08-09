@@ -22,11 +22,11 @@
   <body class="container">
     <!-- Header -->
     <header class="header">
-      <h1 class="heading-primary header__date">July 19, 2022</h1>
+      <h1 class="heading-primary header__date">&nbsp;</h1>
       <p class="header__status">
-        <span class="header__incompleted">5</span>
+        <span class="header__incompleted">&nbsp;</span>
         incompleted,
-        <span class="header__completed">5</span>
+        <span class="header__completed">&nbsp;</span>
         completed
       </p>
     </header>
@@ -34,328 +34,48 @@
     <!-- Main -->
     <main class="main">
       <!-- Tasks -->
+      <!-- Btn to render the task form-->
+      <button class="btn btn--task-form">
+        <svg class="btn__icon">
+          <use href="src/img/svg/sprite.svg#icon-add-new"></use>
+        </svg>
+        <span class="btn__text">Add a new task</span>
+      </button>
+      <form class="form hidden" tabindex="0">
+        <div class="form__group">
+          <input
+            class="form__text"
+            type="text"
+            name="description"
+            placeholder="e.g. Study w/ coffee"
+            required
+            aria-label="Description of the task"
+          />
+          <select
+            class="form__select"
+            name="category"
+            aria-label="Category of the task"
+            required
+          >
+            <option value="">--Choose the category--</option>
+            <option value="💰 Finance">💰 Finance</option>
+            <option value="💞 Wedding">💞 Wedding</option>
+            <option value="🖥️ Freelance">🖥️ Freelance</option>
+          </select>
+        </div>
+        <button class="btn btn--submit u-opacity-0-5" inert>
+          Add new task
+        </button>
+      </form>
       <section class="section-tasks">
         <ul class="tasks tasks--incompleted">
-          <header class="tasks__heading u-margin-bottom-small">
-            <h2 class="heading-secondary u-margin-bottom-md">Incompleted</h2>
-            <!-- Btn to render the task form-->
-            <button class="btn btn--task-form">
-              <svg class="btn__icon">
-                <use href="src/img/svg/sprite.svg#icon-add-new"></use>
-              </svg>
-              <span class="btn__text">Add a new task</span>
-            </button>
-            <form class="form hidden" tabindex="0">
-              <div class="form__group">
-                <input
-                  class="form__text"
-                  type="text"
-                  name="description"
-                  placeholder="e.g. Study w/ coffee"
-                  required
-                  aria-label="Description of the task"
-                />
-                <select
-                  class="form__select"
-                  name="category"
-                  aria-label="Category of the task"
-                  required
-                >
-                  <option value="">--Choose the category--</option>
-                  <option value="💰 Finance">💰 Finance</option>
-                  <option value="💞 Wedding">💞 Wedding</option>
-                  <option value="🖥️ Freelance">🖥️ Freelance</option>
-                </select>
-              </div>
-              <button class="btn btn--submit u-opacity-0-5" inert>
-                Add new task
-              </button>
-            </form>
-          </header>
-          <li class="tasks__item" tabindex="0" data-status="incompleted">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-            />
-            <label class="tasks__label">
-              <span class="tasks__description">Upload 1099-R to TurboTax</span>
-              <span class="tasks__category">💰 Finance</span>
-            </label>
+          <h2 class="heading-secondary u-margin-bottom-md">Incompleted</h2>
 
-            <div class="options">
-              <button
-                class="btn btn--options"
-                aria-label="Button to open a set of options"
-                title="Button options"
-                data-id="73439"
-              >
-                <svg class="btn__icon btn__icon--options-task">
-                  <use
-                    href="src/img/svg/sprite.svg#icon-dots-three-horizontal"
-                  ></use>
-                </svg>
-              </button>
-              <div class="options__list hidden">
-                <button class="btn btn--delete">Delete task</button>
-              </div>
-            </div>
-          </li>
-          <li class="tasks__item" tabindex="0" data-status="incompleted">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-            />
-            <label class="tasks__label">
-              <span class="tasks__description">Submit 2019 tax</span>
-              <span class="tasks__category">💰 Finance</span>
-            </label>
-
-            <div class="options">
-              <button
-                class="btn btn--options"
-                aria-label="Button to open a set of options"
-                title="Button options"
-                data-id="47223"
-              >
-                <svg class="btn__icon btn__icon--options-task">
-                  <use
-                    href="src/img/svg/sprite.svg#icon-dots-three-horizontal"
-                  ></use>
-                </svg>
-              </button>
-              <div class="options__list hidden">
-                <button class="btn btn--delete">Delete task</button>
-              </div>
-            </div>
-          </li>
-          <li class="tasks__item" tabindex="0" data-status="incompleted">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-            />
-            <label class="tasks__label">
-              <span class="tasks__description">Print parking passes</span>
-              <span class="tasks__category">💞 Wedding</span>
-            </label>
-            <div class="options">
-              <button
-                class="btn btn--options"
-                aria-label="Button to open a set of options"
-                title="Button options"
-                data-id="86814"
-              >
-                <svg class="btn__icon btn__icon--options-task">
-                  <use
-                    href="src/img/svg/sprite.svg#icon-dots-three-horizontal"
-                  ></use>
-                </svg>
-              </button>
-              <div class="options__list hidden">
-                <button class="btn btn--delete">Delete task</button>
-              </div>
-            </div>
-          </li>
-          <li class="tasks__item" tabindex="0" data-status="incompleted">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-            />
-            <label class="tasks__label">
-              <span class="tasks__description">Sign contract, send back</span>
-              <span class="tasks__category">🖥️ Freelance</span>
-            </label>
-            <div class="options">
-              <button
-                class="btn btn--options"
-                aria-label="Button to open a set of options"
-                title="Button options"
-                data-id="51877"
-              >
-                <svg class="btn__icon btn__icon--options-task">
-                  <use
-                    href="src/img/svg/sprite.svg#icon-dots-three-horizontal"
-                  ></use>
-                </svg>
-              </button>
-              <div class="options__list hidden">
-                <button class="btn btn--delete">Delete task</button>
-              </div>
-            </div>
-          </li>
-          <li class="tasks__item" tabindex="0" data-status="incompleted">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-            />
-            <label class="tasks__label">
-              <span class="tasks__description">Hand sanitizer</span>
-              <span class="tasks__category">🛒 Shopping List</span>
-            </label>
-            <div class="options">
-              <button
-                class="btn btn--options"
-                aria-label="Button to open a set of options"
-                title="Button options"
-                data-id="98095"
-              >
-                <svg class="btn__icon btn__icon--options-task">
-                  <use
-                    href="src/img/svg/sprite.svg#icon-dots-three-horizontal"
-                  ></use>
-                </svg>
-              </button>
-              <div class="options__list hidden">
-                <button class="btn btn--delete">Delete task</button>
-              </div>
-            </div>
-          </li>
+          <li class="tasks__list"></li>
         </ul>
         <ul class="tasks tasks--completed">
           <h2 class="heading-secondary u-margin-bottom-md">Completed</h2>
-          <li class="tasks__item" tabindex="0" data-status="completed">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-              checked
-              disabled
-            />
-            <label class="tasks__description">Check on FedEx Order</label>
-            <div class="options">
-              <button
-                class="btn btn--options"
-                aria-label="Button to open a set of options"
-                title="Button options"
-                data-id="91070"
-              >
-                <svg class="btn__icon btn__icon--options-task">
-                  <use
-                    href="src/img/svg/sprite.svg#icon-dots-three-horizontal"
-                  ></use>
-                </svg>
-              </button>
-              <div class="options__list hidden">
-                <button class="btn btn--delete">Delete task</button>
-              </div>
-            </div>
-          </li>
-          <li class="tasks__item" tabindex="0" data-status="completed">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-              checked
-              disabled
-            />
-            <label class="tasks__description">Look at new plugins</label>
-            <div class="options">
-              <button
-                class="btn btn--options"
-                aria-label="Button to open a set of options"
-                title="Button options"
-                data-id="56207"
-              >
-                <svg class="btn__icon btn__icon--options-task">
-                  <use
-                    href="src/img/svg/sprite.svg#icon-dots-three-horizontal"
-                  ></use>
-                </svg>
-              </button>
-              <div class="options__list hidden">
-                <button class="btn btn--delete">Delete task</button>
-              </div>
-            </div>
-          </li>
-          <li class="tasks__item" tabindex="0" data-status="completed">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-              checked
-              disabled
-            />
-            <label class="tasks__description"
-              >Respond to catering company</label
-            >
-            <div class="options">
-              <button
-                class="btn btn--options"
-                aria-label="Button to open a set of options"
-                title="Button options"
-                data-id="70208"
-              >
-                <svg class="btn__icon btn__icon--options-task">
-                  <use
-                    href="src/img/svg/sprite.svg#icon-dots-three-horizontal"
-                  ></use>
-                </svg>
-              </button>
-              <div class="options__list hidden">
-                <button class="btn btn--delete">Delete task</button>
-              </div>
-            </div>
-          </li>
-          <li class="tasks__item" tabindex="0" data-status="completed">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-              checked
-              disabled
-            />
-            <label class="tasks__description">Reschedule morning coffee</label>
-            <div class="options">
-              <button
-                class="btn btn--options"
-                aria-label="Button to open a set of options"
-                title="Button options"
-                data-id="7724"
-              >
-                <svg class="btn__icon btn__icon--options-task">
-                  <use
-                    href="src/img/svg/sprite.svg#icon-dots-three-horizontal"
-                  ></use>
-                </svg>
-              </button>
-              <div class="options__list hidden">
-                <button class="btn btn--delete">Delete task</button>
-              </div>
-            </div>
-          </li>
-          <li class="tasks__item" tabindex="0" data-status="completed">
-            <input
-              class="tasks__checkbox"
-              type="checkbox"
-              aria-label="checkbox"
-              checked
-              disabled
-            />
-            <label class="tasks__description"
-              >Check the latest on Community</label
-            >
-            <div class="options">
-              <button
-                class="btn btn--options"
-                aria-label="Button to open a set of options"
-                title="Button options"
-                data-id="45401"
-              >
-                <svg class="btn__icon btn__icon--options-task">
-                  <use
-                    href="src/img/svg/sprite.svg#icon-dots-three-horizontal"
-                  ></use>
-                </svg>
-              </button>
-              <div class="options__list hidden">
-                <button class="btn btn--delete">Delete task</button>
-              </div>
-            </div>
-          </li>
+          <li class="tasks__list"></li>
         </ul>
       </section>
     </main>

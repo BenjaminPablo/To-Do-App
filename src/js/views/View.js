@@ -8,7 +8,7 @@ export default class View {
     this._data = data;
     const markup = this._generateMarkup();
     this._parentEl.innerHTML = '';
-    // this._parentEl.insertAdjacentHTML('beforeend', markup);
+    this._parentEl.insertAdjacentHTML('beforeend', markup);
   }
 
   renderSpinner() {
@@ -18,6 +18,7 @@ export default class View {
           <use href="${icons}#icon-loader"></use>
         </svg>
       </div>`;
+    this._parentEl.innerHTML = '';
     this._parentEl.insertAdjacentHTML('afterend', markup);
   }
 
