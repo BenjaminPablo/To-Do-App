@@ -51,6 +51,9 @@
 
   &__list {
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-1);
   }
 
   &__label {

@@ -4,7 +4,7 @@ import View from './View.js';
 
 class AddTaskView extends View {
   _parentEl = document.querySelector('.tasks--incompleted .tasks__list');
-  _message = `You've completed your daily tasks! You can take a break!`;
+  _message = 'You have completed your daily tasks! You can take a break!';
   _formEl = document.querySelector('.form');
   _formTextEl = document.querySelector('.form__text');
   _formSelectEl = document.querySelector('.form__select');
@@ -15,9 +15,13 @@ class AddTaskView extends View {
     super();
     this._btnOpenEl.addEventListener('click', this._showForm.bind(this));
     this._formEl.addEventListener('input', this._enableBtnSubmit.bind(this));
-    // this._formEl.addEventListener('focusout', this._hideForm.bind(this));
+    this._formEl.addEventListener('focusout', this._hideForm.bind(this));
     document.addEventListener('keydown', this._hideForm.bind(this));
     this._parentEl.textContent = this._message;
+  }
+
+  addHandlerRender(handler) {
+    window.addEventListener('load', handler);
   }
 
   addHandlerNewTask(handler) {
@@ -28,6 +32,7 @@ class AddTaskView extends View {
       const data = Object.fromEntries(dataArr);
       handler(data);
       self._hideForm(e);
+      counterView.increaseCounter();
     });
   }
 

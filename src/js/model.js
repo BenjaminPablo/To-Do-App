@@ -18,12 +18,11 @@ export const addNewTask = function (newTask) {
     category: newTask.category,
     status: 'incompleted',
   });
-  setLocalStorage();
+  persistStorage();
 };
 
-const setLocalStorage = function () {
+const persistStorage = function () {
   localStorage.setItem('tasks', JSON.stringify(state.task.incompleted));
-  localStorage.getItem('tasks', JSON.stringify(state.task.incompleted));
 };
 
 export const deleteTask = function (task) {
@@ -31,9 +30,11 @@ export const deleteTask = function (task) {
     t.description.startsWith(task.description)
   );
   state.task.incompleted.splice(indexTask, 1);
+  persistStorage();
 };
 
 const init = function () {
-  // addNewTask();
+  const storage = localStorage.getItem('tasks');
+  if (storage) state.task.incompleted = JSON.parse(storage);
 };
-// init();
+init();

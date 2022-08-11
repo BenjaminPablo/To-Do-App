@@ -18,13 +18,14 @@ class CounterView extends View {
       this._counter;
   }
 
+  loadCounter(tasks) {
+    this._counter = tasks.length;
+    this._counterInEl.textContent = this._counter;
+  }
+
   increaseCounter(task, parentTask) {
     this._counter++;
-    if (task.category) {
-      this._counterInEl.textContent = this._counter;
-    } else {
-      this._counterComEl.textContent = this._counter;
-    }
+    this._counterInEl.textContent = this._counter;
   }
 
   decreaseCounter(taskList) {

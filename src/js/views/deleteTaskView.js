@@ -15,27 +15,24 @@ class DeleteTaskView extends View {
       const btnDeleteEl = e.target.closest('.btn--delete');
       if (!btnDeleteEl) return;
       const taskItem = btnDeleteEl.closest('.tasks__item');
-      const inTaskList = taskItem.closest('.tasks--incompleted');
-      const comTaskList = taskItem.closest('.tasks--completed');
-      let description, category, deletedTask;
-      if (inTaskList) {
-        description = taskItem
-          .querySelector('.tasks__description')
-          .textContent.trim();
-        category = taskItem
-          .querySelector('.tasks__category')
-          .textContent.trim();
-        deletedTask = { description, category };
-      }
-      if (comTaskList) {
-        description = taskItem
-          .querySelector('.tasks__description')
-          .textContent.trim();
-        deletedTask = { description };
-      }
+      const description = taskItem
+        .querySelector('.tasks__description')
+        .textContent.trim();
+      const category = taskItem
+        ?.querySelector('.tasks__category')
+        .textContent.trim();
+      handler({
+        description,
+        ...(category && { category }),
+      });
       taskItem.remove();
-      handler(deletedTask);
-      counterTaskView.decreaseCounter(deletedTask, inTaskList);
+      counterView.decreaseCounter();
+      const inTasks = document.querySelector(
+        '.tasks--incompleted .tasks__list'
+      );
+      if (inTasks.children.length === 0)
+        inTasks.textContent =
+          'You have completed your daily tasks! You can take a break!';
     });
   }
 }

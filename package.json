@@ -12,10 +12,10 @@
     "@types/core-js": "^2.5.5",
     "@types/regenerator-runtime": "^0.13.1",
     "core-js": "^3.24.1",
-    "open-props": "^1.4.5",
+    "open-props": "^1.4.10",
     "regenerator-runtime": "^0.13.9",
-    "sass": "^1.54.3",
-    "vite": "^3.0.4"
+    "sass": "^1.54.4",
+    "vite": "^3.0.5"
   },
   "dependencies": {
     "lodash": "^4.17.21",

@@ -7,7 +7,7 @@ export default class View {
   render(data) {
     this._data = data;
     const markup = this._generateMarkup();
-    this._parentEl.innerHTML = '';
+    if (data.length !== 0) this._parentEl.innerHTML = '';
     this._parentEl.insertAdjacentHTML('beforeend', markup);
   }
 
@@ -19,7 +19,7 @@ export default class View {
         </svg>
       </div>`;
     this._parentEl.innerHTML = '';
-    this._parentEl.insertAdjacentHTML('afterend', markup);
+    this._parentEl.insertAdjacentHTML('beforeend', markup);
   }
 
   renderMessage(message = this._message) {
@@ -33,7 +33,8 @@ export default class View {
         <p>${message}</p>
       </div>`;
 
-    // this._parentEl.insertAdjacentHTML('beforeend', markup);
+    this._parentEl.innerHTML = '';
+    this._parentEl.insertAdjacentHTML('beforeend', markup);
   }
 
   renderError() {}
