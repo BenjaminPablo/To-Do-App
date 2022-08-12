@@ -1,10 +1,11 @@
 .message {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
-  background-color: white;
-  color: #bbb;
-  font-size: 1.5rem;
-  font-weight: 400;
+  gap: var(--size-5);
+
+  &__icon {
+    width: var(--size-9);
+    height: var(--size-9);
+    fill: var(--violet-9);
+  }
 }

@@ -24,14 +24,12 @@ export default class View {
 
   renderMessage(message = this._message) {
     const markup = `
-      <div class="message">
-        <div>
-          <svg>
-            <use href="${icons}#icon-smile"></use>
-          </svg>
-        </div>
-        <p>${message}</p>
-      </div>`;
+      <figure class="message">
+        <svg class="message__icon">
+          <use href="${icons}#icon-smile"></use>
+        </svg>
+        <figcaption>${message}</figcaption>
+      </figure>`;
 
     this._parentEl.innerHTML = '';
     this._parentEl.insertAdjacentHTML('beforeend', markup);

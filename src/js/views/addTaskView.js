@@ -4,7 +4,7 @@ import View from './View.js';
 
 class AddTaskView extends View {
   _parentEl = document.querySelector('.tasks--incompleted .tasks__list');
-  _message = 'You have completed your daily tasks! You can take a break!';
+  _message = 'You do not have any incompleted tasks! Congratulations!';
   _formEl = document.querySelector('.form');
   _formTextEl = document.querySelector('.form__text');
   _formSelectEl = document.querySelector('.form__select');
@@ -17,7 +17,6 @@ class AddTaskView extends View {
     this._formEl.addEventListener('input', this._enableBtnSubmit.bind(this));
     this._formEl.addEventListener('focusout', this._hideForm.bind(this));
     document.addEventListener('keydown', this._hideForm.bind(this));
-    this._parentEl.textContent = this._message;
   }
 
   addHandlerRender(handler) {
@@ -32,7 +31,38 @@ class AddTaskView extends View {
       const data = Object.fromEntries(dataArr);
       handler(data);
       self._hideForm(e);
-      counterView.increaseCounter();
+    });
+  }
+
+  addHandlerUpdateTask(handler) {
+    this._parentEl.addEventListener('click', function (e) {
+      const taskCheckbox = e.target.closest('.tasks__checkbox');
+      if (!taskCheckbox) return;
+      const data = taskCheckbox.nextElementSibling.children[0].textContent;
+      handler(data);
+
+      //     // Then, we disable and check the checkbox
+      //     taskCheckbox.disabled = true;
+      //     taskCheckbox.setAttribute('checked', '');
+      //     // We desactivate the label and category
+      //     taskDescription.classList.add('u-opacity-0-5');
+      //     taskDesChildren.forEach(child => (child.style.cursor = 'default'));
+      //     // Finally, we change the status of the dataset and remove the task item
+      //     taskItem.dataset.status = 'completed';
+      //     taskItem.remove();
+      //     // And we add it to the completed list
+      //     tasksCompletedEl.insertAdjacentHTML('afterbegin', taskItem.outerHTML);
+
+      //     if (counterTasksIncompleted < 1) {
+      //       counterTasksIncompleted = 0;
+      //       tasksIncompletedEl.replaceWith(p);
+      //     }
+
+      //     // And we update the counters.
+      //     headerStatusIncompletedEl.textContent = counterTasksIncompleted;
+      //     headerStatusCompletedEl.textContent = counterTasksCompleted;
+      //   });
+      // };
     });
   }
 
@@ -154,43 +184,3 @@ export default new AddTaskView();
 // });
 // };
 // renameTask();
-
-// ✅ 4. Be able to see the number of complete and incomplete elements
-// const updateNumberTasks = () => {
-//   // 4.1. Add an event listener for all the incompleted tasks checkboxes
-//   tasksIncompletedEl.addEventListener('click', e => {
-//     const taskCheckbox = e.target.closest('.tasks__checkbox');
-//     if (!taskCheckbox) return;
-//     const taskItem = taskCheckbox.parentElement;
-//     const taskDescription = taskItem.querySelector('.tasks__description');
-//     // To select its children
-//     const taskDesChildren = Array.from(taskDescription.children);
-
-//     // First, if we check the checkbox, we increase the counter in the completed list and decrease it in the incompleted list
-//     counterTasksIncompleted--;
-//     counterTasksCompleted++;
-//     pCompleted.replaceWith(tasksCompletedEl);
-
-//     // Then, we disable and check the checkbox
-//     taskCheckbox.disabled = true;
-//     taskCheckbox.setAttribute('checked', '');
-//     // We desactivate the label and category
-//     taskDescription.classList.add('u-opacity-0-5');
-//     taskDesChildren.forEach(child => (child.style.cursor = 'default'));
-//     // Finally, we change the status of the dataset and remove the task item
-//     taskItem.dataset.status = 'completed';
-//     taskItem.remove();
-//     // And we add it to the completed list
-//     tasksCompletedEl.insertAdjacentHTML('afterbegin', taskItem.outerHTML);
-
-//     if (counterTasksIncompleted < 1) {
-//       counterTasksIncompleted = 0;
-//       tasksIncompletedEl.replaceWith(p);
-//     }
-
-//     // And we update the counters.
-//     headerStatusIncompletedEl.textContent = counterTasksIncompleted;
-//     headerStatusCompletedEl.textContent = counterTasksCompleted;
-//   });
-// };
-// updateNumberTasks();
